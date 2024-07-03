@@ -1,0 +1,112 @@
+.svg {
+  width: 100%;
+  transition: 0.4s;
+  fill: #ffffff;
+}
+.svg_container {
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.github:hover {
+  fill: #181717;
+}
+.whatsapp:hover {
+  fill: #25d366;
+}
+.linkedin:hover {
+  fill: #0a66c2;
+}
+.jest {
+  fill: #c21325;
+}
+.react {
+  fill: #61dafb;
+}
+.styled_components {
+  fill: #db7093;
+}
+.nextjs {
+  fill: #000000;
+}
+.react_router {
+  fill: #ca4245;
+}
+.webpack {
+  fill: #8dd6f9;
+}
+.axios {
+  fill: #5a29e4;
+}
+.socketio {
+  fill: #010101;
+}
+.apollo_graphql {
+  fill: #311c87;
+}
+.graphql {
+  fill: #e10098;
+}
+.typescript {
+  fill: #3178c6;
+}
+.javascript {
+  fill: #f7df1e;
+}
+.python {
+  fill: #3776ab;
+}
+.nodejs {
+  fill: #339933;
+}
+.mongodb {
+  fill: #47a248;
+}
+.postgresql {
+  fill: #4169e1;
+}
+.express {
+  fill: #000000;
+}
+.sequelize {
+  fill: #52b0e7;
+}
+.mongoose {
+  fill: #880000;
+}
+.passport {
+  fill: #34e27a;
+}
+.jsonwebtokens {
+  fill: #000000;
+}
+.django {
+  fill: #092e20;
+}
+.rabbitmq {
+  fill: #ff6600;
+}
+.fastapi {
+  fill: #009688;
+}
+.dotenv {
+  fill: #ecd53f;
+}
+.vscode {
+  fill: #007acc;
+}
+.terminal {
+  fill: #4d4d4d;
+}
+.git {
+  fill: #f05032;
+}
+.css {
+  fill: #1572b6;
+}
+.html {
+  fill: #e34f26;
+}

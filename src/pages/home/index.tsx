@@ -1,10 +1,10 @@
-import style from "./styles.module.css";
-import MarkmapHooks from "./markmap-hooks";
+import styles from "./styles.module.css";
+import { MarkmapVisualizer } from "../../components/MarkmapVisualizer";
 
-export const Home = () => {
+export const Home = ({}: any) => {
   return (
-    <div className={style.page}>
-      <MarkmapHooks />
+    <div className={styles.page}>
+      <MarkmapVisualizer />
     </div>
   );
 };

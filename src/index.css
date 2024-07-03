@@ -2,67 +2,45 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  padding: 0;
+  margin: 0;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /*  */
+  --background-color: black;
+  --main-color-50: #f5f6f6;
+  --main-color-100: #e5e8e8;
+  --main-color-100b: #e5e8e893;
+  --main-color-200: #ced2d3;
+  --main-color-200b: #ced2d393;
+  --main-color-300: #acb3b4;
+  --main-color-300b: #acb3b493;
+  --main-color-400: #838c8d;
+  --main-color-400b: #838c8d93;
+  --main-color-500: #838c8d;
+  --main-color-500b: #838c8d93;
+  --main-color-600: #596061;
+  --main-color-600b: #59606193;
+  --main-color-700: #4c5152;
+  --main-color-700b: #4c515293;
+  --main-color-800: #434647;
+  --main-color-800b: #43464793;
+  --main-color-900: #3a3d3f;
+  --main-color-900b: #3a3d3f93;
+  --main-color-950: #232526;
+  --main-color-950b: #23252693;
+  /*  */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+html {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  padding: 0;
+  font-family: "Rubik", "Quicksand", sans-serif;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
 }

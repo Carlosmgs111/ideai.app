@@ -1,0 +1,17 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.content {
+  text-align: center;
+  justify-content: center;
+  color: #dfdfdf;
+}
+.content > h2 {
+  font-size: 10rem;
+}
+.content > h1 {
+  font-size: 20rem;
+}

@@ -1,4 +1,18 @@
 .app {
-  width: 100vw;
+  width: available;
   min-height: 100vh;
+}
+.header {
+  font-size: 1.8rem;
+  width: 100%;
+  height: fit-content;
+  z-index: 3;
+  top: 0;
+  position: sticky;
+}
+.content {
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 1;
 }

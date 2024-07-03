@@ -1,0 +1,228 @@
+.navbar_container {
+  position: fixed;
+  backdrop-filter: blur(10rem) brightness(80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: relative;
+}
+.navbar {
+  overflow: scroll;
+  min-height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 120rem;
+}
+.indicator {
+  position: absolute;
+  background: radial-gradient(
+    circle at 20% 5%,
+    var(--main-color-400),
+    var(--main-color-500),
+    var(--main-color-600)
+  );
+  height: 60%;
+  align-self: center;
+  transition: left 0.4s, width 0.4s, opacity 1s, scale 0.4s;
+  border-radius: 0.4rem;
+}
+.navbar * ::-webkit-scrollbar {
+  display: none;
+}
+.navbar::-webkit-scrollbar {
+  display: none;
+}
+.navbar_header {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: "space-between";
+  padding: 0 2rem;
+}
+.navbar_header > a > div {
+  width: 4rem;
+  height: 4rem;
+}
+.navbar_header > a > div > svg {
+  filter: drop-shadow(-8px 6px 1px #000000cc);
+}
+.navbar_indexes {
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: 0 2rem;
+  width: fit-content;
+  height: inherit;
+}
+.page_settings {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 4rem;
+  position: absolute;
+  right: 0;
+  top: 6rem;
+  width: fit-content;
+  z-index: 1;
+  transition: 0.4s;
+  align-content: center;
+}
+.languages {
+  padding: 0.8rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-family: "Rubik";
+  font-weight: 500;
+  font-size: 1.8rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: var(--main-color-400);
+  -webkit-text-stroke: var(--main-color-950) 0.8px;
+  transition: 0.4s;
+  filter: drop-shadow(-6px 4px 1px #000000cc);
+  scale: 1.8;
+}
+.languages option * {
+  background-color: transparent;
+  padding: 1.8rem !important;
+}
+.languages option:checked {
+  background-color: var(--main-color-950);
+}
+.itemlist {
+  color: transparent;
+  font-size: 3rem;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 2.8rem;
+  display: flex;
+  overflow-y: scroll;
+  height: inherit;
+  align-content: center;
+  justify-content: left;
+  align-items: center;
+  transition: 0.4s;
+}
+.button {
+  display: none;
+  color: var(--main-color-300);
+}
+.link {
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: "Quicksand", sans-serif;
+  text-align: center;
+  font-style: none !important;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--main-color-400);
+  padding: 1rem 0.8rem;
+  transition: 0.4s;
+  margin: 0 !important;
+}
+.selected {
+  color: var(--main-color-950);
+}
+.avatar {
+  transition: border 0.4s;
+}
+.avatar > img {
+  height: 3.4rem;
+  width: 3.4rem;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 4rem;
+  border: 2px solid #033949;
+  padding: 0;
+  transition: 0.4s;
+}
+.avatar:hover > img,
+.avatar:focus > img {
+  border: 2px solid var(--main-color-300);
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    backdrop-filter: none;
+    background-color: #00000065;
+    position: fixed;
+  }
+  .navbar {
+    align-items: flex-start;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+  .navbar_indexes {
+    flex-direction: column;
+    padding: 0;
+  }
+  .itemlist {
+    backdrop-filter: blur(10rem) brightness(0.4);
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 0;
+    opacity: 0;
+  }
+  .page_settings.show {
+    left: 0;
+  }
+  .link {
+    font-size: 2.8rem;
+    width: 100%;
+    height: fit-content;
+    border-radius: 1.2rem;
+    text-align: right;
+    padding: 2rem;
+  }
+  .banner {
+    background-color: transparent !important;
+    padding: 0;
+    width: fit-content !important;
+  }
+  .avatar > img {
+    scale: 2;
+  }
+  .itemlist.show {
+    padding: 2rem;
+    height: 100vh;
+    opacity: 1;
+  }
+  .button {
+    z-index: 10;
+    display: block;
+    font-size: 4rem;
+  }
+  .navbar_header {
+    width: 100%;
+    padding: 1rem 4rem 0 4rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .itemlist {
+    width: 100%;
+  }
+  .button {
+    scale: 0.8;
+  }
+  .banner {
+    scale: 0.8;
+  }
+}

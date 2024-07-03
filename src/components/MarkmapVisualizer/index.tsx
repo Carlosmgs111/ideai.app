@@ -1,23 +1,28 @@
+import "markmap-toolbar/dist/style.css";
 import React, { useState, useRef, useEffect } from "react";
 import { Markmap } from "markmap-view";
-import { transformer } from "./markmap";
 import { Toolbar } from "markmap-toolbar";
-import "markmap-toolbar/dist/style.css";
+import { loadCSS, loadJS } from "markmap-common";
+import { Transformer } from "markmap-lib";
+import styles from "./styles.module.css";
+
+const transformer = new Transformer();
+const { scripts, styles: TStyles }: any = transformer.getAssets();
+loadCSS(TStyles);
+loadJS(scripts);
 
 const initValue = `# markmap
-
 - beautiful
 - useful
 - easy
 - interactive
 `;
 
-function renderToolbar(mm: Markmap, wrapper: HTMLElement) {
+const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   while (wrapper?.firstChild) wrapper.firstChild.remove();
-  if (mm && wrapper) {
+  if (markMap && wrapper) {
     const toolbar = new Toolbar();
-    toolbar.attach(mm);
-    // Register custom buttons
+    toolbar.attach(markMap);
     toolbar.register({
       id: "alert",
       title: "Click to show an alert",
@@ -27,33 +32,28 @@ function renderToolbar(mm: Markmap, wrapper: HTMLElement) {
     toolbar.setItems([...Toolbar.defaultItems, "alert"]);
     wrapper.append(toolbar.render());
   }
-}
+};
 
-export default function MarkmapHooks() {
+export const MarkmapVisualizer = () => {
   const [value, setValue] = useState(initValue);
-  // Ref for SVG element
   const refSvg = useRef<any>();
-  // Ref for markmap object
   const refMm = useRef<any>();
-  // Ref for toolbar wrapper
   const refToolbar = useRef<any>();
 
   useEffect(() => {
-    // Create markmap and save to refMm
     if (refMm.current) return;
-    const mm = Markmap.create(refSvg.current);
+    const markMap = Markmap.create(refSvg.current);
     console.log("create", refSvg.current);
-    refMm.current = mm;
+    refMm.current = markMap;
     renderToolbar(refMm.current, refToolbar.current);
   }, [refSvg.current]);
 
   useEffect(() => {
-    // Update data for markmap once value is changed
-    const mm = refMm.current;
-    if (!mm) return;
+    const markMap = refMm.current;
+    if (!markMap) return;
     const { root } = transformer.transform(value);
-    mm.setData(root);
-    mm.fit();
+    markMap.setData(root);
+    markMap.fit();
   }, [refMm.current, value]);
 
   const handleChange = (e: any) => {
@@ -61,16 +61,12 @@ export default function MarkmapHooks() {
   };
 
   return (
-    <React.Fragment>
-      <div className="flex-1">
-        <textarea
-          className="w-full h-full border border-gray-400"
-          value={value}
-          onChange={handleChange}
-        />
+    <div className={styles.visualizer}>
+      <div className={styles.editor}>
+        <textarea className="" value={value} onChange={handleChange} />
       </div>
-      <svg className="flex-1" ref={refSvg} />
-      <div className="absolute bottom-1 right-1" ref={refToolbar}></div>
-    </React.Fragment>
+      <svg className={styles.board} ref={refSvg} />
+      <div className={styles.toolbar} ref={refToolbar}></div>
+    </div>
   );
-}
+};
