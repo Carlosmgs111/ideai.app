@@ -66,7 +66,10 @@ export const MarkmapVisualizer = () => {
         <textarea className="" value={value} onChange={handleChange} />
       </div>
       <svg className={styles.board} ref={refSvg} />
-      <div className={styles.toolbar} ref={refToolbar}></div>
+
+      <div className={styles.toolbar}>
+        <div ref={refToolbar}></div>
+      </div>
     </div>
   );
 };

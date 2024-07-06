@@ -4,15 +4,14 @@
   font-weight: 400;
   padding: 0;
   margin: 0;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  font-size: 62.5%;
+  /* color-scheme: light dark; */
+  background-color: #e5e8e8;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /*  */
-  --background-color: black;
   --main-color-50: #f5f6f6;
   --main-color-100: #e5e8e8;
   --main-color-100b: #e5e8e893;
@@ -35,6 +34,7 @@
   --main-color-950: #232526;
   --main-color-950b: #23252693;
   /*  */
+  color: var(--main-color-950);
 }
 
 html {
@@ -43,4 +43,11 @@ html {
   font-family: "Rubik", "Quicksand", sans-serif;
   font-size: 62.5%;
   scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+body::-webkit-scrollbar {
+  display: none;
 }

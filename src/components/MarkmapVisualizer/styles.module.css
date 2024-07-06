@@ -4,6 +4,8 @@
   width: 100vw;
   position: relative;
   overflow: hidden;
+  background-image: radial-gradient(var(--main-color-300b) .1rem, transparent 0);
+  background-size: 1.4rem 1.4rem;
 }
 .visualizer::-webkit-scrollbar {
   display: none;
@@ -14,7 +16,7 @@
 }
 .editor {
   position: absolute;
-  top: 2rem;
+  top: 9rem;
   left: 2rem;
 }
 .editor > textarea {
@@ -23,7 +25,12 @@
   padding: 1.2rem;
 }
 .toolbar {
+  width: fit-content;
+  height: fit-content;
   position: absolute;
   bottom: 2rem;
   right: 2rem;
+  backdrop-filter: brightness(50%);
+  padding: 1.2rem;
+  border-radius: 0.4rem;
 }

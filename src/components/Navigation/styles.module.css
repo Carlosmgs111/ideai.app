@@ -1,6 +1,6 @@
 .navbar_container {
   position: fixed;
-  backdrop-filter: blur(10rem) brightness(80%);
+  backdrop-filter: blur(0.2rem) brightness(80%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   width: 100%;
   top: 0;
   left: 0;
-  position: relative;
+  /* position: relative; */
 }
 .navbar {
   overflow: scroll;
@@ -48,8 +48,11 @@
   width: 4rem;
   height: 4rem;
 }
-.navbar_header > a > div > svg {
-  filter: drop-shadow(-8px 6px 1px #000000cc);
+.banner div > svg {
+  filter: drop-shadow(-4px 4px 1px var(--main-color-400b));
+}
+.banner div > svg:hover {
+  scale: 1.1;
 }
 .navbar_indexes {
   z-index: 1;
@@ -118,7 +121,6 @@
 .link {
   z-index: 1;
   list-style: none;
-  padding: 0;
   text-decoration: none;
   font-size: 1.4rem;
   font-weight: 600;
@@ -129,13 +131,13 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--main-color-400);
-  padding: 1rem 0.8rem;
+  color: var(--main-color-950);
+  padding: .8rem 1.6rem;
   transition: 0.4s;
   margin: 0 !important;
 }
 .selected {
-  color: var(--main-color-950);
+  color: var(--main-color-100);
 }
 .avatar {
   transition: border 0.4s;

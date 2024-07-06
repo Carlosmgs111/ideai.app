@@ -1,22 +1,28 @@
 import styles from "./styles.module.css";
 import { Router } from "../components/Router";
-import { Navigation } from "../components/Navigation";
-import { Home } from "../pages/home";
+import { Navigation } from "../components";
+import { Home, Visualizer } from "../pages";
 
-function App() {
+export default () => {
   return (
     <div className={styles.app}>
       <div className={styles.header}>
-        <Navigation pages={[{ label: "Home", to: "home" }]}></Navigation>
+        <Navigation pages={[{ label: "Board", to: "board" }]}></Navigation>
       </div>
       <div className={styles.content}>
         <Router>
           <Home path={"/"}></Home>
-          <Home path={"home"}></Home>
+          <Visualizer path={"board"}></Visualizer>
         </Router>
+      </div>
+      <div className={styles.footer}>
+        <span>
+          Powered by{" "}
+          <a href="https://markmap.js.org/" target="_blank">
+            markmap.js.org
+          </a>
+        </span>
       </div>
     </div>
   );
-}
-
-export default App;
+};
