@@ -1,5 +1,5 @@
 import "markmap-toolbar/dist/style.css";
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Markmap } from "markmap-view";
 import { Toolbar } from "markmap-toolbar";
 import { loadCSS, loadJS } from "markmap-common";
@@ -34,8 +34,8 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   }
 };
 
-export const MarkmapVisualizer = () => {
-  const [value, setValue] = useState(initValue);
+export const MarkmapVisualizer = ({ markmap = initValue }: any) => {
+  const [value, setValue] = useState(markmap);
   const refSvg = useRef<any>();
   const refMm = useRef<any>();
   const refToolbar = useRef<any>();

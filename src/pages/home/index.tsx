@@ -13,7 +13,7 @@ export const Home = ({}: any) => {
         </article>
         <div>
           <button className={`${styles.button} ${styles.main_button}`}>
-            <i className="fa-solid fa-upload"></i> Upload File
+            <i className="fa-solid fa-arrow-pointer"></i> Select File
           </button>
           <button className={`${styles.button} ${styles.secondary_button}`}>
             Learn More

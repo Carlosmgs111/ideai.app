@@ -9,7 +9,7 @@ import { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { ToggleButton } from "../../components/ToggleButton";
 
-export function Navigation({ className, login, pages }: any) {
+export function Navigation({ className, pages }: any) {
   // const [{ token, avatar }, dispatch] = useStateValue();
   const { pathname } = useLocation();
   const referencesRefs: any = useRef({});
@@ -17,7 +17,7 @@ export function Navigation({ className, login, pages }: any) {
     { show: false, name: "fas fa-bars p-2 item" },
     { show: true, name: "fas fa-times p-2 item" }
   );
-  const [language, toggleLanguage] = useToggle("es", "en");
+  const [_, toggleLanguage] = useToggle("es", "en");
   const indicatorRef: any = useRef(null);
   const adjustIndicatorSizes = (pathname: any) => {
     if (!referencesRefs.current) return;

@@ -4,7 +4,10 @@
   width: 100vw;
   position: relative;
   overflow: hidden;
-  background-image: radial-gradient(var(--main-color-300b) .1rem, transparent 0);
+  background-image: radial-gradient(
+    var(--main-color-300b) 0.1rem,
+    transparent 0
+  );
   background-size: 1.4rem 1.4rem;
 }
 .visualizer::-webkit-scrollbar {
@@ -16,7 +19,7 @@
 }
 .editor {
   position: absolute;
-  top: 9rem;
+  bottom: 2rem;
   left: 2rem;
 }
 .editor > textarea {

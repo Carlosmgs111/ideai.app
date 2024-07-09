@@ -20,12 +20,7 @@
 }
 .indicator {
   position: absolute;
-  background: radial-gradient(
-    circle at 20% 5%,
-    var(--main-color-400),
-    var(--main-color-500),
-    var(--main-color-600)
-  );
+  background: var(--main-color-950);
   height: 60%;
   align-self: center;
   transition: left 0.4s, width 0.4s, opacity 1s, scale 0.4s;
@@ -132,7 +127,7 @@
   justify-content: center;
   text-decoration: none;
   color: var(--main-color-950);
-  padding: .8rem 1.6rem;
+  padding: 0.8rem 1.6rem;
   transition: 0.4s;
   margin: 0 !important;
 }

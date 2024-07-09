@@ -1,9 +1,12 @@
 import styles from "./styles.module.css";
 import { Router } from "../components/Router";
 import { Navigation } from "../components";
-import { Home, Visualizer } from "../pages";
+import { Home, Board } from "../pages";
+import { useStateValue } from "../context";
+
 
 export default () => {
+  const [{}, dispatch]: any = useStateValue();
   return (
     <div className={styles.app}>
       <div className={styles.header}>
@@ -12,7 +15,7 @@ export default () => {
       <div className={styles.content}>
         <Router>
           <Home path={"/"}></Home>
-          <Visualizer path={"board"}></Visualizer>
+          <Board path={"board"}></Board>
         </Router>
       </div>
       <div className={styles.footer}>

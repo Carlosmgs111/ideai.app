@@ -1,5 +1,5 @@
 import { Home } from "./home";
-import { Visualizer } from "./visualizer";
+import { Board } from "./board";
 import { NotFound } from "./NotFound";
 
-export  { Home, Visualizer, NotFound };
+export  { Home, Board, NotFound };

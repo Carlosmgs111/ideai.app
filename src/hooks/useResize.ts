@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 // ? aparently this is a good implementation but must
 // ? be implementated a timing control mechanism
-export const useResizeHTMLElement = <LegacyRef>(
+export const useResizeHTMLElement = (
   callback: Function,
   deps: Array<any> = []
 ) => {

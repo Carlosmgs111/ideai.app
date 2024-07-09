@@ -1,3 +1,8 @@
+.dropzone {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
 .drag_body {
   width: 80rem;
   height: 40rem;
@@ -28,14 +33,10 @@
 .deactivated {
   pointer-events: none;
 }
-.drag_body:hover,
-.drag_body:active,
-.drag_body:focus {
+.drag_body:hover {
   border: var(--main-color-950) 2px dashed;
 }
-.drag_body:hover > span,
-.drag_body:active > span,
-.drag_body:focus > span {
+.drag_body:hover > span {
   color: var(--main-color-950);
 }
 .drag_body > span {
@@ -58,26 +59,36 @@
   display: none;
 }
 .button {
-  padding: 0.8rem 1.6rem;
-  border: none;
+  padding: 0.6rem 1.4rem;
+  border: transparent 1px solid;
   border-radius: 0.6rem;
   font-size: 1.6rem;
   z-index: 10;
   pointer-events: all;
+  transition: 0.4s;
 }
 .main_button {
   background-color: var(--main-color-950);
   color: var(--main-color-50);
 }
 .secondary_button {
-  background-color: transparent;
+  background-color: var(--main-color-50);
   color: var(--main-color-950);
 }
-.floating {
+.floating_right {
   position: absolute;
   right: 4rem;
   bottom: 4rem;
 }
-.button > :hover {
-  color: red;
+.floating_right:hover {
+  border: var(--main-color-950) solid 1px;
+}
+.floating_center {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+}
+.floating_center:hover {
+  border: var(--main-color-50) solid 1px;
 }
