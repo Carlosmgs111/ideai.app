@@ -1,3 +1,4 @@
+import { cloneElement } from "react";
 import { plural, singular } from "pluralize";
 
 export const setEnums = (enums: string[]) => {
@@ -364,3 +365,11 @@ export const getSizesDisposition = (i: any) => {
   sizes = sizes.flat();
   return sizes;
 };
+
+/**
+ * It takes an array of React elements and injects the same attributes to all of them
+ * @param items - an array of React elements
+ * @param [attrs] - The attributes you want to inject into the React elements.
+ */
+export const injectAttrsToReactElements = (items: any, attrs = {}) =>
+  items.map((item: any, index: any) => cloneElement(item, { ...attrs, index }));

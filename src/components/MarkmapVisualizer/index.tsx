@@ -45,8 +45,13 @@ export const MarkmapVisualizer = ({ uuid, text: markmapText }: any) => {
     SocketService.receiveMessage({
       core: {
         [`appendToMarkmapText$${uuid}`]: async (updatedMarkmap: any) => {
-          if (uuid !== updatedMarkmap.uuid) return;
-          const { text: chunk } = updatedMarkmap;
+          const { text: chunk, title } = updatedMarkmap;
+          if (String(title) === String(uuid)) {
+            dispatch({
+              type: "setMarkmaps",
+              payload: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
+            });
+          }
           textDispatch(chunk);
         },
       },
@@ -91,7 +96,6 @@ export const MarkmapVisualizer = ({ uuid, text: markmapText }: any) => {
         <textarea className="" value={markmapText} onChange={handleChange} />
       </div>
       <svg className={styles.board} ref={refSvg} />
-
       <div className={styles.toolbar}>
         <div ref={refToolbar}></div>
       </div>

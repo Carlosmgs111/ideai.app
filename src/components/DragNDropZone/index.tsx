@@ -57,7 +57,7 @@ export const DragNDropZone = () => {
       const uuid = uuidv4();
       dispatch({
         type: "setMarkmaps",
-        payload: { ...markmaps, [uuid]: { uuid, text: "" } },
+        payload: { ...markmaps, [uuid]: { uuid, text: "", title: uuid } },
       });
       e.preventDefault();
       dispatch({ type: "setMarkmap", payload: "" });

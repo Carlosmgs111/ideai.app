@@ -1,0 +1,113 @@
+.body {
+  display: flex;
+  font-size: 1.6rem;
+  overflow: scroll;
+  color: black;
+  border-radius: 0.6rem;
+  background-color: #0f2027;
+  min-height: fit-content;
+  direction: rtl;
+  transition: max-height 0.4s, max-width 0.4s, width 0.4s, scale 0.4s,
+    opacity 0.2s transfrom 0.4s;
+  /* box-shadow: inset 0px 0px 4px 2px #00000033; */
+  max-height: 0;
+  max-width: 0;
+  scale: 0;
+  opacity: 0;
+  transform: translate(-300px, 0);
+  position: sticky;
+}
+.body::-webkit-scrollbar {
+  width: 0.4rem;
+  display: inside;
+  background-color: transparent;
+  display: none;
+}
+.body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: black;
+}
+.body.active {
+  max-height:calc(100vh - 14rem);
+  max-width: 25rem;
+  width: 100%;
+  scale: 1;
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.item {
+  cursor: hand;
+  text-decoration: none !important;
+  display: flex;
+  padding: 0.8rem 0.6rem;
+  align-items: center;
+  position: relative;
+  direction: ltr;
+  color: var(--main-color-700) !important;
+  transition: max-width 0.6s, max-height 0.4s, margin-right 0.4s, color 0.4s,
+    opacity 0.6s, scale 0.6s;
+}
+.header {
+  display: flex;
+  position: sticky;
+  flex-direction: flex-start;
+  direction: ltr;
+  width: 100%;
+  top: 0;
+  background-color: var(--moonlit-asteroid-900);
+  border: 1px var(--moonlit-asteroid-800) solid;
+  border-radius: 0.6rem 0.6rem 0.4rem 0.4rem;
+  z-index: 1;
+}
+.header i {
+  width: fit-content;
+}
+.icon {
+  transition: 0.4s;
+}
+.icon.hidden {
+  scale: 0;
+  width: 0;
+  transform: translate(-30px, 0);
+}
+.item:hover {
+  color: var(--main-color-100) !important;
+}
+.item.active {
+  color: var(--main-color-300) !important;
+}
+.inner {
+  cursor: hand;
+  text-decoration: none !important;
+  display: flex;
+  padding: 0.6rem;
+  align-items: center;
+  position: relative;
+  direction: ltr;
+  color: inherit !important;
+  transition: max-width 0.4s, max-height 0.4s, margin-right 0.4s, opacity 0.2s,
+    transform 0.4s, scale 0.4s;
+  font-family: "Rubik" !important;
+  padding: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  white-space: nowrap;
+  line-height: 1.6rem;
+  transform: translate(-180px, 0);
+  opacity: 0;
+  max-width: 0;
+  max-height: 1.4rem;
+  margin-right: 0;
+  scale: 0;
+}
+.inner.show {
+  transform: translate(0, 0);
+  scale: 1;
+  opacity: 1;
+  max-width: 25rem;
+  margin-right: 1rem;
+}
