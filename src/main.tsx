@@ -6,7 +6,8 @@ import { setActions } from "./utils";
 import "./index.css";
 
 const initialState = {
-  markmap: "",
+  token: "",
+  markmaps: {},
 };
 
 export const actionTypes = setActions([], initialState);
@@ -15,7 +16,8 @@ const reducer = (state: any, action: any) => {
   const { payload, type }: any = action;
 
   const actions: any = {
-    [actionTypes.setMarkmap]: { ...state, markmap: payload },
+    [actionTypes.setToken]: { ...state, token: payload },
+    [actionTypes.setMarkmaps]: { ...state, markmaps: payload },
   };
 
   return actions[type] || state;

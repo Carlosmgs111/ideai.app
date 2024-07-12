@@ -1,22 +1,18 @@
 import "markmap-toolbar/dist/style.css";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect, useReducer } from "react";
+import { useDebounce } from "../../hooks/useDebounce";
 import { Markmap } from "markmap-view";
 import { Toolbar } from "markmap-toolbar";
 import { loadCSS, loadJS } from "markmap-common";
 import { Transformer } from "markmap-lib";
 import styles from "./styles.module.css";
+import { useStateValue } from "../../context";
+import { SocketService } from "../../services";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
 loadCSS(TStyles);
 loadJS(scripts);
-
-const initValue = `# markmap
-- beautiful
-- useful
-- easy
-- interactive
-`;
 
 const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   while (wrapper?.firstChild) wrapper.firstChild.remove();
@@ -34,16 +30,39 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   }
 };
 
-export const MarkmapVisualizer = ({ markmap = initValue }: any) => {
-  const [value, setValue] = useState(markmap);
+export const MarkmapVisualizer = ({ uuid, text: markmapText }: any) => {
+  const [{ markmaps }, dispatch]: any = useStateValue();
   const refSvg = useRef<any>();
   const refMm = useRef<any>();
   const refToolbar = useRef<any>();
+  const [text, textDispatch]: any = useReducer(
+    (prevText: any, text: any) => (prevText += text),
+    markmapText
+  );
+  const debouncedText = useDebounce(text, 100);
+
+  useEffect(() => {
+    SocketService.receiveMessage({
+      core: {
+        [`appendToMarkmapText$${uuid}`]: async (updatedMarkmap: any) => {
+          if (uuid !== updatedMarkmap.uuid) return;
+          const { text: chunk } = updatedMarkmap;
+          textDispatch(chunk);
+        },
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch({
+      type: "setMarkmaps",
+      payload: { ...markmaps, [uuid]: { ...markmaps[uuid], text } },
+    });
+  }, [debouncedText]);
 
   useEffect(() => {
     if (refMm.current) return;
     const markMap = Markmap.create(refSvg.current);
-    console.log("create", refSvg.current);
     refMm.current = markMap;
     renderToolbar(refMm.current, refToolbar.current);
   }, [refSvg.current]);
@@ -51,19 +70,25 @@ export const MarkmapVisualizer = ({ markmap = initValue }: any) => {
   useEffect(() => {
     const markMap = refMm.current;
     if (!markMap) return;
-    const { root } = transformer.transform(value);
+    const { root } = transformer.transform(markmapText);
     markMap.setData(root);
     markMap.fit();
-  }, [refMm.current, value]);
+  }, [refMm.current, markmapText]);
 
   const handleChange = (e: any) => {
-    setValue(e.target.value);
+    dispatch({
+      type: "setMarkmaps",
+      payload: {
+        ...markmaps,
+        [uuid]: { uuid, text: e.target.value },
+      },
+    });
   };
 
   return (
     <div className={styles.visualizer}>
       <div className={styles.editor}>
-        <textarea className="" value={value} onChange={handleChange} />
+        <textarea className="" value={markmapText} onChange={handleChange} />
       </div>
       <svg className={styles.board} ref={refSvg} />
 

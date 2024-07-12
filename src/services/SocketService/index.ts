@@ -24,7 +24,6 @@ export class SocketService {
   };
 
   addClient = (client: any) => {
-    console.log(this.id);
     const token = localStorage.getItem("token")?.replaceAll('"', "");
     let tries = 0;
     const [alias, address] = Mapfy(client).entries().next().value;
@@ -74,7 +73,11 @@ export class SocketService {
   receiveMessage = (payload: any) => {
     let [client, receiveIn, callback] =
       this.extractRemoteHandlersSpecs(payload);
+    // if (this.isEventRegistered(this.clients[client], receiveIn, callback)) {
+    //   this.clients[client].off(receiveIn);
+    // }
     return new Promise((resolve, reject) => {
+      reject; // TODO implement to handle errors
       this.clients[client].on(receiveIn, (data: any) => {
         resolve(callback(data));
       });
@@ -100,5 +103,9 @@ export class SocketService {
       [functionName, callback] = Mapfy(object).entries().next().value;
     }
     return [functionName, callback];
+  };
+
+  isEventRegistered = (socket: any, eventName: any) => {
+    return socket._callbacks && socket._callbacks["$" + eventName];
   };
 }

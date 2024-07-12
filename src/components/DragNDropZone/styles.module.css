@@ -81,14 +81,19 @@
   bottom: 4rem;
 }
 .floating_right:hover {
-  border: var(--main-color-950) solid 1px;
+  border: var(--main-color-50) solid 1px;
+  color: var(--main-color-50);
+  background-color: var(--main-color-950);
 }
 .floating_center {
   position: absolute;
   left: 50%;
   bottom: 50%;
   transform: translate(-50%, 50%);
+  cursor: pointer;
 }
 .floating_center:hover {
-  border: var(--main-color-50) solid 1px;
+  border: var(--main-color-950) solid 1px;
+  color: var(--main-color-950);
+  background-color: var(--main-color-50);
 }

@@ -5,6 +5,8 @@ import config from "../../config";
 import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
 import { useNavigate } from "react-router-dom";
+import { SocketService } from "../../services";
+import { v4 as uuidv4 } from "uuid";
 
 const FilesPreview = ({ children }: any): any => {
   const files = Children.toArray(children);
@@ -30,7 +32,7 @@ const FilesPreview = ({ children }: any): any => {
 
 export const DragNDropZone = () => {
   const [files, setFiles]: any = useState([]);
-  const [{}, dispatch]: any = useStateValue();
+  const [{ markmaps }, dispatch]: any = useStateValue();
   const navigate = useNavigate();
 
   const reader = new FileReader();
@@ -52,21 +54,27 @@ export const DragNDropZone = () => {
 
   const uploadFile = useCallback(
     (e: any) => {
+      const uuid = uuidv4();
+      dispatch({
+        type: "setMarkmaps",
+        payload: { ...markmaps, [uuid]: { uuid, text: "" } },
+      });
       e.preventDefault();
+      dispatch({ type: "setMarkmap", payload: "" });
       if (!files[0]) return;
-      fetch(`${config.prodUrl}/markmap/uploadfile`, {
+      fetch(`${config.prodUrl}/markmap/transformfiletomarkmap`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           format: "base64",
           payload: files[0].split(",")[1],
+          clientSocketID: SocketService.id,
+          uuid,
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          dispatch({ type: "setMarkmap", payload: data.text });
-          navigate("/board")
-        });
+      }).then((response) => {
+        response.json();
+      });
+      navigate("/board");
     },
     [files]
   );
@@ -91,7 +99,7 @@ export const DragNDropZone = () => {
             <label>
               {isDragActive
                 ? "Drop file here!"
-                : "Drag file and drop file, or click here to upload!"}
+                : "Drag and drop, or click here to select file!"}
             </label>
           </>
         )}
@@ -109,7 +117,7 @@ export const DragNDropZone = () => {
           className={`${styles.button} ${styles.main_button} ${styles.floating_center}`}
           onClick={uploadFile}
         >
-          <i className="fa-solid fa-solid fa-upload"></i> Upload File
+          <i className="fa-solid fa-diagram-project"></i> Transform Into Markmap
         </button>
       )}
     </div>
