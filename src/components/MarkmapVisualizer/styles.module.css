@@ -12,6 +12,14 @@
   border: 2px solid var(--main-color-950);
   border-radius: 2rem;
 }
+.preview {
+  width: calc(60rem - 4px);
+  height: 40rem;
+}
+.visualizer:nth-child(n) {
+  transition: 0.4s;
+  scale: 1;
+}
 .board {
   width: 100%;
   height: 100%;
@@ -35,4 +43,7 @@
   backdrop-filter: brightness(50%);
   padding: 1.2rem;
   border-radius: 0.4rem;
+}
+.hidden {
+  scale: 0;
 }

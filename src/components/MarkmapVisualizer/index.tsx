@@ -30,7 +30,11 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   }
 };
 
-export const MarkmapVisualizer = ({ uuid, text: markmapText }: any) => {
+export const MarkmapVisualizer = ({
+  uuid,
+  text: markmapText,
+  preview = false,
+}: any) => {
   const [{ markmaps }, dispatch]: any = useStateValue();
   const refSvg = useRef<any>();
   const refMm = useRef<any>();
@@ -70,7 +74,7 @@ export const MarkmapVisualizer = ({ uuid, text: markmapText }: any) => {
     const markMap = Markmap.create(refSvg.current);
     refMm.current = markMap;
     renderToolbar(refMm.current, refToolbar.current);
-  }, [refSvg.current]);
+  }, [refSvg.current, preview]);
 
   useEffect(() => {
     const markMap = refMm.current;
@@ -91,12 +95,13 @@ export const MarkmapVisualizer = ({ uuid, text: markmapText }: any) => {
   };
 
   return (
-    <div className={styles.visualizer}>
-      <div className={styles.editor}>
+    <div className={`${styles.visualizer} ${preview ? styles.preview : ""}`}>
+      <div className={`${styles.editor} ${preview ? styles.hidden : ""}`}>
         <textarea className="" value={markmapText} onChange={handleChange} />
       </div>
       <svg className={styles.board} ref={refSvg} />
-      <div className={styles.toolbar}>
+
+      <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
         <div ref={refToolbar}></div>
       </div>
     </div>

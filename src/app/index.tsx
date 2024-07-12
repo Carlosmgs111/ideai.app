@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { Router } from "../components/Router";
 import { Navigation } from "../components";
-import { Home, Board, Dashboard } from "../pages";
+import { Home, Board, Dashboard, Mindmaps } from "../pages";
 import { useStateValue } from "../context";
 
 export default () => {
@@ -11,6 +11,7 @@ export default () => {
       <div className={styles.header}>
         <Navigation
           pages={[
+            { label: "Mindmaps", to: "mindmaps" },
             { label: "Board", to: "board" },
             { label: token ? "Dasboard" : "Login", to: "dashboard" },
           ]}
@@ -21,6 +22,7 @@ export default () => {
           <Home path={"/"}></Home>
           <Board path={"board"}></Board>
           <Dashboard path={"dashboard"}></Dashboard>
+          <Mindmaps path={"mindmaps"}></Mindmaps>
         </Router>
       </div>
       <div className={styles.footer}>
