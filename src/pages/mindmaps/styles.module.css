@@ -10,9 +10,11 @@
   width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: 4rem;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.8rem;
 }
 
 @media screen and (min-width: 900px) {

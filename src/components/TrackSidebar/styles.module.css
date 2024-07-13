@@ -1,21 +1,24 @@
 .body {
   display: flex;
+  gap: 0.8rem;
   font-size: 1.6rem;
   overflow: scroll;
   color: black;
-  border-radius: 0.6rem;
-  background-color: #0f2027;
+  /* border-radius: 0.6rem; */
+  border-left: 2px solid var(--main-color-950);
+  border-right: 2px solid var(--main-color-950);
+  background-color: var(--main-color-200);
   min-height: fit-content;
   direction: rtl;
   transition: max-height 0.4s, max-width 0.4s, width 0.4s, scale 0.4s,
     opacity 0.2s transfrom 0.4s;
-  /* box-shadow: inset 0px 0px 4px 2px #00000033; */
   max-height: 0;
   max-width: 0;
   scale: 0;
   opacity: 0;
   transform: translate(-300px, 0);
   position: sticky;
+  padding: 0.8rem;
 }
 .body::-webkit-scrollbar {
   width: 0.4rem;
@@ -28,7 +31,7 @@
   background-color: black;
 }
 .body.active {
-  max-height:calc(100vh - 14rem);
+  max-height: calc(100vh - 14rem);
   max-width: 25rem;
   width: 100%;
   scale: 1;
@@ -39,24 +42,25 @@
   cursor: hand;
   text-decoration: none !important;
   display: flex;
-  padding: 0.8rem 0.6rem;
+  padding: 0.8rem 1.6rem;
   align-items: center;
   position: relative;
   direction: ltr;
-  color: var(--main-color-700) !important;
-  transition: max-width 0.6s, max-height 0.4s, margin-right 0.4s, color 0.4s,
-    opacity 0.6s, scale 0.6s;
+  color: var(--main-color-950) !important;
+  border-radius: 0.4rem;
+  transition: max-width 0.6s, max-height 0.4s, color 0.4s, opacity 0.6s,
+    scale 0.6s, background-color 0.4s;
 }
 .header {
   display: flex;
   position: sticky;
   flex-direction: flex-start;
   direction: ltr;
-  width: 100%;
+  width: available;
   top: 0;
-  background-color: var(--moonlit-asteroid-900);
-  border: 1px var(--moonlit-asteroid-800) solid;
-  border-radius: 0.6rem 0.6rem 0.4rem 0.4rem;
+  background-color: var(--main-color-200);
+  border: 2px var(--main-color-950) solid;
+  border-radius:  0.4rem;
   z-index: 1;
 }
 .header i {
@@ -71,10 +75,11 @@
   transform: translate(-30px, 0);
 }
 .item:hover {
-  color: var(--main-color-100) !important;
+  color: var(--main-color-50) !important;
 }
 .item.active {
-  color: var(--main-color-300) !important;
+  background-color: var(--main-color-600);
+  color: var(--main-color-50) !important;
 }
 .inner {
   cursor: hand;
@@ -84,9 +89,9 @@
   align-items: center;
   position: relative;
   direction: ltr;
-  color: inherit !important;
-  transition: max-width 0.4s, max-height 0.4s, margin-right 0.4s, opacity 0.2s,
-    transform 0.4s, scale 0.4s;
+  /* color: inherit !important; */
+  transition: max-width 0.4s, max-height 0.4s, opacity 0.2s, transform 0.4s,
+    scale 0.4s;
   font-family: "Rubik" !important;
   padding: 0;
   text-overflow: ellipsis;
@@ -101,13 +106,11 @@
   opacity: 0;
   max-width: 0;
   max-height: 1.4rem;
-  margin-right: 0;
   scale: 0;
 }
 .inner.show {
   transform: translate(0, 0);
   scale: 1;
   opacity: 1;
-  max-width: 25rem;
-  margin-right: 1rem;
+  max-width: 20rem;
 }

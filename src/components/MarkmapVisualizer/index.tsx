@@ -1,7 +1,7 @@
 import "markmap-toolbar/dist/style.css";
 import { useRef, useEffect, useReducer } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
-import { Markmap } from "markmap-view";
+import { Markmap, deriveOptions } from "markmap-view";
 import { Toolbar } from "markmap-toolbar";
 import { loadCSS, loadJS } from "markmap-common";
 import { Transformer } from "markmap-lib";
@@ -44,6 +44,12 @@ export const MarkmapVisualizer = ({
     markmapText
   );
   const debouncedText = useDebounce(text, 100);
+  const markmapOptions = deriveOptions({
+    maxWidth: 300,
+    initialExpandLevel: preview ? 2 : -1,
+    extraCss: [styles.board],
+    // color: ["#F7F052", "#F28123", "#D34E24", "#563F1B", "#38726C"],
+  });
 
   useEffect(() => {
     SocketService.receiveMessage({
@@ -71,10 +77,10 @@ export const MarkmapVisualizer = ({
 
   useEffect(() => {
     if (refMm.current) return;
-    const markMap = Markmap.create(refSvg.current);
+    const markMap = Markmap.create(refSvg.current, markmapOptions);
     refMm.current = markMap;
     renderToolbar(refMm.current, refToolbar.current);
-  }, [refSvg.current, preview]);
+  }, [refSvg.current, preview, markmapOptions]);
 
   useEffect(() => {
     const markMap = refMm.current;
@@ -99,7 +105,13 @@ export const MarkmapVisualizer = ({
       <div className={`${styles.editor} ${preview ? styles.hidden : ""}`}>
         <textarea className="" value={markmapText} onChange={handleChange} />
       </div>
-      <svg className={styles.board} ref={refSvg} />
+      <svg
+        className={styles.board}
+        style={{
+          color: preview ? "var(--main-color-950)" : "var(--main-color-950)",
+        }}
+        ref={refSvg}
+      />
 
       <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
         <div ref={refToolbar}></div>

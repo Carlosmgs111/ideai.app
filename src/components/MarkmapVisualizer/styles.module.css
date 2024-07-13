@@ -8,13 +8,19 @@
     transparent 0
   );
   background-size: 1.4rem 1.4rem;
-  box-shadow: inset 0 0 12rem var(--main-color-950);
-  border: 2px solid var(--main-color-950);
-  border-radius: 2rem;
 }
 .preview {
-  width: calc(60rem - 4px);
-  height: 40rem;
+  box-shadow: 0 0 0.8rem var(--main-color-300);
+  border-radius: 0.8rem;
+  width: calc(46rem - 4px);
+  height: 30rem;
+  background-color: var(--main-color-300);
+  background-image: radial-gradient(
+    var(--main-color-400b) 0.1rem,
+    transparent 0
+  );
+  background-size: 0.8rem 0.8rem;
+  border: 2rem solid var(--main-color-300);
 }
 .visualizer:nth-child(n) {
   transition: 0.4s;

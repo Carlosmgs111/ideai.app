@@ -23,7 +23,7 @@ export const Mindmaps = ({}: any) => {
           <ContentWrapper>
             {mapToList(markmaps).map((markmap: any, key: any) => (
               <MarkmapVisualizer
-                id={markmap.uuid}
+                 id={markmap.uuid}
                 key={key}
                 {...{ ...markmap, preview: true }}
               ></MarkmapVisualizer>

@@ -1,6 +1,7 @@
 .navbar_container {
   position: fixed;
-  backdrop-filter: blur(0.2rem) brightness(80%);
+  backdrop-filter: blur(0.4rem) brightness(80%);
+  background-color: var(--main-color-200b);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -3,9 +3,24 @@ import { Router } from "../components/Router";
 import { Navigation } from "../components";
 import { Home, Board, Dashboard, Mindmaps } from "../pages";
 import { useStateValue } from "../context";
+import { useEffect } from "react";
+import { URL_API } from "../services";
 
 export default () => {
-  const [{ token }]: any = useStateValue();
+  const [{ token }, dispatch]: any = useStateValue();
+  useEffect(() => {
+    fetch(`${URL_API}/markmap/getmanymarkmaps?size=20&page=10`, {
+      method: "GET",
+    })
+      .then((response: any) => response.json())
+      .then((data) => {
+        const newMarkmaps: any = {};
+        data.forEach((markmap: any) => {
+          newMarkmaps[markmap.uuid] = markmap;
+        });
+        dispatch({ type: "setMarkmaps", payload: newMarkmaps });
+      });
+  }, []);
   return (
     <div className={styles.app}>
       <div className={styles.header}>
