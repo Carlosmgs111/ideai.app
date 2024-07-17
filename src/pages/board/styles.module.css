@@ -4,14 +4,88 @@
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
+  position: relative;
 }
 .content {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   gap: 4rem;
+  touch-action: all;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+.content::-webkit-scrollbar {
+  display: none;
+}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 4rem;
+}
+.navboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color-200);
+  padding: 1.6rem 3.2rem;
+  width: 100%;
+  gap: 1.2rem;
+  border-radius: 2rem;
+}
+.navboard::-webkit-scrollbar {
+  display: none;
+}
+.navboard > button {
+  font-size: 4rem;
+  border: none;
+  background: none;
+  transition: 0.4s;
+}
+.navboard > button:nth-child(1):hover {
+  scale: 1.1;
+  transform: translate(-0.4rem);
+}
+.navboard > button:nth-child(3):hover {
+  scale: 1.1;
+  transform: translate(0.4rem);
+}
+.indexes {
+  display: flex;
+  gap: 1.2rem;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  touch-action: all;
+  border-radius: 1.2rem;
+}
+.indexes::-webkit-scrollbar {
+  display: none;
+}
+.anchor {
+  text-wrap: nowrap;
+  font-size: 1.8rem;
+  cursor: pointer;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  transition: 0.2s;
+  max-width: 20rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.8rem 1.6rem;
+  background-color: var(--main-color-400);
+  border-radius: 1.2rem;
+}
+.anchor > span {
+  top: 0;
 }
 
 @media screen and (min-width: 900px) {

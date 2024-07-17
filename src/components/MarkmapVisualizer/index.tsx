@@ -8,6 +8,8 @@ import { Transformer } from "markmap-lib";
 import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
 import { SocketService } from "../../services";
+import { useNearScreen } from "../../hooks/useNearScreen";
+import { TextEditor } from "../TextEditor";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
@@ -30,12 +32,28 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   }
 };
 
+const Dashboard = ({ markmapText, handleChange }: any) => {
+  return (
+    <div className={styles.dashboard}>
+      <button>BUTTON</button>
+      <div>
+        <div className={`${styles.editor}`}>
+          <TextEditor
+            {...{ value: markmapText, onChange: handleChange }}
+          ></TextEditor>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const MarkmapVisualizer = ({
   uuid,
   text: markmapText,
   preview = false,
 }: any) => {
   const [{ markmaps }, dispatch]: any = useStateValue();
+  const [refVisualizer, showVisualizer] = useNearScreen(false);
   const refSvg = useRef<any>();
   const refMm = useRef<any>();
   const refToolbar = useRef<any>();
@@ -101,10 +119,12 @@ export const MarkmapVisualizer = ({
   };
 
   return (
-    <div className={`${styles.visualizer} ${preview ? styles.preview : ""}`}>
-      <div className={`${styles.editor} ${preview ? styles.hidden : ""}`}>
-        <textarea className="" value={markmapText} onChange={handleChange} />
-      </div>
+    <div
+      ref={refVisualizer}
+      className={`${styles.visualizer} ${preview ? styles.preview : ""} ${
+        !showVisualizer && !preview ? styles.hide : ""
+      }`}
+    >
       <svg
         className={styles.board}
         style={{
@@ -112,7 +132,7 @@ export const MarkmapVisualizer = ({
         }}
         ref={refSvg}
       />
-
+      {!preview&&<Dashboard {...{ preview, handleChange, markmapText }}></Dashboard>}
       <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
         <div ref={refToolbar}></div>
       </div>
