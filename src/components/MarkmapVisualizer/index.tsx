@@ -10,6 +10,7 @@ import { useStateValue } from "../../context";
 import { SocketService } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
 import { TextEditor } from "../TextEditor";
+import { useToggle } from "../../hooks/useToggle";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
@@ -32,10 +33,16 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   }
 };
 
-const Dashboard = ({ markmapText, handleChange }: any) => {
+const Dashboard = ({ markmapText, handleChange, hide, toggleHide }: any) => {
   return (
-    <div className={styles.dashboard}>
-      <button>BUTTON</button>
+    <div className={`${styles.dashboard} ${hide && styles.hide}`}>
+      <div className={styles.header}>
+        <button
+          className={`fa-solid fa-caret-left ${styles.button}`}
+          onClick={toggleHide}
+        ></button>
+      </div>
+
       <div>
         <div className={`${styles.editor}`}>
           <TextEditor
@@ -61,6 +68,7 @@ export const MarkmapVisualizer = ({
     (prevText: any, text: any) => (prevText += text),
     markmapText
   );
+  const [hideDashboard, toggleHideDashboard] = useToggle(true, false);
   const debouncedText = useDebounce(text, 100);
   const markmapOptions = deriveOptions({
     maxWidth: 300,
@@ -132,7 +140,23 @@ export const MarkmapVisualizer = ({
         }}
         ref={refSvg}
       />
-      {!preview&&<Dashboard {...{ preview, handleChange, markmapText }}></Dashboard>}
+      <button
+        className={`fa-solid fa-pencil ${styles.button} ${
+          !hideDashboard && styles.hide
+        }`}
+        onClick={toggleHideDashboard}
+      ></button>
+      {!preview && (
+        <Dashboard
+          {...{
+            preview,
+            handleChange,
+            markmapText,
+            hide: hideDashboard,
+            toggleHide: toggleHideDashboard,
+          }}
+        ></Dashboard>
+      )}
       <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
         <div ref={refToolbar}></div>
       </div>

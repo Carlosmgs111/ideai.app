@@ -17,7 +17,6 @@ export const TextEditor = ({ value, onChange }: any) => {
   };
 
   const checkOverflow = () => {
-    console.log("scrolling");
     try {
       const { scrollTop, scrollHeight, clientHeight } =
         textContainerRef.current;

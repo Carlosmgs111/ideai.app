@@ -25,7 +25,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60rem;
+  width: 40rem;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
@@ -36,7 +36,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--main-color-200);
-  padding: 1.6rem 3.2rem;
+  padding: .8rem 1.6rem;
   width: 100%;
   gap: 1.2rem;
   border-radius: 2rem;
@@ -60,7 +60,7 @@
 }
 .indexes {
   display: flex;
-  gap: 1.2rem;
+  gap: .8rem;
   overflow: scroll;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -72,12 +72,12 @@
 }
 .anchor {
   text-wrap: nowrap;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   cursor: pointer;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   transition: 0.2s;
-  max-width: 20rem;
+  max-width: 16rem;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0.8rem 1.6rem;
