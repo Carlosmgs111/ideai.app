@@ -1,10 +1,11 @@
-import { URL_API } from "..";
+import config from "../../config";
 import axios from "axios";
 
 const methods = Object.freeze(["get", "post", "put", "patch", "delete"]);
 const typedAxios: any = axios;
+const API_URL = config.apiUrl;
 
-export function runRequest({ setData, setLoading, setError }: any = {}) {
+export function useAxiosRequest({ setData, setLoading, setError }: any = {}) {
   const _fetch = async (method: any, ...args: any) => {
     let data = null;
     let error = null;
@@ -12,7 +13,7 @@ export function runRequest({ setData, setLoading, setError }: any = {}) {
     // setError({ message: "ERROR" });
 
     setLoading && setLoading(true);
-    args[0] = `${URL_API}/${args[0]}`;
+    args[0] = `${API_URL}/${args[0]}`;
     try {
       data = (await method(...args)).data;
     } catch (e) {

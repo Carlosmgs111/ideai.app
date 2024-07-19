@@ -11,7 +11,7 @@ const deepinInChild = (element: Element, cb: Function) => {
 };
 
 // TODO 🏗️ Optimize
-export const useSmoothScroll = (
+export const useReferedScroll = (
   { horizontal = false }: any,
   dependencies: Array<any> = []
 ) => {

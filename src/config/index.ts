@@ -9,6 +9,7 @@ const config = {
   //   prodApiVersion: process.env.REACT_APP_PROD_API_VERSION,
   //   devWsUrl: process.env.REACT_APP_DEV_WS_SERVICE_URL,
   //   prodWsUrl: process.env.REACT_APP_PROD_WS_SERVICE_URL,
+  apiUrl: import.meta.env.VITE_PROD_URL || import.meta.env.VITE_DEV_URL,
 };
 
 export default config;

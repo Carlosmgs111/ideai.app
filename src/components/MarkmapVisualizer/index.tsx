@@ -1,5 +1,5 @@
 import "markmap-toolbar/dist/style.css";
-import { useRef, useEffect, useReducer } from "react";
+import { useRef, useEffect, useReducer, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import { Markmap, deriveOptions } from "markmap-view";
 import { Toolbar } from "markmap-toolbar";
@@ -7,7 +7,7 @@ import { loadCSS, loadJS } from "markmap-common";
 import { Transformer } from "markmap-lib";
 import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
-import { SocketService } from "../../services";
+import { SocketService, URL_API } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
 import { TextEditor } from "../TextEditor";
 import { useToggle } from "../../hooks/useToggle";
@@ -33,7 +33,14 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   }
 };
 
-const Dashboard = ({ markmapText, handleChange, hide, toggleHide }: any) => {
+const Dashboard = ({
+  text,
+  handleChange,
+  hide,
+  toggleHide,
+  autosave,
+  toggleAutosave,
+}: any) => {
   return (
     <div className={`${styles.dashboard} ${hide && styles.hide}`}>
       <div className={styles.header}>
@@ -41,13 +48,26 @@ const Dashboard = ({ markmapText, handleChange, hide, toggleHide }: any) => {
           className={`fa-solid fa-caret-left ${styles.button}`}
           onClick={toggleHide}
         ></button>
+        <label
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          htmlFor=""
+        >
+          Autosave {/*  */}
+          <input
+            type="checkbox"
+            value={autosave}
+            onClick={toggleAutosave}
+          ></input>
+        </label>
       </div>
 
       <div>
         <div className={`${styles.editor}`}>
-          <TextEditor
-            {...{ value: markmapText, onChange: handleChange }}
-          ></TextEditor>
+          <TextEditor {...{ value: text, onChange: handleChange }}></TextEditor>
         </div>
       </div>
     </div>
@@ -58,24 +78,44 @@ export const MarkmapVisualizer = ({
   uuid,
   text: markmapText,
   preview = false,
+  autosave: _autosave = false,
 }: any) => {
   const [{ markmaps }, dispatch]: any = useStateValue();
+  const [text, setText]: any = useState(markmapText);
+  const [autosave, toggleAutosave] = useToggle(_autosave, !_autosave);
+  const debouncedText = useDebounce(text, 500);
   const [refVisualizer, showVisualizer] = useNearScreen(false);
   const refSvg = useRef<any>();
   const refMm = useRef<any>();
   const refToolbar = useRef<any>();
-  const [text, textDispatch]: any = useReducer(
+  const [composedText, composedTextDispatch]: any = useReducer(
     (prevText: any, text: any) => (prevText += text),
     markmapText
   );
   const [hideDashboard, toggleHideDashboard] = useToggle(true, false);
-  const debouncedText = useDebounce(text, 100);
+  const debouncedComposedText = useDebounce(composedText, 100);
   const markmapOptions = deriveOptions({
     maxWidth: 300,
     initialExpandLevel: preview ? 2 : -1,
     extraCss: [styles.board],
-    // color: ["#F7F052", "#F28123", "#D34E24", "#563F1B", "#38726C"],
+    // color: ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#F9F871"],
   });
+
+  const saveText = (text: any) => {
+    fetch(`${URL_API}/markmap/update`, {
+      method: "PUT",
+      body: JSON.stringify({ text, uuid }),
+      headers: {
+        "Content-Type": "application/json",
+        // authorization: `Bearer ${token}`,
+      },
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        const { message } = data;
+        // notify({ message });
+      });
+  };
 
   useEffect(() => {
     SocketService.receiveMessage({
@@ -88,7 +128,7 @@ export const MarkmapVisualizer = ({
               payload: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
             });
           }
-          textDispatch(chunk);
+          composedTextDispatch(chunk);
         },
       },
     });
@@ -97,9 +137,13 @@ export const MarkmapVisualizer = ({
   useEffect(() => {
     dispatch({
       type: "setMarkmaps",
-      payload: { ...markmaps, [uuid]: { ...markmaps[uuid], text } },
+      payload: {
+        ...markmaps,
+        [uuid]: { ...markmaps[uuid], text: composedText },
+      },
     });
-  }, [debouncedText]);
+    setText(composedText);
+  }, [debouncedComposedText]);
 
   useEffect(() => {
     if (refMm.current) return;
@@ -111,19 +155,24 @@ export const MarkmapVisualizer = ({
   useEffect(() => {
     const markMap = refMm.current;
     if (!markMap) return;
-    const { root } = transformer.transform(markmapText);
+    const { root } = transformer.transform(text);
     markMap.setData(root);
     markMap.fit();
-  }, [refMm.current, markmapText]);
+  }, [refMm.current, text]);
 
-  const handleChange = (e: any) => {
+  useEffect(() => {
     dispatch({
       type: "setMarkmaps",
       payload: {
         ...markmaps,
-        [uuid]: { uuid, text: e.target.value },
+        [uuid]: { uuid, text },
       },
     });
+    autosave && saveText(text);
+  }, [debouncedText]);
+
+  const handleChange = (e: any) => {
+    setText(e.target.value);
   };
 
   return (
@@ -140,18 +189,22 @@ export const MarkmapVisualizer = ({
         }}
         ref={refSvg}
       />
-      <button
-        className={`fa-solid fa-pencil ${styles.button} ${
-          !hideDashboard && styles.hide
-        }`}
-        onClick={toggleHideDashboard}
-      ></button>
+      {!preview && (
+        <button
+          className={`fa-solid fa-pencil ${styles.button} ${
+            !hideDashboard && styles.hide
+          }`}
+          onClick={toggleHideDashboard}
+        ></button>
+      )}
       {!preview && (
         <Dashboard
           {...{
+            autosave,
+            toggleAutosave,
             preview,
             handleChange,
-            markmapText,
+            text,
             hide: hideDashboard,
             toggleHide: toggleHideDashboard,
           }}

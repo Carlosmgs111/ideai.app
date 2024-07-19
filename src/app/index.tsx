@@ -9,7 +9,7 @@ import { URL_API } from "../services";
 export default () => {
   const [{ token }, dispatch]: any = useStateValue();
   useEffect(() => {
-    fetch(`${URL_API}/markmap/getmanymarkmaps?size=20&page=10`, {
+    fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=17`, {
       method: "GET",
     })
       .then((response: any) => response.json())

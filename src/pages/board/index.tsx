@@ -3,7 +3,7 @@ import { MarkmapVisualizer } from "../../components/MarkmapVisualizer";
 import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
 import { ComponentReferencer } from "../../components/ComponentReferencer";
-import { useSmoothScroll } from "../../hooks/useSmoothScroll";
+import { useReferedScroll } from "../../hooks/useReferedScroll";
 import { useRef } from "react";
 
 const Anchor = ({ children }: any) => {
@@ -36,7 +36,7 @@ const Dashboard = ({ children }: any) => {
 
 export const Board = ({}: any) => {
   const [{ markmaps }]: any = useStateValue();
-  const { parent, elements, anchors }: any = useSmoothScroll(
+  const { parent, elements, anchors }: any = useReferedScroll(
     {
       horizontal: true,
     },

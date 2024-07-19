@@ -25,7 +25,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40rem;
+  max-width: 40rem;
   position: absolute;
   left: 50%;
   transform: translate(-50%);
@@ -40,6 +40,7 @@
   width: 100%;
   gap: 1.2rem;
   border-radius: 2rem;
+  box-shadow: 0 0 1.2rem black;
 }
 .navboard::-webkit-scrollbar {
   display: none;
