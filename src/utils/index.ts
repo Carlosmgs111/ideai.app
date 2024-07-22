@@ -373,3 +373,19 @@ export const getSizesDisposition = (i: any) => {
  */
 export const injectAttrsToReactElements = (items: any, attrs = {}) =>
   items.map((item: any, index: any) => cloneElement(item, { ...attrs, index }));
+
+
+export const getDispatchSetFunctions = (
+  dispatch: Function,
+  actionTypes: Array<string>
+) => {
+  let functions = {};
+  for (let actionType in actionTypes) {
+    functions = {
+      ...functions,
+      [actionType]: (data: any) =>
+        dispatch({ type: actionType, payload: data }),
+    };
+  }
+  return functions;
+};

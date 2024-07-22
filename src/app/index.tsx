@@ -9,21 +9,21 @@ import { URL_API } from "../services";
 export default () => {
   const [{ token }, dispatch]: any = useStateValue();
   useEffect(() => {
-    fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=17`, {
-      method: "GET",
-    })
-      .then((response: any) => response.json())
-      .then((data) => {
-        const newMarkmaps: any = {};
-        data.forEach((markmap: any) => {
-          newMarkmaps[markmap.uuid] = markmap;
-        });
-        dispatch({ type: "setMarkmaps", payload: newMarkmaps });
-      });
+     fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
+       method: "GET",
+     })
+       .then((response: any) => response.json())
+       .then((data) => {
+         const newMarkmaps: any = {};
+         data.forEach((markmap: any) => {
+           newMarkmaps[markmap.uuid] = markmap;
+         });
+         dispatch({ type: "setMarkmaps", payload: newMarkmaps });
+       });
   }, []);
   return (
     <div className={styles.app}>
-      <div className={styles.header}>
+      <div className={styles.header}>e
         <Navigation
           pages={[
             { label: "Mindmaps", to: "mindmaps" },

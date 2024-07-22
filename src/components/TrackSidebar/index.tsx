@@ -19,11 +19,12 @@ export function TrackSidebar(props: any) {
     !expanded
   );
   const indexesList: any = [];
-  items.map((name: any, index: number) => {
+  items.map((item: any, index: number) => {
+    const { title, reference } = item;
     const href = redirect
-      ? `/${redirect}#${labelCases(name).LS}`
-      : `#${labelCases(name).LS}`;
-    const active = refs.includes(labelCases(name).LS);
+      ? `/${redirect}#${labelCases(reference).LS}`
+      : `#${labelCases(reference).LS}`;
+    const active = refs.includes(labelCases(reference).LS);
     indexesList.push(
       <a
         className={`
@@ -44,7 +45,7 @@ export function TrackSidebar(props: any) {
               className: styles.inner.concat(" ", expand ? styles.show : ""),
             }}
           >
-            {labelCases(name).CS}
+            {labelCases(title).CS}
           </i>
         )}
       </a>

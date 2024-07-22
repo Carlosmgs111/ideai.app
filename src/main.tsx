@@ -12,16 +12,13 @@ const initialState = {
 };
 
 export const actionTypes = setActions([], initialState);
-
 const reducer = (state: any, action: any) => {
   const { payload, type }: any = action;
-
   const actions: any = {
     [actionTypes.setToken]: { ...state, token: payload },
     [actionTypes.setMarkmaps]: { ...state, markmaps: payload },
     [actionTypes.setSidebarFloat]: { ...state, sidebarFloat: payload },
   };
-
   return actions[type] || state;
 };
 

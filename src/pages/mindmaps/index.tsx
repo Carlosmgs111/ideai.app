@@ -4,6 +4,7 @@ import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
 import { SidePanel } from "../../components/SidePanel";
 import { useTrackSidebar } from "../../hooks/useTrackSidebar";
+import { Preview } from "../../containers/Preview";
 
 export const Mindmaps = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();
@@ -20,15 +21,17 @@ export const Mindmaps = ({}: any) => {
         }}
       >
         <div className={styles.content}>
-          <ContentWrapper>
-            {mapToList(markmaps).map((markmap: any, key: any) => (
-              <MarkmapVisualizer
-                 id={markmap.uuid}
-                key={key}
-                {...{ ...markmap, preview: true }}
-              ></MarkmapVisualizer>
-            ))}
-          </ContentWrapper>
+          {mapToList(markmaps).length && (
+            <ContentWrapper>
+              {mapToList(markmaps).map((markmap: any, key: any) => (
+                <Preview title={markmap.title} id={markmap.uuid} key={key}>
+                  <MarkmapVisualizer
+                    {...{ ...markmap, preview: true }}
+                  ></MarkmapVisualizer>
+                </Preview>
+              ))}
+            </ContentWrapper>
+          )}
         </div>
       </SidePanel>
     </div>

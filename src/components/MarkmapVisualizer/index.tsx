@@ -97,7 +97,6 @@ export const MarkmapVisualizer = ({
   const markmapOptions = deriveOptions({
     maxWidth: 300,
     initialExpandLevel: preview ? 2 : -1,
-    extraCss: [styles.board],
     // color: ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#F9F871"],
   });
 
@@ -111,9 +110,8 @@ export const MarkmapVisualizer = ({
       },
     })
       .then((data) => data.json())
-      .then((data) => {
-        const { message } = data;
-        // notify({ message });
+      .then(({ updated }) => {
+        updated;
       });
   };
 
@@ -135,6 +133,8 @@ export const MarkmapVisualizer = ({
   }, []);
 
   useEffect(() => {
+    setText(composedText);
+    if (markmaps[uuid].text === composedText) return;
     dispatch({
       type: "setMarkmaps",
       payload: {
@@ -142,7 +142,6 @@ export const MarkmapVisualizer = ({
         [uuid]: { ...markmaps[uuid], text: composedText },
       },
     });
-    setText(composedText);
   }, [debouncedComposedText]);
 
   useEffect(() => {
@@ -161,14 +160,15 @@ export const MarkmapVisualizer = ({
   }, [refMm.current, text]);
 
   useEffect(() => {
+    if (markmaps[uuid].text === text) return;
+    autosave && saveText(text);
     dispatch({
       type: "setMarkmaps",
       payload: {
         ...markmaps,
-        [uuid]: { uuid, text },
+        [uuid]: { ...markmaps[uuid], text },
       },
     });
-    autosave && saveText(text);
   }, [debouncedText]);
 
   const handleChange = (e: any) => {

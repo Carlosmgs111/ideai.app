@@ -1,5 +1,5 @@
 .visualizer {
-  width: calc(100dvw - 4rem);
+  width: calc(100dvw - 8rem);
   height: calc(100dvh - 4rem);
   position: relative;
   overflow: hidden;

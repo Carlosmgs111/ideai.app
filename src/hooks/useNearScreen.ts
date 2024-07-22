@@ -40,7 +40,10 @@ export const useNearScreenArray = (
   cb: Function | null = null,
   opts = { threshold: 0.5 }
 ) => {
-  const refs: any = useRef(initialState.map(() => ({ current: null })));
+  const refs: any = useRef([]);
+  initialState.forEach((_: any, index: any) => {
+    refs.current[index] = { current: null };
+  });
   const [show, setShow] = useState(initialState);
   useEffect(() => {
     var observers: any = [];

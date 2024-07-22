@@ -3,7 +3,7 @@ import { MarkmapVisualizer } from "../../components/MarkmapVisualizer";
 import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
 import { ComponentReferencer } from "../../components/ComponentReferencer";
-import { useReferedScroll } from "../../hooks/useReferedScroll";
+import { useNavScroll } from "../../hooks/useNavScroll";
 import { useRef } from "react";
 
 const Anchor = ({ children }: any) => {
@@ -16,7 +16,6 @@ const Anchor = ({ children }: any) => {
 };
 
 const Dashboard = ({ children }: any) => {
-  if (!children.props.children[0]) return;
   return (
     <div className={styles.dashboard}>
       <div className={styles.navboard}>
@@ -36,16 +35,20 @@ const Dashboard = ({ children }: any) => {
 
 export const Board = ({}: any) => {
   const [{ markmaps }]: any = useStateValue();
-  const { parent, elements, anchors }: any = useReferedScroll(
-    {
-      horizontal: true,
-    },
-    [markmaps]
-  );
+  const { container, elements, navIndexes, navPrev, navNext }: any =
+    useNavScroll(
+      {
+        horizontal: true,
+      },
+      [markmaps]
+    );
 
   return (
     <div className={styles.page}>
-      <div ref={parent} className={styles.content}>
+      <button onClick={navPrev}>
+        <i className={`fa-solid fa-chevron-left`}></i>
+      </button>
+      <div ref={container} className={styles.content}>
         <ComponentReferencer>
           {mapToList(markmaps).map((markmap: any, idx: any) => (
             <MarkmapVisualizer
@@ -57,13 +60,18 @@ export const Board = ({}: any) => {
           ))}
         </ComponentReferencer>
       </div>
+      <button onClick={navNext}>
+        <i className={`fa-solid fa-chevron-right`}></i>
+      </button>
       <Dashboard>
         <ComponentReferencer>
-          {mapToList(markmaps).map((markmap: any, idx: any) => (
-            <Anchor key={idx} $refs={anchors} idx={String(idx)}>
-              {markmap.uuid}
-            </Anchor>
-          ))}
+          {mapToList(markmaps).map((markmap: any, idx: any) => {
+            return (
+              <Anchor key={idx} $refs={navIndexes} idx={String(idx)}>
+                {markmap.title}
+              </Anchor>
+            );
+          })}
         </ComponentReferencer>
       </Dashboard>
     </div>
