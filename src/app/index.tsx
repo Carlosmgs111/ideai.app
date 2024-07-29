@@ -5,25 +5,26 @@ import { Home, Board, Dashboard, Mindmaps } from "../pages";
 import { useStateValue } from "../context";
 import { useEffect } from "react";
 import { URL_API } from "../services";
+import { Modal } from "../components/Modal";
 
 export default () => {
-  const [{ token }, dispatch]: any = useStateValue();
+  const [{ token, currentModal }, dispatch]: any = useStateValue();
   useEffect(() => {
-     fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
-       method: "GET",
-     })
-       .then((response: any) => response.json())
-       .then((data) => {
-         const newMarkmaps: any = {};
-         data.forEach((markmap: any) => {
-           newMarkmaps[markmap.uuid] = markmap;
-         });
-         dispatch({ type: "setMarkmaps", payload: newMarkmaps });
-       });
+    fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
+      method: "GET",
+    })
+      .then((response: any) => response.json())
+      .then((data) => {
+        const newMarkmaps: any = {};
+        data.forEach((markmap: any) => {
+          newMarkmaps[markmap.uuid] = markmap;
+        });
+        dispatch({ type: "setMarkmaps", payload: newMarkmaps });
+      });
   }, []);
   return (
     <div className={styles.app}>
-      <div className={styles.header}>e
+      <div className={styles.header}>
         <Navigation
           pages={[
             { label: "Mindmaps", to: "mindmaps" },
@@ -40,6 +41,11 @@ export default () => {
           <Mindmaps path={"mindmaps"}></Mindmaps>
         </Router>
       </div>
+      <Modal
+        onClick={() => dispatch({ type: "setCurrentModal", payload: null })}
+      >
+        {currentModal}
+      </Modal>
       <div className={styles.footer}>
         <span>
           Powered by{" "}

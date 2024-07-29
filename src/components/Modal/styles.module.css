@@ -1,0 +1,64 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  backdrop-filter: brightness(70%) blur(2px);
+  color: white;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  transition: 0.4s;
+  overflow: scroll;
+  opacity: 0;
+  z-index: -10;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+.modal.over {
+  z-index: 10;
+}
+
+.modal.active {
+  opacity: 1;
+}
+
+.main_container {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.button_container {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+}
+
+.close_button {
+  font-size: 2.4rem;
+  color: #69686875;
+  -webkit-text-stroke: 1.2px black;
+  right: 2%;
+  top: 2%;
+  transition: 0.2s;
+  font-weight: 1000;
+}
+
+.close_button:hover {
+  font-size: 2.8rem;
+  color: #950202;
+}

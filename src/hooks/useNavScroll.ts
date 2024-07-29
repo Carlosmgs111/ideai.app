@@ -29,8 +29,10 @@ export const useNavScroll = (
     if (currentId === 0) return setCurrentId(elements.current.length - 1);
     setCurrentId(currentId - 1);
   };
+  const navTo = (index: number) => setCurrentId(index);
   useEffect(() => {
-    if (!container.current || !navIndexes.current[0] || !elements.current[0]) return;
+    if (!container.current || !navIndexes.current[0] || !elements.current[0])
+      return;
     container.current.scrollTo({
       left: elements.current[currentId].current.offsetLeft,
       behavior: "smooth",
@@ -38,7 +40,8 @@ export const useNavScroll = (
   }, [container.current, currentId]);
 
   useEffect(() => {
-    if (!container.current || !navIndexes.current[0] || !elements.current[0]) return;
+    if (!container.current || !navIndexes.current[0] || !elements.current[0])
+      return;
     navIndexes.current.forEach((anchor: any) => {
       if (!anchor.current) return;
       const elementId = anchor.current.id;
@@ -62,5 +65,5 @@ export const useNavScroll = (
     };
   }, [...dependencies, currentId]);
 
-  return { container, navIndexes, elements, navPrev, navNext };
+  return { container, navIndexes, elements, navPrev, navNext, navTo };
 };

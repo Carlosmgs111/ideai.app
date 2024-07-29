@@ -4,7 +4,8 @@ import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
 import { ComponentReferencer } from "../../components/ComponentReferencer";
 import { useNavScroll } from "../../hooks/useNavScroll";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 const Anchor = ({ children }: any) => {
   const ref = useRef(null);
@@ -35,13 +36,22 @@ const Dashboard = ({ children }: any) => {
 
 export const Board = ({}: any) => {
   const [{ markmaps }]: any = useStateValue();
-  const { container, elements, navIndexes, navPrev, navNext }: any =
+  const location = useLocation();
+  const { container, elements, navIndexes, navPrev, navNext, navTo }: any =
     useNavScroll(
       {
         horizontal: true,
       },
       [markmaps]
     );
+
+  useEffect(() => {
+    const currentUUID = location.search.split("?uuid=")[1];
+    const index = mapToList(markmaps).findIndex(
+      ({ uuid }: any) => uuid === currentUUID
+    );
+    if (index > -1) navTo(index);
+  }, [location, markmaps]);
 
   return (
     <div className={styles.page}>

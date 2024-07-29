@@ -8,7 +8,7 @@ export const ComponentReferencer = ({ children }: any) => {
     const ref = { current: null };
     $refs.current[index] = ref;
     return (
-      <div id={child.props.idx} key={index} ref={ref}>
+      <div id={child.props.idx} key={index} ref={ref} autoFocus={true}>
         {cloneElement(child, {
           ...child.props,
           key: index,
