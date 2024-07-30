@@ -28,7 +28,7 @@
     var(--main-color-400b) 0.1rem,
     transparent 0
   );
-  background-size: 0.8rem 0.8rem;
+  background-size: 1.6rem 1.6rem;
   border: 2rem solid var(--main-color-300);
 }
 .visualizer:nth-child(n) {

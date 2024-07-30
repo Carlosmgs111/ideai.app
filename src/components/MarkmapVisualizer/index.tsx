@@ -97,6 +97,7 @@ export const MarkmapVisualizer = ({
   const markmapOptions = deriveOptions({
     maxWidth: 300,
     initialExpandLevel: preview ? 2 : -1,
+    colorFreezeLevel: 3,
     // color: ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#F9F871"],
   });
 

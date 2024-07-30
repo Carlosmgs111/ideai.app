@@ -26,7 +26,7 @@ export class SocketService {
   addClient = (client: any) => {
     const token = localStorage.getItem("token")?.replaceAll('"', "");
     let tries = 0;
-    const [alias, address] = Mapfy(client).entries().next().value;
+    const [alias, address]: any = Mapfy(client).entries().next().value;
     this.clients[alias] = connect(`${address}`, {
       path: "/ws",
       auth: { token },
@@ -86,8 +86,10 @@ export class SocketService {
 
   extractRemoteHandlersSpecs = (object: any, receiverFunc?: any) => {
     let specs = [];
-    const [client, _payload] = Mapfy(object).entries().next().value;
-    const [sendTo, paramsOrCallback] = Mapfy(_payload).entries().next().value;
+    const [client, _payload]: any = Mapfy(object).entries().next().value;
+    const [sendTo, paramsOrCallback]: any = Mapfy(_payload)
+      .entries()
+      .next().value;
     specs = [client, sendTo, paramsOrCallback];
     if (typeof receiverFunc === "string") specs = [...specs, receiverFunc];
     else if (receiverFunc)
@@ -99,9 +101,9 @@ export class SocketService {
     let [functionName, callback] = ["function_not_provided", (...[]) => {}];
     if (object instanceof Function) {
       [functionName, callback] = [object.name, object];
-    } else if (callback instanceof Object) {
+    } /* else if (callback instanceof Object) {
       [functionName, callback] = Mapfy(object).entries().next().value;
-    }
+    } */
     return [functionName, callback];
   };
 

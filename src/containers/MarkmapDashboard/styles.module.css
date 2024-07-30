@@ -1,0 +1,38 @@
+.dashboard_body {
+  width: 50rem;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 3.2rem;
+  gap: 1.6rem;
+  background-color: var(--main-color-800);
+  border-radius: 0.8rem;
+}
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section > div:nth-child(n) {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+button {
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  outline: none;
+  border: 1px solid transparent;
+  transition: 0.4s;
+}
+button.caution {
+  border: 1px solid #f00000;
+  background-color: transparent;
+}
+button.caution:hover {
+  color: var(--main-color-950);
+  border: 1px solid var(--main-color-950);
+  background-color: #f00000;
+}

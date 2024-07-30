@@ -74,7 +74,7 @@ export const DragNDropZone = () => {
       }).then((response) => {
         response.json();
       });
-      navigate("/board");
+      navigate(`/board?uuid=${uuid}`);
     },
     [files]
   );
