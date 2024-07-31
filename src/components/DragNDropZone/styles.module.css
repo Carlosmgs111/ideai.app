@@ -36,10 +36,10 @@
 .drag_body:hover {
   border: var(--main-color-950) 2px dashed;
 }
-.drag_body:hover > span {
+.drag_body:hover > label > i {
   color: var(--main-color-950);
 }
-.drag_body > span {
+.drag_body > label > i {
   transition: 0.4s;
   font-size: 4rem;
   color: var(--main-color-950b);

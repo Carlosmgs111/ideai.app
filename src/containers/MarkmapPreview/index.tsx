@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { MarkmapDashboard } from "../MarkmapDashboard";
+import { MarkmapPreviewDashboard } from "../MarkmapPreviewDashboard";
 import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 
@@ -19,7 +19,7 @@ export const MarkmapPreview = ({ children }: any) => {
   const settingsButtonOnClick = () => {
     dispatch({
       type: "setCurrentModal",
-      payload: <MarkmapDashboard {...{ uuid, title }} />,
+      payload: <MarkmapPreviewDashboard {...{ uuid, title }} />,
     });
   };
   return (

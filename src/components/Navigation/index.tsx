@@ -115,17 +115,19 @@ export function Navigation({ className, pages }: any) {
         </nav>
       </div>
       <div className={`${styles.page_settings}  ${menu.show && styles.show}`}>
-        <div className={styles.languages}>
-          <ToggleButton
-            onChange={toggleLanguage}
-            toggled={
-              "url('https://cdn-icons-png.flaticon.com/256/555/555526.png')"
-            }
-            unToggled={
-              "url('https://w7.pngwing.com/pngs/900/804/png-transparent-flag-of-colombia-national-flag-flag-of-cuba-flag-miscellaneous-angle-flag-thumbnail.png')"
-            }
-          ></ToggleButton>
-        </div>
+        {false && (
+          <div className={styles.languages}>
+            <ToggleButton
+              onChange={toggleLanguage}
+              toggled={
+                "url('https://cdn-icons-png.flaticon.com/256/555/555526.png')"
+              }
+              unToggled={
+                "url('https://w7.pngwing.com/pngs/900/804/png-transparent-flag-of-colombia-national-flag-flag-of-cuba-flag-miscellaneous-angle-flag-thumbnail.png')"
+              }
+            ></ToggleButton>
+          </div>
+        )}
       </div>
     </div>
   );

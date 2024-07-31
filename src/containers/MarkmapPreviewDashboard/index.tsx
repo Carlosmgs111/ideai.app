@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-export const MarkmapDashboard = ({ uuid, title }: any) => {
+export const MarkmapPreviewDashboard = ({ uuid, title }: any) => {
   uuid;
   return (
     <div className={styles.dashboard_body}>

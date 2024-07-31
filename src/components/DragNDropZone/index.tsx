@@ -1,12 +1,7 @@
 import { useDropzone } from "react-dropzone";
 import { useCallback, useState, Children } from "react";
 import { getSizesDisposition } from "../../utils";
-import config from "../../config";
 import styles from "./styles.module.css";
-import { useStateValue } from "../../context";
-import { useNavigate } from "react-router-dom";
-import { SocketService } from "../../services";
-import { v4 as uuidv4 } from "uuid";
 
 const FilesPreview = ({ children }: any): any => {
   const files = Children.toArray(children);
@@ -30,10 +25,9 @@ const FilesPreview = ({ children }: any): any => {
   );
 };
 
-export const DragNDropZone = () => {
+export const DragNDropZone = ({ uploadFile }: any) => {
   const [files, setFiles]: any = useState([]);
-  const [{ markmaps }, dispatch]: any = useStateValue();
-  const navigate = useNavigate();
+  const onClick = useCallback((e: any) => uploadFile(e, { files }), [files]);
 
   const reader = new FileReader();
   const onDrop = useCallback(
@@ -52,38 +46,12 @@ export const DragNDropZone = () => {
     [files]
   );
 
-  const uploadFile = useCallback(
-    (e: any) => {
-      const uuid = uuidv4();
-      dispatch({
-        type: "setMarkmaps",
-        payload: { ...markmaps, [uuid]: { uuid, text: "", title: uuid } },
-      });
-      e.preventDefault();
-      dispatch({ type: "setMarkmap", payload: "" });
-      if (!files[0]) return;
-      fetch(`${config.prodUrl}/markmap/transformfiletomarkmap`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          format: "base64",
-          payload: files[0].split(",")[1],
-          clientSocketID: SocketService.id,
-          uuid,
-        }),
-      }).then((response) => {
-        response.json();
-      });
-      navigate(`/board?uuid=${uuid}`);
-    },
-    [files]
-  );
-
   const { getRootProps, getInputProps, isDragActive }: any = useDropzone({
     onDrop,
     maxFiles: 1,
     noDragEventsBubbling: true,
   });
+
   return (
     <div className={styles.dropzone}>
       <form
@@ -94,14 +62,12 @@ export const DragNDropZone = () => {
         <FilesPreview>{files}</FilesPreview>
         <input {...getInputProps()}></input>
         {Boolean(!files.length) && (
-          <>
-            <span className="fa-solid fa-cloud-arrow-up"></span>
-            <label>
-              {isDragActive
-                ? "Drop file here!"
-                : "Drag and drop, or click here to select file!"}
-            </label>
-          </>
+          <label>
+            <i className="fa-solid fa-cloud-arrow-up"></i>{" "}
+            {isDragActive
+              ? "Suelta el archivo aquí!"
+              : "Arrastrar y soltar un archivo PDF, o hacer clic aquí para empezar!"}
+          </label>
         )}
       </form>
       {Boolean(files.length) && (
@@ -109,15 +75,15 @@ export const DragNDropZone = () => {
           className={`${styles.button} ${styles.secondary_button} ${styles.floating_right}`}
           onClick={() => setFiles([])}
         >
-          <i className="fa-solid fa-arrow-rotate-left"></i> Replace File
+          <i className="fa-solid fa-arrow-rotate-left"></i> Cambiar archivo
         </button>
       )}
       {Boolean(files.length) && (
         <button
           className={`${styles.button} ${styles.main_button} ${styles.floating_center}`}
-          onClick={uploadFile}
+          onClick={onClick}
         >
-          <i className="fa-solid fa-diagram-project"></i> Transform Into Markmap
+          <i className="fa-solid fa-diagram-project"></i> Generar nuevo Mindmap
         </button>
       )}
     </div>

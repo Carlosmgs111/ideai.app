@@ -31,6 +31,10 @@
   display: flex;
   gap: 2rem;
 }
+.hero > span{
+  font-size: 1.8rem;
+  font-weight: 500;
+}
 .button {
   padding: 0.8rem 1.6rem;
   border: none;
