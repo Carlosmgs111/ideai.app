@@ -10,7 +10,7 @@ import { Modal } from "../components/Modal";
 export default () => {
   const [{ token, currentModal }, dispatch]: any = useStateValue();
   useEffect(() => {
-    fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
+    fetch(`${URL_API}/markmap/getmanymarkmaps?size=20&page=0`, {
       method: "GET",
     })
       .then((response: any) => response.json())

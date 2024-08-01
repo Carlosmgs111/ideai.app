@@ -121,12 +121,10 @@ export const MarkmapVisualizer = ({
       core: {
         [`appendToMarkmapText$${uuid}`]: async (updatedMarkmap: any) => {
           const { text: chunk, title } = updatedMarkmap;
-          if (String(title) === String(uuid)) {
-            dispatch({
-              type: "setMarkmaps",
-              payload: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
-            });
-          }
+          dispatch({
+            type: "setMarkmaps",
+            payload: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
+          });
           composedTextDispatch(chunk);
         },
       },

@@ -1,0 +1,16 @@
+.input_helper {
+  --padding: -1rem;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: "Nunito";
+  color: red;
+}
+.left {
+  left: var(--padding);
+}
+.right {
+  right: var(--padding);
+}

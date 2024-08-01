@@ -1,0 +1,64 @@
+.input_text {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  width: 100%;
+  height: auto;
+}
+.input_text:hover div {
+  opacity: 1;
+  transform: scale(100%); /* ? ⬅️ This refer to ButtonsContainer component */
+}
+.input_text:focus + .label,
+.input_text:hover + .label {
+  top: -0.7rem;
+  left: 2rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  font-size: 1rem;
+  opacity: 1;
+}
+.textarea {
+  outline: none;
+  padding: 0.8rem;
+  resize: vertical;
+  transition: border 0.4s;
+  border: 2px solid transparent;
+  border-radius: 0.4rem;
+  width: 100%;
+  height: auto;
+  max-height: 40rem;
+  min-height: 3.4rem;
+  resize: none;
+  overflow: hidden;
+  font-family: var(--main-font);
+  color: black;
+  background-color: var(--main-color-500b);
+  text-align: justify;
+}
+.textarea::placeholder {
+  transition: 0.4s;
+  color: black;
+}
+.textarea:focus,
+.textarea:active,
+.textarea:hover {
+  border: 2px solid var(--main-color-400);
+}
+.textarea:focus::placeholder,
+.textarea:active::placeholder,
+.textarea:hover::placeholder {
+  color: transparent;
+}
+.textarea:focus + .label,
+.textarea:active + .label,
+.textarea:hover + .label {
+  top: -0.7rem;
+  left: 2rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  font-size: 1rem;
+  opacity: 1;
+}

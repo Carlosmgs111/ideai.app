@@ -1,0 +1,29 @@
+.input_container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+  overflow: hidden;
+}
+.input_container:hover .button_container,
+.input_container:focus .button_container,
+.input_container:active .button_container {
+  opacity: 1;
+  transform: scale(100%) translate(0, -0.8rem); /*  ? ⬅️ This refer to ButtonsContainer component */
+}
+.multiinput {
+  display: flex;
+  padding: 1rem 0;
+  flex-direction: column;
+  border-top: 1px black solid;
+  gap: 1rem;
+  width: 100%;
+}
+.multiinput:hover .label {
+  top: -0.7rem;
+  left: 2rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  font-size: 1rem;
+  opacity: 1;
+}

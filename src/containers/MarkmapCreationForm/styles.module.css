@@ -1,0 +1,25 @@
+.form_body {
+  padding: 3.6rem;
+  background-color: var(--main-color-950);
+  background-image: radial-gradient(
+    var(--main-color-700b) 0.1rem,
+    transparent 0
+  );
+  background-size: 1.6rem 1.6rem;
+  border-radius: 0.8rem;
+}
+.form_body > div {
+  padding: 0;
+}
+.form_body > button {
+  border: 1px solid transparent;
+  background-color: var(--main-color-50);
+  padding: 0.8rem 1.6rem;
+}
+
+.form_body > button:hover {
+  border: 1px solid var(--main-color-50);
+  background-color: var(--main-color-950);
+  color: var(--main-color-50);
+  padding: 0.8rem 1.6rem;
+}

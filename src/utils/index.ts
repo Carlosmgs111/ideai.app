@@ -227,10 +227,6 @@ export const beutifyLabel = (label: any) => {
       }
     }
   }
-  label = label.replace("{", "");
-  label = label.replace("~", "");
-  label = label.replace("+", "");
-  label = label.replace("<", "");
   return label;
 };
 

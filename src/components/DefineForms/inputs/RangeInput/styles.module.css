@@ -1,0 +1,37 @@
+.range {
+  appearance: none;
+  width: 100%;
+  height: 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  background-color: var(--main-color-400);
+  margin: 0.4rem 0;
+  cursor: ew-resize;
+}
+.range:focus + .label,
+.range:hover + .label,
+.range:active + .label,
+.range.active + .label {
+  top: -1.6rem;
+  left: 2rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  font-size: 1rem;
+  opacity: 1;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background: var(--main-color-700);
+  box-shadow: 0 0 6px 0 #555;
+  transition: background 0.3s ease-in-out;
+}
+.range::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}

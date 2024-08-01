@@ -3,6 +3,7 @@ import { DragNDropZone } from "../../components";
 import config from "../../config";
 import { useStateValue } from "../../context";
 import { useNavigate } from "react-router-dom";
+import { MarkmapCreationForm } from "../../containers/MarkmapCreationForm";
 import { SocketService } from "../../services";
 import { v4 as uuidv4 } from "uuid";
 
@@ -43,15 +44,24 @@ export const Home = ({}: any) => {
           siguiente nivel tu ideas.
         </article>
         <div>
-          <button className={`${styles.button} ${styles.main_button}`}>
+          <button
+            onClick={() =>
+              dispatch({
+                type: "setCurrentModal",
+                payload: <MarkmapCreationForm />,
+              })
+            }
+            className={`${styles.button} ${styles.main_button}`}
+          >
             <i className="fa-solid fa-diagram-project"></i> Crea Mindmap desde
             Cero
           </button>
           <button className={`${styles.button} ${styles.secondary_button}`}>
-            Aprende Más
+            <i className={`fa-solid fa-book`}></i> Aprende Más
           </button>
         </div>
-        <span>O puedes</span><DragNDropZone uploadFile={uploadFileCallback}></DragNDropZone>
+        <span>O puedes...</span>
+        <DragNDropZone uploadFile={uploadFileCallback}></DragNDropZone>
       </div>
     </div>
   );
