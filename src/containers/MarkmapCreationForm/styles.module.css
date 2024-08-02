@@ -7,11 +7,16 @@
   );
   background-size: 1.6rem 1.6rem;
   border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 50rem;
 }
 .form_body > div {
   padding: 0;
 }
 .form_body > button {
+  width: fit-content;
   border: 1px solid transparent;
   background-color: var(--main-color-50);
   padding: 0.8rem 1.6rem;

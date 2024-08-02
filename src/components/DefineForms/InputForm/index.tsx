@@ -9,15 +9,15 @@ import {
   DateInput,
   ParagraphInput,
 } from "../inputs";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useToggle } from "../../../hooks/useToggle";
 import { INPUT_TYPES } from "..";
 import styles from "./styles.module.css";
 
 type InputFormOps = {
   index: any;
-  schema: any;
-  _data: any;
+  schemaSize: any;
+  data: any;
   updateSchemaDelta: Function;
   fixed?: Boolean;
   modifiable?: Boolean;
@@ -28,8 +28,8 @@ type InputFormOps = {
 
 export function InputForm({
   index,
-  schema,
-  _data,
+  schemaSize: _schemaSize,
+  data: _data,
   updateSchemaDelta,
   fixed = false,
   modifiable = true,
@@ -38,7 +38,7 @@ export function InputForm({
   onClick,
 }: InputFormOps) {
   const [isExpanded, _] = useToggle(true, false);
-  // const [data, setData] = useState(_data);
+  const [schemaSize, setSchemaSize] = useState(_schemaSize);
   const [data, setData]: any = useReducer(
     (data: any, { index, payload }: any): any => {
       if (!payload) return {};
@@ -55,9 +55,17 @@ export function InputForm({
     });
   };
 
+  useEffect(() => setSchemaSize(_schemaSize), [_schemaSize]);
+  useEffect(() => {
+    if (_schemaSize !== schemaSize) return;
+    Mapfy(_data).forEach((form: any, key: any) => {
+      if (data[key].controlledValue !== form.controlledValue) {
+        updateData(key, form.controlledValue);
+      }
+    });
+  }, [_data]);
   useEffect(() => {
     updateSchemaDelta(index, { ...data });
-    // console.log(`Index changed: ${index}`);
   }, [data]);
 
   const onChange = (currentName: any, target: any, inputType?: string) => {
@@ -73,7 +81,6 @@ export function InputForm({
         inputType[0] === INPUT_TYPES.PARAGRAPH ||
         inputType[0] === INPUT_TYPES.SELECTION
       ) {
-        // console.log(inputType[0], { schema, index, currentName, target });
         const list = [...data[currentName].controlledValue];
         list[name] = value;
         value = [...list];
@@ -271,7 +278,13 @@ export function InputForm({
         if (index < nonOptionals.length + 1)
           return <li key={index}> {Form(attribute, onChange)}</li>;
         return (
-          <MemoizedComponent deps={[Mapfy(data).size]}>
+          <MemoizedComponent
+            deps={
+              [
+                /* Mapfy(data).size */
+              ]
+            }
+          >
             <li
               style={{ width: "100%" }}
               key={index}
@@ -284,24 +297,32 @@ export function InputForm({
           </MemoizedComponent>
         );
       })}
-      {modifiable && (
-        <button
-          className={`fa-solid fa-plus ${styles.main} ${styles.add_button}`}
-          type="button"
-          name="add"
-          id={index}
-          onClick={(e: any) => onClick(e)}
-        />
-      )}
-      {Object.entries(schema).length > 1 && !fixed && modifiable ? (
-        <button
-          className={`fa-solid fa-trash ${styles.main} ${styles.delete_button}`}
-          type="button"
-          name="remove"
-          id={index}
-          onClick={(e: any) => onClick(e)}
-        />
-      ) : null}
+
+      <div className={styles.button_section}>
+        {modifiable && (
+          <button
+            className={`${styles.add_button} ${styles.button}`}
+            type="button"
+            name="add"
+            id={index}
+            onClick={(e: any) => onClick(e)}
+          >
+            <i className="fa-solid fa-plus"></i> Añadir
+          </button>
+        )}
+        {schemaSize > 1 && !fixed && modifiable ? (
+          <button
+            className={` ${styles.delete_button} ${styles.button}`}
+            type="button"
+            name="remove"
+            id={index}
+            onClick={(e: any) => onClick(e)}
+          >
+            <i className="fa-solid fa-trash"></i> Eliminar
+          </button>
+        ) : null}
+      </div>
+
       {/* {Object.entries(schema[index]).length > 2 ? (
         <ExpandButton
           type="button"

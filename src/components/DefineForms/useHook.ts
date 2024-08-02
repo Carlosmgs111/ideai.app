@@ -2,7 +2,11 @@ import { useState, useEffect, useReducer } from "react";
 import { runButtonBehavior, genRandomId, Mapfy } from "../../utils";
 import { INPUT_TYPES } from ".";
 
-export function useHook({ baseSchema = {}, onClickHandler }: any): any {
+export function useHook({
+  baseSchema = {},
+  onClickHandler,
+  onChangeHandler,
+}: any): any {
   const [label, setLabel] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -10,11 +14,15 @@ export function useHook({ baseSchema = {}, onClickHandler }: any): any {
     (schema: any, { index, payload }: any): any => {
       if (!payload) return {};
       if (payload && !index) return payload;
-      return { ...schema, [index]: payload };
+      if (onChangeHandler) {
+        payload = onChangeHandler(payload);
+      }
+      schema = { ...schema, [index]: payload };
+      return schema;
     },
     {}
   );
-  const listOfDefineAttributes: any = [];
+  const forms: any = [];
 
   const updateSchemaDelta = (index: any, deltaData: any) => {
     setSchema({ index, payload: deltaData });
@@ -103,6 +111,7 @@ export function useHook({ baseSchema = {}, onClickHandler }: any): any {
 
     Mapfy(schema).forEach((attr: any) => {
       parsedSchema.push({});
+      if (!attr) return;
       Mapfy(attr).forEach((value: any, name: any) => {
         parsedSchema[index][name] = value.controlledValue;
       });
@@ -126,7 +135,6 @@ export function useHook({ baseSchema = {}, onClickHandler }: any): any {
       data: parseSchema(),
       reset,
     });
-    
   }
 
   const addDefineAttribute = (e: any) => {
@@ -166,7 +174,7 @@ export function useHook({ baseSchema = {}, onClickHandler }: any): any {
     schema,
     updateSchemaDelta,
     onClick,
-    listOfDefineAttributes,
+    forms,
     label,
     setLabel,
     loading,

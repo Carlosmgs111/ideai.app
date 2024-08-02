@@ -41,6 +41,7 @@ export function DefineForms({
   baseSchema = {},
   nonOptionals,
   onClickHandler,
+  onChangeHandler,
   buttons = { main: "save" },
   message = false,
   modifiable = true,
@@ -48,25 +49,21 @@ export function DefineForms({
   if (!nonOptionals)
     nonOptionals = Object.entries(baseSchema).map((kv) => kv[0]);
 
-  const {
-    schema,
-    updateSchemaDelta,
-    onClick,
-    listOfDefineAttributes,
-    label,
-    setLabel,
-  } = useHook({ baseSchema, onClickHandler });
-
+  const { schema, updateSchemaDelta, onClick, forms, label, setLabel } =
+    useHook({ baseSchema, onClickHandler, onChangeHandler });
+  // console.log(schema);
   Mapfy(schema).forEach((_, index) => {
-    const _data = schema[index];
-    listOfDefineAttributes.push(
-      <MemoizedComponent key={index} {...{ deps: [_data, Mapfy(schema).size] }}>
+    const data = schema[index];
+    const schemaSize = Mapfy(schema).size;
+    forms.push(
+      <MemoizedComponent key={index} {...{ deps: [data, schemaSize] }}>
         <InputForm
           {...{
             index,
-            schema,
-            _data,
+            schemaSize,
+            data,
             updateSchemaDelta,
+            onChangeHandler,
             nonOptionals,
             onClick,
             fixed: false,
@@ -88,7 +85,7 @@ export function DefineForms({
         onChange={(e) => setLabel(e.target.value)}
       />
       <form className={styles.form} name="main" onSubmit={onClick}>
-        {listOfDefineAttributes}
+        {forms}
       </form>
       {Mapfy(buttons).has("main") && (
         <button
