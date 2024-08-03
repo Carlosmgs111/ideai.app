@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { MarkmapVisualizer } from "../../components/MarkmapVisualizer";
+import { MarkmapVisualizer } from "../../containers/MarkmapVisualizer";
 import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
 import { ComponentReferencer } from "../../components/ComponentReferencer";
@@ -16,9 +16,9 @@ const Anchor = ({ children }: any) => {
   );
 };
 
-const Dashboard = ({ children }: any) => {
+const QuicknavDashboard = ({ children, hide = false }: any) => {
   return (
-    <div className={styles.dashboard}>
+    <div className={`${styles.dashboard} ${!hide && styles.hide}`}>
       <div className={styles.navboard}>
         <button
           className="fa-solid fa-caret-left"
@@ -34,7 +34,7 @@ const Dashboard = ({ children }: any) => {
   );
 };
 
-export const Board = ({}: any) => {
+export const Board = ({ quicknav = false }: any) => {
   const [{ markmaps }]: any = useStateValue();
   const location = useLocation();
   const { container, elements, navIndexes, navPrev, navNext, navTo }: any =
@@ -73,7 +73,7 @@ export const Board = ({}: any) => {
       <button onClick={navNext}>
         <i className={`fa-solid fa-chevron-right`}></i>
       </button>
-      <Dashboard>
+      <QuicknavDashboard hide={quicknav}>
         <ComponentReferencer>
           {mapToList(markmaps).map((markmap: any, idx: any) => {
             return (
@@ -83,7 +83,7 @@ export const Board = ({}: any) => {
             );
           })}
         </ComponentReferencer>
-      </Dashboard>
+      </QuicknavDashboard>
     </div>
   );
 };

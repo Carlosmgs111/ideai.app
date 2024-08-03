@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
 import { SocketService, URL_API } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
-import { TextEditor } from "../TextEditor";
+import { MarkmapVisualizerDashboard } from "../MarkmapVisualizerDashboard";
 import { useToggle } from "../../hooks/useToggle";
 
 const transformer = new Transformer();
@@ -33,52 +33,12 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
   }
 };
 
-const Dashboard = ({
-  text,
-  handleChange,
-  hide,
-  toggleHide,
-  autosave,
-  toggleAutosave,
-}: any) => {
-  return (
-    <div className={`${styles.dashboard} ${hide && styles.hide}`}>
-      <div className={styles.header}>
-        <button
-          className={`fa-solid fa-caret-left ${styles.button}`}
-          onClick={toggleHide}
-        ></button>
-        <label
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          htmlFor=""
-        >
-          Autosave {/*  */}
-          <input
-            type="checkbox"
-            value={autosave}
-            onClick={toggleAutosave}
-          ></input>
-        </label>
-      </div>
-
-      <div>
-        <div className={`${styles.editor}`}>
-          <TextEditor {...{ value: text, onChange: handleChange }}></TextEditor>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export const MarkmapVisualizer = ({
   uuid,
   text: markmapText,
   preview = false,
-  autosave: _autosave = false,
+  autosave: _autosave = true,
+  title,
 }: any) => {
   const [{ markmaps }, dispatch]: any = useStateValue();
   const [text, setText]: any = useState(markmapText);
@@ -95,12 +55,11 @@ export const MarkmapVisualizer = ({
   const [hideDashboard, toggleHideDashboard] = useToggle(true, false);
   const debouncedComposedText = useDebounce(composedText, 100);
   const markmapOptions = deriveOptions({
-    maxWidth: 300,
+    maxWidth: 800,
     initialExpandLevel: preview ? 2 : -1,
     colorFreezeLevel: 3,
     // color: ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#F9F871"],
   });
-
   const saveText = (text: any) => {
     fetch(`${URL_API}/markmap/update`, {
       method: "PUT",
@@ -170,6 +129,10 @@ export const MarkmapVisualizer = ({
     });
   }, [debouncedText]);
 
+  useEffect(() => {
+    setText(markmapText);
+  }, [markmapText]);
+
   const handleChange = (e: any) => {
     setText(e.target.value);
   };
@@ -181,6 +144,7 @@ export const MarkmapVisualizer = ({
         !showVisualizer && !preview ? styles.hide : ""
       }`}
     >
+      {!preview && <h1>{title}</h1>}
       <svg
         className={styles.board}
         style={{
@@ -197,7 +161,7 @@ export const MarkmapVisualizer = ({
         ></button>
       )}
       {!preview && (
-        <Dashboard
+        <MarkmapVisualizerDashboard
           {...{
             autosave,
             toggleAutosave,
@@ -207,7 +171,7 @@ export const MarkmapVisualizer = ({
             hide: hideDashboard,
             toggleHide: toggleHideDashboard,
           }}
-        ></Dashboard>
+        ></MarkmapVisualizerDashboard>
       )}
       <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
         <div ref={refToolbar}></div>

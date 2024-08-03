@@ -20,33 +20,45 @@
   width: 100%;
   font-size: 6rem;
   text-align: center;
+  color: var(--main-color-950);
 }
 .hero > article {
   font-size: 2rem;
   width: 60rem;
   text-align: center;
-  color: var(--main-color-800);
+  color: var(--main-color-950);
 }
 .hero > div {
   display: flex;
   gap: 2rem;
 }
-.hero > span{
+.hero > span {
   font-size: 1.8rem;
   font-weight: 500;
 }
 .button {
   padding: 0.8rem 1.6rem;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 0.6rem;
   font-size: 1.6rem;
   cursor: pointer;
 }
-.main_button {
+.hero > div > button:nth-child(1) {
   background-color: var(--main-color-950);
   color: var(--main-color-50);
 }
-.secondary_button {
+.hero > div > button:nth-child(1):hover {
+  border: 1px solid var(--main-color-950);
+  background-color: var(--main-color-50);
+  color: var(--main-color-950);
+}
+.hero > div > button:nth-child(2) {
+  border: 1px solid var(--main-color-950);
   background-color: transparent;
   color: var(--main-color-950);
+}
+.hero > div > button:nth-child(2):hover {
+  border: 1px solid transparent;
+  background-color: var(--main-color-950);
+  color: var(--main-color-50);
 }

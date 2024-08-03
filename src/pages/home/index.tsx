@@ -38,9 +38,11 @@ export const Home = ({}: any) => {
       <div className={styles.hero}>
         <h1>Organiza y Visualiza tus ideas con Mindmaps </h1>
         <article>
-          Crea, gestiona y comparte tus Mindmaps fácilmente. Extrae información
-          directamente desde tus archivos PDF o empieza desde cero. ¡Empieza
-          ahora y visualiza tus ideas potenciadas por nuestras IA's!
+          Crea, gestiona y comparte tus <strong>Mindmaps</strong> fácilmente.
+          Extrae información directamente desde tus archivos{" "}
+          <strong>PDF</strong> o empieza desde cero usando{" "}
+          <strong>Markmap</strong>. ¡Empieza ahora y visualiza tus ideas
+          potenciadas por nuestras <strong>IA's</strong>!
         </article>
         <div>
           <button
@@ -50,16 +52,16 @@ export const Home = ({}: any) => {
                 payload: <MarkmapCreationForm />,
               })
             }
-            className={`${styles.button} ${styles.main_button}`}
+            className={`${styles.button} `}
           >
             <i className="fa-solid fa-diagram-project"></i> Crea Mindmap desde
             Cero
           </button>
           <button
-            className={`${styles.button} ${styles.secondary_button}`}
-            onClick={() => navigate("/learn")}
+            className={`${styles.button}`}
+            onClick={() => navigate("/learn/markmap")}
           >
-            <i className={`fa-solid fa-book`}></i> Aprende Más
+            <i className={`fa-solid fa-book`}></i> Aprende sobre Markmap
           </button>
         </div>
         <span>O puedes...</span>

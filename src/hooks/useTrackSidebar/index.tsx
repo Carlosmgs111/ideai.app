@@ -13,7 +13,6 @@ export const useTrackSidebar = () => {
       indexesRefs.splice(indexesRefs.indexOf(ref), 1);
     setIndexesRefs([...indexesRefs]);
   };
-
   const TrackSidebar = useCallback(
     (props: any) => {
       return (
@@ -31,15 +30,15 @@ export const useTrackSidebar = () => {
   );
   const ContentWrapper = useCallback(({ children }: any): any => {
     const [elementsRefs] = useNearScreenArray(children, refreshRefs);
-    const elementsIndexes = children.map(
-      ({ props: { title, id: reference } }: any) => ({
-        reference,
-        title,
-      })
-    );
+
     useEffect(() => {
-      setIndexes(elementsIndexes);
-    }, []);
+      const childrenIndexes: any = [];
+      children.forEach((child: any) => {
+        const { id, title } = child.props;
+        childrenIndexes.push({ reference: id, title });
+      });
+      setIndexes(childrenIndexes);
+    }, [children.length]);
 
     return children.map((child: any, index: any): any => (
       <div

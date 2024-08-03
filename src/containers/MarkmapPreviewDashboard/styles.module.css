@@ -6,8 +6,14 @@
   flex-direction: column;
   padding: 3.2rem;
   gap: 1.6rem;
-  background-color: var(--main-color-800);
+  background-color: var(--main-color-950);
+  background-image: radial-gradient(
+    var(--main-color-700b) 0.1rem,
+    transparent 0
+  );
+  background-size: 1.6rem 1.6rem;
   border-radius: 0.8rem;
+  font-size: 1.2rem;
 }
 .section {
   width: 100%;
@@ -29,7 +35,8 @@ button {
 }
 button.caution {
   border: 1px solid #f00000;
-  background-color: transparent;
+  background-color: var(--main-color-950);
+  color: #f00000;
 }
 button.caution:hover {
   color: var(--main-color-950);

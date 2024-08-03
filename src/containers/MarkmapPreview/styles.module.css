@@ -22,7 +22,7 @@
   bottom: 0;
   width: calc(100% - 3.2rem);
   border-radius: 0 0 0.8rem 0.8rem;
-  backdrop-filter: blur(1px) brightness(30%);
+  backdrop-filter: blur(1px) brightness(70%);
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -57,13 +57,12 @@
   color: var(--main-color-50);
 }
 .dashboard > button:nth-child(2) {
-  background: transparent;
-  border: 1px solid var(--main-color-400);
-  color: var(--main-color-400);
+  background: var(--main-color-950);
+  color: var(--main-color-50);
 }
 .dashboard > button:nth-child(2):hover {
-  border: 1px solid var(--main-color-50);
-  color: var(--main-color-50);
+  background: var(--main-color-50);
+  color: var(--main-color-950);
 }
 .detail_view {
   padding: 1.6rem;

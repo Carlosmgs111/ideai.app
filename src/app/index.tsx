@@ -8,9 +8,9 @@ import { URL_API } from "../services";
 import { Modal } from "../components/Modal";
 
 export default () => {
-  const [{ token, currentModal }, dispatch]: any = useStateValue();
+  const [{ currentModal }, dispatch]: any = useStateValue();
   useEffect(() => {
-    fetch(`${URL_API}/markmap/getmanymarkmaps?size=20&page=0`, {
+    fetch(`${URL_API}/markmap/getmanymarkmaps?size=50&page=0`, {
       method: "GET",
     })
       .then((response: any) => response.json())
@@ -29,7 +29,7 @@ export default () => {
           pages={[
             { label: "Mindmaps", to: "mindmaps" },
             { label: "Board", to: "board" },
-            { label: token ? "Dasboard" : "Login", to: "dashboard" },
+            // { label: token ? "Dasboard" : "Login", to: "dashboard" },
           ]}
         ></Navigation>
       </div>
@@ -39,7 +39,7 @@ export default () => {
           <Board path={"board"}></Board>
           <Dashboard path={"dashboard"}></Dashboard>
           <Mindmaps path={"mindmaps"}></Mindmaps>
-          <Learn path={"learn"}></Learn>
+          <Learn path={"learn/markmap"}></Learn>
         </Router>
       </div>
       <Modal

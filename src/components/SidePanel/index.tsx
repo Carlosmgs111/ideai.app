@@ -12,7 +12,7 @@ export const SidePanel = (props: any) => {
     sidebars = [],
     children,
     width = "fit-content",
-    float: _float = true,
+    float: _float = false,
     multi = true,
     settings = false,
   } = props;
@@ -95,17 +95,18 @@ export const SidePanel = (props: any) => {
                 })
               )}
             </section>
-            <section className={styles.footer}>
-              {token || settings && (
-                <i
-                  key="settings-button"
-                  className={`fa-solid fa-gear ${styles.rotable} ${
-                    styles.item
-                  } ${settingsDashboard ? styles.active : ""}`}
-                  onClick={switchSettingsDashboard}
-                ></i>
-              )}
-            </section>
+            {settings ||
+              (token && (
+                <section className={styles.footer}>
+                  <i
+                    key="settings-button"
+                    className={`fa-solid fa-gear ${styles.rotable} ${
+                      styles.item
+                    } ${settingsDashboard ? styles.active : ""}`}
+                    onClick={switchSettingsDashboard}
+                  ></i>
+                </section>
+              ))}
           </section>
           <SettingsDashboard
             {...{

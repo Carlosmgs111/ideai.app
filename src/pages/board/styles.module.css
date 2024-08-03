@@ -57,6 +57,10 @@
   transform: translate(-50%);
   bottom: 8rem;
 }
+.dashboard.hide {
+  z-index: -100;
+  opacity: 0;
+}
 .navboard {
   display: flex;
   justify-content: center;

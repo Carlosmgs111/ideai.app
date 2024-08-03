@@ -16,6 +16,10 @@
   gap: 1.8rem;
   font-size: 1.6rem;
 }
+.content > h2 {
+  width: 100%;
+  text-align: center;
+}
 .content > :nth-child(n) {
   max-width: 80rem;
 }

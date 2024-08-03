@@ -59,8 +59,8 @@
   width: available;
   top: 0;
   background-color: var(--main-color-200);
-  border: 2px var(--main-color-950) solid;
-  border-radius:  0.4rem;
+  border-bottom: 2px var(--main-color-950) solid;
+  border-top: 2px var(--main-color-950) solid;
   z-index: 1;
 }
 .header i {
@@ -92,7 +92,6 @@
   /* color: inherit !important; */
   transition: max-width 0.4s, max-height 0.4s, opacity 0.2s, transform 0.4s,
     scale 0.4s;
-  font-family: "Rubik" !important;
   padding: 0;
   text-overflow: ellipsis;
   overflow: hidden;
