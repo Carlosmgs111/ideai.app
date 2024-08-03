@@ -36,12 +36,11 @@ export const Home = ({}: any) => {
   return (
     <div className={styles.page}>
       <div className={styles.hero}>
-        <h1>Gráfica y Visualiza tus ideas con Mindmaps </h1>
+        <h1>Organiza y Visualiza tus ideas con Mindmaps </h1>
         <article>
-          Crea tus Mindmaps desde cero o subiendo un archivo PDF, puedes
-          personalizarlos y obtener ayuda de nuestras AI's para sacar el maximo
-          provecho a tus ideas, comparte y colabora con otros para llevar al
-          siguiente nivel tu ideas.
+          Crea, gestiona y comparte tus Mindmaps fácilmente. Extrae información
+          directamente desde tus archivos PDF o empieza desde cero. ¡Empieza
+          ahora y visualiza tus ideas potenciadas por nuestras IA's!
         </article>
         <div>
           <button
@@ -56,7 +55,10 @@ export const Home = ({}: any) => {
             <i className="fa-solid fa-diagram-project"></i> Crea Mindmap desde
             Cero
           </button>
-          <button className={`${styles.button} ${styles.secondary_button}`}>
+          <button
+            className={`${styles.button} ${styles.secondary_button}`}
+            onClick={() => navigate("/learn")}
+          >
             <i className={`fa-solid fa-book`}></i> Aprende Más
           </button>
         </div>

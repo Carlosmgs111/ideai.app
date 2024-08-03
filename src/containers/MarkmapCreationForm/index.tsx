@@ -70,11 +70,14 @@ export const MarkmapCreationForm = () => {
         <i className={`fa-solid fa-floppy-disk`}></i> Guardar Nuevo Markmap
       </button>
       <span>
-        <mark>
-          Nota: No es absolutamente necesario completar el texto, puedes
-          completarlo desde el tablero (Board) y ver como tu Mindmap va
-          adquiriendo forma.
-        </mark>
+        💡Tip 1: No es absolutamente necesario digitar por completo el texto,
+        puedes completarlo desde el tablero (Board) y ver como tu Mindmap va
+        adquiriendo forma.
+      </span>
+      <span>
+        💡Tip 2:  El título del Mindmap será agregado automáticamente al texto
+        cuando este se digita, sin embargo, podrás modificarlo en cualquier
+        momento y permanecerá así siempre y cuando no cambies el título.
       </span>
     </div>
   );

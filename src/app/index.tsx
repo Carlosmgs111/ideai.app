@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { Router } from "../components/Router";
 import { Navigation } from "../components";
-import { Home, Board, Dashboard, Mindmaps } from "../pages";
+import { Home, Board, Dashboard, Mindmaps, Learn } from "../pages";
 import { useStateValue } from "../context";
 import { useEffect } from "react";
 import { URL_API } from "../services";
@@ -39,6 +39,7 @@ export default () => {
           <Board path={"board"}></Board>
           <Dashboard path={"dashboard"}></Dashboard>
           <Mindmaps path={"mindmaps"}></Mindmaps>
+          <Learn path={"learn"}></Learn>
         </Router>
       </div>
       <Modal
