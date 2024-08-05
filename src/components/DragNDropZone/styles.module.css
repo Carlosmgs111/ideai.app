@@ -4,13 +4,17 @@
   height: fit-content;
 }
 .drag_body {
-  width: 80rem;
+  min-width: 30rem;
+  max-width: 80rem;
   height: 40rem;
   border: var(--main-color-950b) 2px dashed;
   border-radius: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   padding: 2rem;
   transition: 0.4s;
   background-image: radial-gradient(
@@ -18,15 +22,7 @@
     transparent 0
   ); /* * dotted background */
   background-size: 20px 20px; /* * dotted background */
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.4rem;
   text-align: center;
-  border-radius: 2rem;
-  padding: 2rem;
   position: relative;
   overflow: hidden;
 }

@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
 import { SocketService, URL_API } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
-import { MarkmapVisualizerDashboard } from "../MarkmapVisualizerDashboard";
+import { MarkmapVisualizerEditor } from "../MarkmapVisualizerEditor";
 import { useToggle } from "../../hooks/useToggle";
 
 const transformer = new Transformer();
@@ -161,7 +161,7 @@ export const MarkmapVisualizer = ({
         ></button>
       )}
       {!preview && (
-        <MarkmapVisualizerDashboard
+        <MarkmapVisualizerEditor
           {...{
             autosave,
             toggleAutosave,
@@ -171,7 +171,7 @@ export const MarkmapVisualizer = ({
             hide: hideDashboard,
             toggleHide: toggleHideDashboard,
           }}
-        ></MarkmapVisualizerDashboard>
+        ></MarkmapVisualizerEditor>
       )}
       <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
         <div ref={refToolbar}></div>

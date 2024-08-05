@@ -11,24 +11,38 @@
   flex-direction: column;
   gap: 0.8rem;
   max-width: 50rem;
+  min-height: 50rem;
 }
-.form_body > div {
+.form_body > button:nth-child(1) {
+  cursor: pointer;
+}
+.form_body > button:nth-child(1):hover {
+  background-color: var(--main-color-950);
+  color: var(--main-color-50);
+  border: solid 1px var(--main-color-50);
+}
+.creation_form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: 0.4s;
+}
+.creation_form > div {
   padding: 0;
 }
-.form_body > button {
+.creation_form > button {
   width: fit-content;
   border: 1px solid transparent;
   background-color: var(--main-color-50);
   padding: 0.8rem 1.6rem;
 }
-
-.form_body > button:hover {
+.creation_form > button:hover {
   border: 1px solid var(--main-color-50);
   background-color: var(--main-color-950);
   color: var(--main-color-50);
   padding: 0.8rem 1.6rem;
 }
-.form_body > span {
+.creation_form > span {
   font-size: 1.2rem;
   font-weight: 100;
 }

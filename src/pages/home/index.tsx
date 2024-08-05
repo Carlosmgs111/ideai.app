@@ -17,7 +17,6 @@ export const Home = ({}: any) => {
       type: "setMarkmaps",
       payload: { ...markmaps, [uuid]: { uuid, text: "", title: uuid } },
     });
-    dispatch({ type: "setMarkmap", payload: "" });
     if (!files[0]) return;
     fetch(`${config.prodUrl}/markmap/transformfiletomarkmap`, {
       method: "POST",
@@ -38,11 +37,12 @@ export const Home = ({}: any) => {
       <div className={styles.hero}>
         <h1>Organiza y Visualiza tus ideas con Mindmaps </h1>
         <article>
-          Crea, gestiona y comparte tus <strong>Mindmaps</strong> fácilmente.
-          Extrae información directamente desde tus archivos{" "}
-          <strong>PDF</strong> o empieza desde cero usando{" "}
+          Crea, gestiona y comparte tus&nbsp;<strong>Mindmaps</strong>
+          &nbsp;fácilmente. Extrae información directamente desde tus
+          archivos&nbsp;
+          <strong>PDF</strong> o empieza desde cero usando&nbsp;
           <strong>Markmap</strong>. ¡Empieza ahora y visualiza tus ideas
-          potenciadas por nuestras <strong>IA's</strong>!
+          potenciadas por nuestras&nbsp;<strong>IA's</strong>!
         </article>
         <div>
           <button
@@ -65,8 +65,63 @@ export const Home = ({}: any) => {
           </button>
         </div>
         <span>O puedes...</span>
-        <DragNDropZone uploadFile={uploadFileCallback}></DragNDropZone>
+        <div>
+          <DragNDropZone uploadFile={uploadFileCallback}></DragNDropZone>
+        </div>
       </div>
+      <section className={styles.about}>
+        <article>
+          <h3>Changelog</h3>
+          <ul>
+            <li>
+              <span>
+                Ahora sin importar el metodo de creacion de un&nbsp;
+                <strong>Mindmap</strong>, una vez inicie el proceso de creacion,
+                la aplicacion automaticamente se redirigira hacia la
+                pagina&nbsp;<strong>Board</strong>, ubicando automaticamente
+                el&nbsp;
+                <strong>Mindmap</strong> en cuestion, el recien creado.
+              </span>
+            </li>
+            <li>
+              <span>
+                Los Mindmaps pueden ahora ser eliminados desde la pagina&nbsp;
+                <strong>Mindmaps</strong>, solo hay que ubicar el Mindmap a
+                eliminar, dar click en el boton que dice&nbsp;
+                [&nbsp;<strong>
+                  <i className="fa-solid fa-screwdriver-wrench"></i>
+                  Configuraciónes
+                </strong>&nbsp;]
+                , lo cual abrira un modal donde se podra ubicar un boton que
+                indicara la accion de eliminar.
+              </span>
+            </li>
+            <li>
+              <span>
+                Ahora, en el modal desplegado para la creacion de un nuevo&nbsp;
+                <strong>Mindmap</strong>, &nbsp;[&nbsp;
+                <strong>
+                  <i className="fa-solid fa-diagram-project"></i> Crea Mindmap
+                  desde Cero
+                </strong>
+                &nbsp; ] se puede intercambiar el metodo de creacion, entre forma
+                manual&nbsp; [&nbsp;
+                <strong>
+                  <i className="fa-solid fa-pencil"></i> Crear Manualmente
+                </strong>
+                &nbsp;] &nbsp; y usando prompt&nbsp; [&nbsp;
+                <strong>
+                  <i className="fa-solid fa-robot"></i> Crear mediante Prompt
+                </strong>
+                &nbsp;].
+              </span>
+            </li>
+            <li>
+              <span>Mas cambios en camino...</span>
+            </li>
+          </ul>
+        </article>
+      </section>
     </div>
   );
 };

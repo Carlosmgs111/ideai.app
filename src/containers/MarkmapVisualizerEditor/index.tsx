@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { TextEditor } from "../../components/TextEditor";
 
-export const MarkmapVisualizerDashboard = ({
+export const MarkmapVisualizerEditor = ({
   text,
   handleChange,
   hide,
