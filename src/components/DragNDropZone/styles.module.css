@@ -7,21 +7,15 @@
   min-width: 30rem;
   max-width: 80rem;
   height: 40rem;
-  border: var(--main-color-950b) 2px dashed;
-  border-radius: 2rem;
+  border-radius: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.4rem;
-  padding: 2rem;
   transition: 0.4s;
-  background-image: radial-gradient(
-    var(--main-color-300b) 1px,
-    transparent 0
-  ); /* * dotted background */
-  background-size: 20px 20px; /* * dotted background */
+  backdrop-filter: brightness(50%);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -29,25 +23,29 @@
 .deactivated {
   pointer-events: none;
 }
-.drag_body:hover {
-  border: var(--main-color-950) 2px dashed;
-}
-.drag_body:hover > label > i {
+.drag_body > label {
+  padding: 3.6rem;
+  transition: 0.4s;
+  font-size: 2rem;
+  width: 54rem;
   color: var(--main-color-950);
+}
+.drag_body:hover > label {
+  color: var(--main-color-50);
 }
 .drag_body > label > i {
   transition: 0.4s;
   font-size: 4rem;
-  color: var(--main-color-950b);
+  color: var(--main-color-950);
 }
-.drag_body > label {
-  font-size: 2rem;
+.drag_body:hover > label > i {
+  color: var(--main-color-50);
 }
 .file_preview {
   border-radius: 0.8rem;
   object-fit: cover;
   pointer-events: none;
-  z-index: -1;
+  z-index: 10;
   transition: 0.6s;
   overflow: hidden;
 }
@@ -72,6 +70,7 @@
   color: var(--main-color-950);
 }
 .floating_right {
+  border: var(--main-color-950) solid 1px;
   position: absolute;
   right: 4rem;
   bottom: 4rem;

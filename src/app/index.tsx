@@ -10,15 +10,17 @@ import { Modal } from "../components/Modal";
 export default () => {
   const [{ currentModal }, dispatch]: any = useStateValue();
   useEffect(() => {
-    fetch(`${URL_API}/markmap/getmanymarkmaps?size=50&page=0`, {
+    fetch(`${URL_API}/markmap/getmanymarkmaps?size=100&page=0`, {
       method: "GET",
     })
       .then((response: any) => response.json())
       .then((data) => {
         const newMarkmaps: any = {};
-        data.forEach((markmap: any) => {
-          newMarkmaps[markmap.uuid] = markmap;
-        });
+        data
+          .reverse()
+          .forEach((markmap: any) => {
+            newMarkmaps[markmap.uuid] = markmap;
+          });
         dispatch({ type: "setMarkmaps", payload: newMarkmaps });
       });
   }, []);

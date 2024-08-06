@@ -63,7 +63,8 @@ export const DragNDropZone = ({ uploadFile }: any) => {
         <input {...getInputProps()}></input>
         {Boolean(!files.length) && (
           <label>
-            <i className="fa-solid fa-cloud-arrow-up"></i>{" "}
+            <i className="fa-solid fa-cloud-arrow-up"></i>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             {isDragActive
               ? "Suelta el archivo aquí!"
               : "Arrastrar y soltar un archivo PDF, o hacer clic aquí para empezar!"}

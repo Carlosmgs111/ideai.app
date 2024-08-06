@@ -6,7 +6,6 @@
   margin: 0;
   font-size: 62.5%;
   /* color-scheme: light dark; */
-  background-color: #e5e8e8;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -46,4 +45,54 @@ html {
 
 body {
   margin: 0;
+  position: relative;
+}
+body::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -10;
+  background-image: radial-gradient(
+      var(--main-color-300b) 0.1rem,
+      transparent 0
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      transparent,
+      var(--main-color-200) 5%,
+      var(--main-color-300),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 0%,
+      transparent 20%,
+      var(--main-color-200),
+      var(--main-color-100),
+      var(--main-color-200),
+      transparent 21%
+    ),
+    radial-gradient(
+      circle at 0% 20%,
+      transparent 30%,
+      var(--main-color-200),
+      var(--main-color-100),
+      var(--main-color-200),
+      transparent 31%
+    );
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    var(--main-color-100b) 0.1rem,
+    transparent 0
+  );
+  background-size: 0.4rem 0.4rem;
+  z-index: -100;
+  background-color: var(--main-color-50);
 }

@@ -4,22 +4,28 @@
   height: fit-content;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1.6rem;
   bottom: 2rem;
   left: 2rem;
   padding: 1.2rem;
-  padding: 1.6rem;
-  backdrop-filter: blur(6px) brightness(80%);
+  padding: 3.2rem;
   border-radius: 0.8rem;
   transition: 0.4s;
+  background-color: var(--main-color-950);
+  background-image: radial-gradient(
+    var(--main-color-900b) 0.1rem,
+    transparent 0
+  );
+  background-size: 1.4rem 1.4rem;
+  color: var(--main-color-50);
 }
 .header {
   padding: 0.8rem;
-  border: 2px solid var(--main-color-950b);
   border-radius: 0.8rem;
   display: flex;
   justify-content: flex-start;
   gap: 0.8rem;
+  color: var(--main-color-50);
 }
 .header > span {
   width: 1px;
@@ -29,6 +35,7 @@
 .header > button {
   font-size: 2.4rem;
   padding: 0 0.4rem;
+  color: inherit;
 }
 .header > button:hover {
   transform: translate(-0.6rem);
@@ -44,13 +51,6 @@
   height: fit-content;
   padding: 0 1.6rem;
   border-radius: 0.8rem;
-  background-color: var(--main-color-200);
-  background-image: linear-gradient(
-    var(--main-color-300b) 0.1rem,
-    transparent 0
-  );
-  background-size: 1.4rem 1.4rem;
-  border: 2px solid var(--main-color-950b);
   /* position: relative; */ /* ? important to set location of shadows corners from TextEditor component */
 }
 .editor > textarea {

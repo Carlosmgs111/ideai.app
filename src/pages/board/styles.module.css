@@ -118,10 +118,3 @@
 .anchor > span {
   top: 0;
 }
-
-@media screen and (min-width: 900px) {
-  .content {
-    padding: 2rem;
-    width: calc(100% - 4rem);
-  }
-}

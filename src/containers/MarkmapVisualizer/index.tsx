@@ -28,7 +28,7 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
       content: "Alert",
       onClick: () => alert("You made it!"),
     });
-    toolbar.setItems([...Toolbar.defaultItems, "alert"]);
+    // toolbar.setItems([...Toolbar.defaultItems, "alert"]);
     wrapper.append(toolbar.render());
   }
 };
@@ -55,9 +55,10 @@ export const MarkmapVisualizer = ({
   const [hideDashboard, toggleHideDashboard] = useToggle(true, false);
   const debouncedComposedText = useDebounce(composedText, 100);
   const markmapOptions = deriveOptions({
-    maxWidth: 800,
-    initialExpandLevel: preview ? 2 : -1,
+    maxWidth: preview ? 260 : 800,
+    initialExpandLevel: preview ? 2 : 3,
     colorFreezeLevel: 3,
+    duration: 400,
     // color: ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#F9F871"],
   });
   const saveText = (text: any) => {

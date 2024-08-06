@@ -1,13 +1,15 @@
 .visualizer {
-  width: calc(100dvw - 8rem);
-  height: calc(100dvh - 4rem);
+  width: 100dvw;
+  height: 100dvh;
   position: relative;
   overflow: hidden;
+  background-color: var(--main-color-100);
   background-image: radial-gradient(
     var(--main-color-300b) 0.1rem,
     transparent 0
   );
   background-size: 1.4rem 1.4rem;
+  border-radius: 0.8rem;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   transition: 0.4s ease !important;
@@ -31,17 +33,13 @@
   border: 1px solid var(--main-color-950);
 }
 .preview {
-  box-shadow: 0 0 0.8rem var(--main-color-300);
+  /* box-shadow: 0 0 1.6rem var(--main-color-300); */
+  pointer-events: none;
   border-radius: 0.8rem;
-  width: calc(46rem - 4px);
-  height: 30rem;
-  background-color: var(--main-color-300);
-  background-image: radial-gradient(
-    var(--main-color-400b) 0.1rem,
-    transparent 0
-  );
-  background-size: 1.6rem 1.6rem;
-  border: 2rem solid var(--main-color-300);
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-image: none;
 }
 .visualizer:nth-child(n) {
   transition: 0.4s;
