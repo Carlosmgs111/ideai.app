@@ -103,25 +103,34 @@ const ManualCreation = ({}: any) => {
   );
 };
 
-const PromptCreation = () => {
+const PromptCreation = ({ usefile: _usefile = false }: any) => {
+  const [{ markmaps, file }, dispatch]: any = useStateValue();
+  const [usefile, toogleUsefile] = useToggle(_usefile, !_usefile);
   const uuid = uuidv4();
   const navigate = useNavigate();
-  const [{ markmaps }, dispatch]: any = useStateValue();
+
+  const creationEndpoint = usefile
+    ? `${URL_API}/markmap/createusingfileandprompt`
+    : `${URL_API}/markmap/createusingprompt`;
 
   const [onClickHandler, HOHTrigger]: any = getHOHAndTrigger(
     ({ setError: _, setLoading: __, data, reset: ___ }: any) => {
+      let body = {
+        ...data[0],
+        uuid,
+        clientSocketID: SocketService.id,
+      };
+      if (usefile) {
+        body = { ...body, file: file.split(",")[1], format: "base64" };
+      }
       dispatch({
         type: "setMarkmaps",
         payload: { ...markmaps, [uuid]: { uuid, text: "", title: uuid } },
       });
-      fetch(`${URL_API}/markmap/createusingprompt`, {
+      fetch(creationEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data[0],
-          uuid,
-          clientSocketID: SocketService.id,
-        }),
+        body: JSON.stringify(body),
       }).then((response) => response.json());
       dispatch({ type: "setCurrentModal", payload: null });
       navigate(`/board?uuid=${uuid}`);
@@ -149,23 +158,43 @@ const PromptCreation = () => {
           modifiable: false,
         }}
       ></DefineForms>
+      {file && (
+        <label>
+          Usar archivo cargado como base de conocimiento
+          <input
+            type="checkbox"
+            value={usefile}
+            defaultChecked={usefile}
+            onClick={toogleUsefile}
+          ></input>
+        </label>
+      )}
       <button onClick={HOHTrigger}>
         <i className={`fa-solid fa-share-from-square`}></i> Enviar Prompt
       </button>
       <span>
-        💡<strong>Tip 1:</strong> Se lo mas preciso posible con respecto a lo
-        que quieres resumir.
+        💡<strong>Tip 1:</strong> Se preciso, claro y detallado con respecto al
+        tema con el que desees crear el <strong>Mindmap</strong>, entre mas
+        informacion proveas mas preciso sera la respuesta.
       </span>
       <span>
         💡<strong>Tip 2:</strong> En el formulario&nbsp;<strong>Temas</strong>,
         digite los temas en los que se pretenda profundizar separados por una
         coma <strong>(,)</strong>, aunque no es un campo obligatorio.
       </span>
+      {file && (
+        <span>
+          💡<strong>Tip 3:</strong> Marca la casilla&nbsp;
+          <strong>Usar archivo cargado como base de conocimiento</strong> para
+          usar el archivo cargado junto con el prompt y potenciar tu&nbsp;
+          <strong>Mindmap</strong>
+        </span>
+      )}
     </div>
   );
 };
 
-export const MarkmapCreationForm = () => {
+export const MarkmapCreationForm = ({ usefile = false }: any) => {
   const [manual, toggleManual] = useToggle(false, true);
   return (
     <div className={styles.form_body}>
@@ -174,7 +203,7 @@ export const MarkmapCreationForm = () => {
         &nbsp;&nbsp;
         {manual ? "Crear mediante Prompt" : "Crear Manualmente"}
       </button>
-      {manual ? <ManualCreation /> : <PromptCreation />}
+      {manual ? <ManualCreation /> : <PromptCreation usefile={usefile} />}
     </div>
   );
 };

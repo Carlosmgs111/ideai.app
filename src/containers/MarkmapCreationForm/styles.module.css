@@ -46,3 +46,8 @@
   font-size: 1.2rem;
   font-weight: 100;
 }
+.creation_form > label:nth-child(2) {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}

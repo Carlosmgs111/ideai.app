@@ -16,11 +16,9 @@ export default () => {
       .then((response: any) => response.json())
       .then((data) => {
         const newMarkmaps: any = {};
-        data
-          .reverse()
-          .forEach((markmap: any) => {
-            newMarkmaps[markmap.uuid] = markmap;
-          });
+        data.reverse().forEach((markmap: any) => {
+          newMarkmaps[markmap.uuid] = markmap;
+        });
         dispatch({ type: "setMarkmaps", payload: newMarkmaps });
       });
   }, []);

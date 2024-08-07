@@ -88,10 +88,11 @@ export const Home = ({}: any) => {
                 Los Mindmaps pueden ahora ser eliminados desde la pagina&nbsp;
                 <strong>Mindmaps</strong>, solo hay que ubicar el Mindmap a
                 eliminar, dar click en el boton que dice&nbsp;
-                [&nbsp;<strong>
+                <strong>
+                  [&nbsp;
                   <i className="fa-solid fa-screwdriver-wrench"></i>
-                  Configuraciónes
-                </strong>&nbsp;]
+                  Configuraciónes &nbsp;]
+                </strong>
                 , lo cual abrira un modal donde se podra ubicar un boton que
                 indicara la accion de eliminar.
               </span>
@@ -99,21 +100,26 @@ export const Home = ({}: any) => {
             <li>
               <span>
                 Ahora, en el modal desplegado para la creacion de un nuevo&nbsp;
-                <strong>Mindmap</strong>, &nbsp;[&nbsp;
+                <strong>Mindmap</strong>, &nbsp;
                 <strong>
+                  [&nbsp;
                   <i className="fa-solid fa-diagram-project"></i> Crea Mindmap
-                  desde Cero
+                  desde Cero&nbsp;]
                 </strong>
-                &nbsp; ] se puede intercambiar el metodo de creacion, entre forma
-                manual&nbsp; [&nbsp;
+                se puede intercambiar el metodo de creacion, entre forma
+                manual&nbsp;
                 <strong>
-                  <i className="fa-solid fa-pencil"></i> Crear Manualmente
+                  [&nbsp;
+                  <i className="fa-solid fa-pencil"></i> Crear
+                  Manualmente&nbsp;]
                 </strong>
-                &nbsp;] &nbsp; y usando prompt&nbsp; [&nbsp;
+                &nbsp; y usando prompt&nbsp;
                 <strong>
-                  <i className="fa-solid fa-robot"></i> Crear mediante Prompt
+                  [&nbsp;
+                  <i className="fa-solid fa-robot"></i> Crear mediante
+                  Prompt&nbsp;]
                 </strong>
-                &nbsp;].
+                .
               </span>
             </li>
             <li>

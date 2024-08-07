@@ -10,6 +10,7 @@ const initialState = {
   markmaps: {},
   sidebarFloat: true,
   currentModal: null,
+  file: undefined,
 };
 
 export const actionTypes = setActions([], initialState);
@@ -20,6 +21,7 @@ const reducer = (state: any, action: any) => {
     [actionTypes.setMarkmaps]: { ...state, markmaps: payload },
     [actionTypes.setSidebarFloat]: { ...state, sidebarFloat: payload },
     [actionTypes.setCurrentModal]: { ...state, currentModal: payload },
+    [actionTypes.setFile]: { ...state, file: payload },
   };
   return actions[type] || state;
 };

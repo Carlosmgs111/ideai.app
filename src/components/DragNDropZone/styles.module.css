@@ -4,9 +4,9 @@
   height: fit-content;
 }
 .drag_body {
-  min-width: 30rem;
+  min-width: 64rem;
   max-width: 80rem;
-  height: 40rem;
+  height: 42rem;
   border-radius: 0.8rem;
   display: flex;
   align-items: center;
@@ -52,7 +52,20 @@
 .file_preview::-webkit-scrollbar {
   display: none;
 }
-.button {
+.options {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1.6rem;
+  height: fit-content;
+  width: calc(100% - 3.2rem);
+}
+.options > button:nth-child(n) {
   padding: 0.6rem 1.4rem;
   border: transparent 1px solid;
   border-radius: 0.6rem;
@@ -60,35 +73,29 @@
   z-index: 10;
   pointer-events: all;
   transition: 0.4s;
+  width: fit-content;
+  max-width: 100%;
 }
-.main_button {
+.options > button:nth-child(1),
+.options > button:nth-child(2) {
   background-color: var(--main-color-950);
   color: var(--main-color-50);
+  text-wrap: nowrap;
+  cursor: pointer;
 }
-.secondary_button {
+.options > button:nth-child(1):hover,
+.options > button:nth-child(2):hover {
+  border: var(--main-color-950) solid 1px;
+  color: var(--main-color-950);
+  background-color: var(--main-color-50);
+}
+.options > button:nth-child(3) {
+  border: var(--main-color-950) solid 1px;
   background-color: var(--main-color-50);
   color: var(--main-color-950);
 }
-.floating_right {
-  border: var(--main-color-950) solid 1px;
-  position: absolute;
-  right: 4rem;
-  bottom: 4rem;
-}
-.floating_right:hover {
+.options > button:nth-child(3):hover {
   border: var(--main-color-50) solid 1px;
   color: var(--main-color-50);
   background-color: var(--main-color-950);
-}
-.floating_center {
-  position: absolute;
-  left: 50%;
-  bottom: 50%;
-  transform: translate(-50%, 50%);
-  cursor: pointer;
-}
-.floating_center:hover {
-  border: var(--main-color-950) solid 1px;
-  color: var(--main-color-950);
-  background-color: var(--main-color-50);
 }

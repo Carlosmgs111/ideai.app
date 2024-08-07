@@ -23,7 +23,6 @@ export const MarkmapVisualizerEditor = ({
             alignItems: "center",
             justifyContent: "center",
           }}
-          htmlFor=""
         >
           Autoguardado {/*  */}
           <input
