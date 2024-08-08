@@ -9,7 +9,7 @@ import { MarkmapPreview } from "../../containers/MarkmapPreview";
 export const Mindmaps = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();
   const [{ markmaps }]: any = useStateValue();
-  const markmapsArray = mapToList(markmaps);
+  const markmapsArray = [...mapToList(markmaps)];
   return (
     <div className={styles.page}>
       <SidePanel

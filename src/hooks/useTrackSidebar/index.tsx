@@ -1,22 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
-import { TrackSidebar as T } from "../../components/TrackSidebar";
+import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSidebar";
 import { cloneElement } from "react";
 import { useNearScreenArray } from "../useNearScreen";
 import { labelCases } from "../../utils";
 
 export const useTrackSidebar = () => {
-  const [indexesRefs, setIndexesRefs]: any = useState([]);
+  const [indexesRefs, setIndexesRefs]: any = useState({});
   const [indexes, setIndexes]: any = useState([]);
   const refreshRefs = (ref: any, show: boolean) => {
-    if (show && !indexesRefs.includes(ref)) indexesRefs.push(ref);
-    if (!show && indexesRefs.includes(ref))
-      indexesRefs.splice(indexesRefs.indexOf(ref), 1);
-    setIndexesRefs([...indexesRefs]);
+    indexesRefs[ref] = show;
+    setIndexesRefs({ ...indexesRefs });
   };
+
   const TrackSidebar = useCallback(
     (props: any) => {
       return (
-        <T
+        <WrappedTrackSidebar
           {...{
             ...props,
             items: indexes,
@@ -28,6 +27,7 @@ export const useTrackSidebar = () => {
     },
     [indexes]
   );
+
   const ContentWrapper = useCallback(({ children }: any): any => {
     const [elementsRefs] = useNearScreenArray(children, refreshRefs);
 
@@ -38,6 +38,7 @@ export const useTrackSidebar = () => {
         childrenIndexes.push({ reference: id, title });
       });
       setIndexes(childrenIndexes);
+      setIndexesRefs(indexesRefs);
     }, [children.length]);
 
     return children.map((child: any, index: any): any => (

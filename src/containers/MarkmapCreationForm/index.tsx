@@ -20,6 +20,12 @@ const ManualCreation = ({}: any) => {
   const [onClickHandler, HOHTrigger]: any = getHOHAndTrigger(
     ({ setError: _, setLoading: __, data, reset: ___ }: any) => {
       const markmap = { ...data[0], uuid };
+      dispatch({
+        type: "setMarkmaps",
+        payload: { [uuid]: markmap, ...markmaps },
+      });
+      dispatch({ type: "setCurrentModal", payload: null });
+      navigate(`/board?uuid=${uuid}`);
       fetch(`${URL_API}/markmap/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,12 +34,6 @@ const ManualCreation = ({}: any) => {
         .then((data) => data.json())
         .then(({ created }) => {
           if (!created) return;
-          dispatch({
-            type: "setMarkmaps",
-            payload: { ...markmaps, [uuid]: markmap },
-          });
-          dispatch({ type: "setCurrentModal", payload: null });
-          navigate(`/board?uuid=${uuid}`);
         });
     }
   );
@@ -125,13 +125,17 @@ const PromptCreation = ({ usefile: _usefile = false }: any) => {
       }
       dispatch({
         type: "setMarkmaps",
-        payload: { ...markmaps, [uuid]: { uuid, text: "", title: uuid } },
+        payload: { [uuid]: { uuid, text: "", title: "" }, ...markmaps },
       });
       fetch(creationEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
-      }).then((response) => response.json());
+      })
+        .then((response) => response.json())
+        .then(({ created }: any) => {
+          if (!created) return;
+        });
       dispatch({ type: "setCurrentModal", payload: null });
       navigate(`/board?uuid=${uuid}`);
     }

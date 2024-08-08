@@ -24,12 +24,11 @@ export function TrackSidebar(props: any) {
     const href = redirect
       ? `/${redirect}#${labelCases(reference).LS}`
       : `#${labelCases(reference).LS}`;
-    const active = refs.includes(labelCases(reference).LS);
     indexesList.push(
       <a
         className={`
       ${styles.item} 
-      ${active ? styles.active : ""}`}
+      ${refs[labelCases(reference).LS] ? styles.active : ""}`}
         key={index}
         href={href}
       >
@@ -37,7 +36,7 @@ export function TrackSidebar(props: any) {
           className={`
         fa-solid fa-circle-dot 
         ${styles.icon} ${expand && styles.hidden}
-        ${active ? styles.active : ""}`}
+        ${refs[labelCases(reference).LS] ? styles.active : ""}`}
         ></i>
         {innerItems && (
           <i

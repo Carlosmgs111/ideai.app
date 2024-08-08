@@ -44,12 +44,14 @@ export const useNearScreenArray = (
   initialState.forEach((_: any, index: any) => {
     refs.current[index] = { current: null };
   });
-  const [show, setShow] = useState(initialState);
+  console.log({ refs });
+  const [show, setShow] = useState(refs.current);
   useEffect(() => {
     var observers: any = [];
     const setObserver = (current: any, index: any) => {
       observers[index] = new window.IntersectionObserver((entries) => {
         const { isIntersecting }: any = entries[0];
+        console.log({ isIntersecting });
         show.splice(index, 1, isIntersecting);
         setShow([...show]);
         if (cb) cb(current.id, isIntersecting);
@@ -60,7 +62,7 @@ export const useNearScreenArray = (
       setObserver(ref.current, index);
     });
     return () => observers.forEach((observer: any) => observer?.disconnect());
-  }, [refs]);
+  }, []);
 
   return [refs, show];
 };

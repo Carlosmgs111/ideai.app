@@ -15,8 +15,9 @@ export const Home = ({}: any) => {
     const uuid = uuidv4();
     dispatch({
       type: "setMarkmaps",
-      payload: { ...markmaps, [uuid]: { uuid, text: "", title: uuid } },
+      payload: { [uuid]: { uuid, text: "", title: "" }, ...markmaps },
     });
+
     if (!files[0]) return;
     fetch(`${config.prodUrl}/markmap/transformfiletomarkmap`, {
       method: "POST",
@@ -27,9 +28,13 @@ export const Home = ({}: any) => {
         clientSocketID: SocketService.id,
         uuid,
       }),
-    }).then((response) => {
-      response.json();
-    });
+    })
+      .then((response) => {
+        response.json();
+      })
+      .then(({ created }: any) => {
+        if (!created) return;
+      });
     navigate(`/board?uuid=${uuid}`);
   };
   return (

@@ -10,7 +10,11 @@
   border-radius: 0.8rem;
   backdrop-filter: blur(4px) brightness(90%);
 }
-
+.container > a:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
 .container:hover .panel {
   opacity: 1;
 }
@@ -63,6 +67,8 @@
   color: var(--main-color-950);
 }
 .detail_view {
+  width: 100%;
+  height: 100%;
   padding: 1.6rem;
   color: var(--main-color-950);
 }

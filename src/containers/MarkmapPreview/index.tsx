@@ -3,10 +3,11 @@ import { MarkmapPreviewDashboard } from "../MarkmapPreviewDashboard";
 import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 
-const DetailView = ({ title, description }: any) => {
+const DetailView = ({ title, uuid, description }: any) => {
   return (
     <div className={styles.detail_view}>
       <h3>{title}</h3>
+      <h5>{uuid}</h5>
       <article>{description}</article>
     </div>
   );
@@ -24,8 +25,9 @@ export const MarkmapPreview = ({ children }: any) => {
   };
   return (
     <div className={styles.container}>
-      {!detailView && <a href={`/board?uuid=${uuid}`}>{children}</a>}
-      {detailView && <DetailView {...{ title }} />}
+      <a href={`/board?uuid=${uuid}`}>
+        {detailView ? <DetailView {...{ uuid, title }} /> : children}
+      </a>
       <div className={styles.panel}>
         <div className={styles.dashboard}>
           <button onClick={settingsButtonOnClick}>
@@ -39,7 +41,7 @@ export const MarkmapPreview = ({ children }: any) => {
                   : "fa-solid fa-circle-info"
               }`}
             ></i>{" "}
-            {detailView?"Volver":"Ver Detalles"}
+            {detailView ? "Volver" : "Ver Detalles"}
           </button>
         </div>
       </div>
