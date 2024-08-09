@@ -23,13 +23,12 @@
   outline: none;
   padding: 0.8rem;
   resize: vertical;
-  transition: border 0.4s;
   border: 2px solid transparent;
   border-radius: 0.4rem;
   width: 100%;
   height: auto;
   max-height: 40rem;
-  min-height: 3.4rem;
+  min-height: 6rem;
   resize: none;
   overflow: hidden;
   font-family: var(--main-font);

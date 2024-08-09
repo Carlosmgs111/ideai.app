@@ -9,9 +9,8 @@
   border-radius: 0.8rem;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  max-width: 50rem;
-  min-height: 50rem;
+  gap: 1.6rem;
+  width: 50rem;
 }
 .form_body > button:nth-child(1) {
   cursor: pointer;
@@ -24,7 +23,7 @@
 .creation_form {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1.6rem;
   transition: 0.4s;
 }
 .creation_form > div {

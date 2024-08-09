@@ -36,6 +36,13 @@
   color: var(--main-color-950);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 html {
   margin: 0;
   padding: 0;

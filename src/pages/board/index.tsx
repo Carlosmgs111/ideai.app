@@ -59,11 +59,10 @@ export const Board = ({ quicknav = false }: any) => {
         <i className={`fa-solid fa-chevron-left`}></i>
       </button>
       <div ref={container} className={styles.content}>
-        <ComponentReferencer>
+        <ComponentReferencer $refs={elements}>
           {mapToList(markmaps).map((markmap: any, idx: any) => (
             <MarkmapVisualizer
               key={idx}
-              $refs={elements}
               idx={String(idx)}
               {...markmap}
             ></MarkmapVisualizer>
@@ -74,10 +73,10 @@ export const Board = ({ quicknav = false }: any) => {
         <i className={`fa-solid fa-chevron-right`}></i>
       </button>
       <QuicknavDashboard hide={quicknav}>
-        <ComponentReferencer>
+        <ComponentReferencer $refs={navIndexes}>
           {mapToList(markmaps).map((markmap: any, idx: any) => {
             return (
-              <Anchor key={idx} $refs={navIndexes} idx={String(idx)}>
+              <Anchor key={idx} idx={String(idx)}>
                 {markmap.title}
               </Anchor>
             );

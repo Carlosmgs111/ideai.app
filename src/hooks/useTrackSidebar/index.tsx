@@ -1,12 +1,13 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSidebar";
-import { cloneElement } from "react";
-import { useNearScreenArray } from "../useNearScreen";
+import { cloneElement, Children } from "react";
+import { ComponentReferencer } from "../../components/ComponentReferencer";
 import { labelCases } from "../../utils";
 
 export const useTrackSidebar = () => {
   const [indexesRefs, setIndexesRefs]: any = useState({});
   const [indexes, setIndexes]: any = useState([]);
+  const elementsIndexes = useRef([]);
   const refreshRefs = (ref: any, show: boolean) => {
     indexesRefs[ref] = show;
     setIndexesRefs({ ...indexesRefs });
@@ -29,8 +30,6 @@ export const useTrackSidebar = () => {
   );
 
   const ContentWrapper = useCallback(({ children }: any): any => {
-    const [elementsRefs] = useNearScreenArray(children, refreshRefs);
-
     useEffect(() => {
       const childrenIndexes: any = [];
       children.forEach((child: any) => {
@@ -39,17 +38,25 @@ export const useTrackSidebar = () => {
       });
       setIndexes(childrenIndexes);
       setIndexesRefs(indexesRefs);
-    }, [children.length]);
+    }, []);
 
-    return children.map((child: any, index: any): any => (
-      <div
-        key={index}
-        ref={elementsRefs.current[index]}
-        id={labelCases(child.props.id).LS}
-      >
-        {cloneElement(child, {})}
-      </div>
-    ));
+    return (
+      <ComponentReferencer $refs={elementsIndexes}>
+        {Children.toArray(children).map((child: any) =>
+          cloneElement(child, {
+            ...child.props,
+            id: labelCases(child.props.id).LS,
+            use: (current: any) => {
+              if (!current) return;
+              new window.IntersectionObserver((entries) => {
+                const { isIntersecting }: any = entries[0];
+                refreshRefs(child.props.id, isIntersecting);
+              }, {}).observe(current);
+            },
+          })
+        )}
+      </ComponentReferencer>
+    );
   }, []);
   return { TrackSidebar, ContentWrapper };
 };
