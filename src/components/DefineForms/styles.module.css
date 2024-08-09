@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   width: available;
+  width: 100%;
   /* max-width: 600px; */
-  padding: 2rem;
   /* margin: 2rem; */
   font-weight: bold;
   /* border: 1px solid black; */

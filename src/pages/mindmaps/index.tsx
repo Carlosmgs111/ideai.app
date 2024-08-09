@@ -21,7 +21,7 @@ export const Mindmaps = ({}: any) => {
       >
         <div className={styles.content}>
           {markmapsArray.length && (
-            <ContentWrapper>
+            <ContentWrapper deps={[markmaps]}>
               {markmapsArray.map((markmap: any, key: any) => (
                 <MarkmapPreview
                   title={markmap.title}
