@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import { MarkmapPreviewDashboard } from "../MarkmapPreviewDashboard";
+import { MemoizedComponent } from "../../components/MemoizedComponent";
 import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 
@@ -24,27 +25,30 @@ export const MarkmapPreview = ({ children }: any) => {
     });
   };
   return (
-    <div className={styles.container}>
-      <a href={`/board?uuid=${uuid}`}>
-        {detailView ? <DetailView {...{ uuid, title }} /> : children}
-      </a>
-      <div className={styles.panel}>
-        <div className={styles.dashboard}>
-          <button onClick={settingsButtonOnClick}>
-            <i className={`fa-solid fa-screwdriver-wrench`}></i> Configuraciónes
-          </button>
-          <button onClick={toggleDetailView}>
-            <i
-              className={`${
-                detailView
-                  ? "fa-solid fa-rotate-left"
-                  : "fa-solid fa-circle-info"
-              }`}
-            ></i>{" "}
-            {detailView ? "Volver" : "Ver Detalles"}
-          </button>
+    <MemoizedComponent>
+      <div className={styles.container}>
+        <a href={`/board?uuid=${uuid}`}>
+          {detailView ? <DetailView {...{ uuid, title }} /> : children}
+        </a>
+        <div className={styles.panel}>
+          <div className={styles.dashboard}>
+            <button onClick={settingsButtonOnClick}>
+              <i className={`fa-solid fa-screwdriver-wrench`}></i>{" "}
+              Configuraciónes
+            </button>
+            <button onClick={toggleDetailView}>
+              <i
+                className={`${
+                  detailView
+                    ? "fa-solid fa-rotate-left"
+                    : "fa-solid fa-circle-info"
+                }`}
+              ></i>{" "}
+              {detailView ? "Volver" : "Ver Detalles"}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </MemoizedComponent>
   );
 };

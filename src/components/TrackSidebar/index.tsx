@@ -2,6 +2,7 @@ import { labelCases, mapToList } from "../../utils";
 import { useToggle } from "../../hooks/useToggle";
 import styles from "./styles.module.css";
 import { useMemo } from "react";
+import { MemoizedComponent } from "../MemoizedComponent";
 
 export function TrackSidebar(props: any) {
   const {
@@ -59,25 +60,27 @@ export function TrackSidebar(props: any) {
   );
 
   return (
-    <section
-      {...{
-        ...props,
-        style: { flexDirection: direction, width },
-        className: styles.body.concat(" ", isactive && styles.active),
-      }}
-    >
-      {innerItems && Boolean(showbutton) && (
-        <div className={styles.header}>
-          <i
-            key="0"
-            className={`fa-solid 
+    <MemoizedComponent deps={[indexesList]}>
+      <section
+        {...{
+          ...props,
+          style: { flexDirection: direction, width },
+          className: styles.body.concat(" ", isactive && styles.active),
+        }}
+      >
+        {innerItems && Boolean(showbutton) && (
+          <div className={styles.header}>
+            <i
+              key="0"
+              className={`fa-solid 
             ${expand ? "fa-xmark" : "fa-bars"}
             ${styles.item}`}
-            onClick={switchExpand}
-          />
-        </div>
-      )}
-      {indexesList}
-    </section>
+              onClick={switchExpand}
+            />
+          </div>
+        )}
+        {indexesList}
+      </section>
+    </MemoizedComponent>
   );
 }

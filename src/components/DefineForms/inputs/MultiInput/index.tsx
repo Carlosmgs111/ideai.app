@@ -67,8 +67,8 @@ export const MultiInput = ({
   mapToList(inputValue).forEach((contentValue: any, index: any) => {
     inputs[index] = (
       <MemoizedComponent
+        key={index}
         {...{
-          key: index,
           deps: [contentValue],
         }}
       >

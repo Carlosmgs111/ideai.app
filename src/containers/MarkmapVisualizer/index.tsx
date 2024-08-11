@@ -11,6 +11,7 @@ import { SocketService, URL_API } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
 import { MarkmapVisualizerEditor } from "../MarkmapVisualizerEditor";
 import { useToggle } from "../../hooks/useToggle";
+import { MemoizedComponent } from "../../components/MemoizedComponent";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
@@ -139,44 +140,46 @@ export const MarkmapVisualizer = ({
   };
 
   return (
-    <div
-      ref={refVisualizer}
-      className={`${styles.visualizer} ${preview ? styles.preview : ""} ${
-        !showVisualizer && !preview ? styles.hide : ""
-      }`}
-    >
-      {!preview && <h1>{title}</h1>}
-      <svg
-        className={styles.board}
-        style={{
-          color: preview ? "var(--main-color-950)" : "var(--main-color-950)",
-        }}
-        ref={refSvg}
-      />
-      {!preview && (
-        <button
-          className={`fa-solid fa-pencil ${styles.button} ${
-            !hideDashboard && styles.hide
-          }`}
-          onClick={toggleHideDashboard}
-        ></button>
-      )}
-      {!preview && (
-        <MarkmapVisualizerEditor
-          {...{
-            autosave,
-            toggleAutosave,
-            preview,
-            handleChange,
-            text,
-            hide: hideDashboard,
-            toggleHide: toggleHideDashboard,
+    <MemoizedComponent deps={[text, refMm.current, title, showVisualizer, hideDashboard]}>
+      <div
+        ref={refVisualizer}
+        className={`${styles.visualizer} ${preview ? styles.preview : ""} ${
+          !showVisualizer && !preview ? styles.hide : ""
+        }`}
+      >
+        {!preview && <h1>{title}</h1>}
+        <svg
+          className={styles.board}
+          style={{
+            color: preview ? "var(--main-color-950)" : "var(--main-color-950)",
           }}
-        ></MarkmapVisualizerEditor>
-      )}
-      <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
-        <div ref={refToolbar}></div>
+          ref={refSvg}
+        />
+        {!preview && (
+          <button
+            className={`fa-solid fa-pencil ${styles.button} ${
+              !hideDashboard && styles.hide
+            }`}
+            onClick={toggleHideDashboard}
+          ></button>
+        )}
+        {!preview && (
+          <MarkmapVisualizerEditor
+            {...{
+              autosave,
+              toggleAutosave,
+              preview,
+              handleChange,
+              text,
+              hide: hideDashboard,
+              toggleHide: toggleHideDashboard,
+            }}
+          ></MarkmapVisualizerEditor>
+        )}
+        <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
+          <div ref={refToolbar}></div>
+        </div>
       </div>
-    </div>
+    </MemoizedComponent>
   );
 };

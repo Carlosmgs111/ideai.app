@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  gap: 3.6rem;
   padding-bottom: 3.6rem;
 }
 .hero {

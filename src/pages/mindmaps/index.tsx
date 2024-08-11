@@ -5,6 +5,7 @@ import { mapToList } from "../../utils";
 import { SidePanel } from "../../components/SidePanel";
 import { useTrackSidebar } from "../../hooks/useTrackSidebar";
 import { MarkmapPreview } from "../../containers/MarkmapPreview";
+import { MemoizedComponent } from "../../components/MemoizedComponent";
 
 export const Mindmaps = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();
@@ -19,23 +20,25 @@ export const Mindmaps = ({}: any) => {
           sidebars: [<TrackSidebar />],
         }}
       >
-        <div className={styles.content}>
-          {markmapsArray.length && (
-            <ContentWrapper deps={[markmaps]}>
-              {markmapsArray.map((markmap: any, key: any) => (
-                <MarkmapPreview
-                  title={markmap.title}
-                  id={markmap.uuid}
-                  key={key}
-                >
-                  <MarkmapVisualizer
-                    {...{ ...markmap, preview: true }}
-                  ></MarkmapVisualizer>
-                </MarkmapPreview>
-              ))}
-            </ContentWrapper>
-          )}
-        </div>
+        <MemoizedComponent deps={[markmaps]}>
+          <div className={styles.content}>
+            {markmapsArray.length && (
+              <ContentWrapper>
+                {markmapsArray.map((markmap: any, key: any) => (
+                  <MarkmapPreview
+                    title={markmap.title}
+                    id={markmap.uuid}
+                    key={key}
+                  >
+                    <MarkmapVisualizer
+                      {...{ ...markmap, preview: true }}
+                    ></MarkmapVisualizer>
+                  </MarkmapPreview>
+                ))}
+              </ContentWrapper>
+            )}
+          </div>
+        </MemoizedComponent>
       </SidePanel>
     </div>
   );

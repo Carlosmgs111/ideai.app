@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSidebar";
 import { cloneElement, Children } from "react";
 import { ComponentReferencer } from "../../components/ComponentReferencer";
+import { MemoizedComponent } from "../../components/MemoizedComponent";
 import { mapToList } from "../../utils";
 
 const ElementWrapped = ({
@@ -20,15 +21,20 @@ const ElementWrapped = ({
     setIndexes({ ...indexes });
   }, [id, title]);
 
-  return cloneElement(child, {
-    ...child.props,
-  });
+  return (
+    <MemoizedComponent deps={[child.props]}>
+      <div id={id}>
+        {cloneElement(child, {
+          ...child.props,
+        })}
+      </div>
+    </MemoizedComponent>
+  );
 };
 
 export const useTrackSidebar = () => {
   const [indexes, setIndexes]: any = useState({});
   const elementsIndexes = useRef([]);
-
   const TrackSidebar = useCallback((props: any) => {
     return (
       <WrappedTrackSidebar
@@ -50,6 +56,7 @@ export const useTrackSidebar = () => {
       <ComponentReferencer $refs={elementsIndexes}>
         {Children.toArray(children).map((child: any, index) => (
           <ElementWrapped
+            key={index}
             {...{
               indexes,
               setIndexes,
