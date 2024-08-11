@@ -1,6 +1,6 @@
 import { Children, cloneElement, useMemo } from "react";
 
-export const MemoizedComponent = ({ children, deps = [] }: any): any => {
+export const Memo = ({ children, deps = [] }: any): any => {
   return useMemo(
     () =>
       Children.toArray(children).map((child: any) =>

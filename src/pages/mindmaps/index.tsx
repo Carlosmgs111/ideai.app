@@ -5,7 +5,7 @@ import { mapToList } from "../../utils";
 import { SidePanel } from "../../components/SidePanel";
 import { useTrackSidebar } from "../../hooks/useTrackSidebar";
 import { MarkmapPreview } from "../../containers/MarkmapPreview";
-import { MemoizedComponent } from "../../components/MemoizedComponent";
+import { Memo } from "../../components/Memo";
 
 export const Mindmaps = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();
@@ -20,7 +20,7 @@ export const Mindmaps = ({}: any) => {
           sidebars: [<TrackSidebar />],
         }}
       >
-        <MemoizedComponent deps={[markmaps]}>
+        <Memo deps={[markmaps]}>
           <div className={styles.content}>
             {markmapsArray.length && (
               <ContentWrapper>
@@ -38,7 +38,7 @@ export const Mindmaps = ({}: any) => {
               </ContentWrapper>
             )}
           </div>
-        </MemoizedComponent>
+        </Memo>
       </SidePanel>
     </div>
   );

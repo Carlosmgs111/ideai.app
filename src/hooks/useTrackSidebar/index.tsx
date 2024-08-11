@@ -2,7 +2,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSidebar";
 import { cloneElement, Children } from "react";
 import { ComponentReferencer } from "../../components/ComponentReferencer";
-import { MemoizedComponent } from "../../components/MemoizedComponent";
+import { Memo } from "../../components/Memo";
 import { mapToList } from "../../utils";
 
 const ElementWrapped = ({
@@ -22,13 +22,13 @@ const ElementWrapped = ({
   }, [id, title]);
 
   return (
-    <MemoizedComponent deps={[child.props]}>
+    <Memo deps={[child.props]}>
       <div id={id}>
         {cloneElement(child, {
           ...child.props,
         })}
       </div>
-    </MemoizedComponent>
+    </Memo>
   );
 };
 

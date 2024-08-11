@@ -6,7 +6,7 @@ import { ComponentReferencer } from "../../components/ComponentReferencer";
 import { useNavScroll } from "../../hooks/useNavScroll";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { MemoizedComponent } from "../../components/MemoizedComponent";
+import { Memo } from "../../components/Memo";
 
 const Anchor = ({ children }: any) => {
   const ref = useRef(null);
@@ -59,7 +59,7 @@ export const Board = ({ quicknav = false }: any) => {
       <button onClick={navPrev}>
         <i className={`fa-solid fa-chevron-left`}></i>
       </button>
-      <MemoizedComponent deps={[markmaps]}>
+      <Memo deps={[markmaps]}>
         <div ref={container} className={styles.content}>
           <ComponentReferencer $refs={elements}>
             {mapToList(markmaps).map((markmap: any, idx: any) => (
@@ -71,7 +71,7 @@ export const Board = ({ quicknav = false }: any) => {
             ))}
           </ComponentReferencer>
         </div>
-      </MemoizedComponent>
+      </Memo>
       <button onClick={navNext}>
         <i className={`fa-solid fa-chevron-right`}></i>
       </button>

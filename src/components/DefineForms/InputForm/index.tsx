@@ -1,5 +1,5 @@
 import { beutifyLabel, Mapfy } from "../../../utils";
-import { MemoizedComponent } from "../../../components/MemoizedComponent";
+import { Memo } from "../../../components/Memo";
 import {
   CommonInput,
   SelectionInput,
@@ -197,7 +197,7 @@ export function InputForm({
     };
 
     return (
-      <MemoizedComponent deps={[controlledValue]}>
+      <Memo deps={[controlledValue]}>
         <div className={`${styles.form} ${isExpanded}`}>
           {(() => {
             if (Array.isArray(inputType)) {
@@ -268,7 +268,7 @@ export function InputForm({
             </label>
           )}
         </div>
-      </MemoizedComponent>
+      </Memo>
     );
   };
 
@@ -278,7 +278,7 @@ export function InputForm({
         if (index < nonOptionals.length + 1)
           return <li key={index}> {Form(attribute, onChange)}</li>;
         return (
-          <MemoizedComponent
+          <Memo
             deps={
               [
                 /* Mapfy(data).size */
@@ -294,7 +294,7 @@ export function InputForm({
             >
               {Form(attribute, onChange, index)}
             </li>
-          </MemoizedComponent>
+          </Memo>
         );
       })}
 

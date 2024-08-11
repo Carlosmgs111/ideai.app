@@ -2,7 +2,7 @@ import { InputForm } from "./InputForm";
 import styles from "./styles.module.css";
 import { useHook } from "./useHook";
 import { labelCases, Mapfy } from "../../utils";
-import { MemoizedComponent } from "../../components/MemoizedComponent";
+import { Memo } from "../../components/Memo";
 
 export enum INPUT_TYPES {
   TEXT = "TEXT", // input text
@@ -56,7 +56,7 @@ export function DefineForms({
     const data = schema[index];
     const schemaSize = Mapfy(schema).size;
     forms.push(
-      <MemoizedComponent key={index} {...{ deps: [data, schemaSize] }}>
+      <Memo key={index} {...{ deps: [data, schemaSize] }}>
         <InputForm
           {...{
             index,
@@ -70,7 +70,7 @@ export function DefineForms({
             modifiable,
           }}
         />
-      </MemoizedComponent>
+      </Memo>
     );
   });
 

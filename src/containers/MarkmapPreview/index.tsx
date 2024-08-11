@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import { MarkmapPreviewDashboard } from "../MarkmapPreviewDashboard";
-import { MemoizedComponent } from "../../components/MemoizedComponent";
+import { Memo } from "../../components/Memo";
 import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 
@@ -25,7 +25,7 @@ export const MarkmapPreview = ({ children }: any) => {
     });
   };
   return (
-    <MemoizedComponent>
+    <Memo>
       <div className={styles.container}>
         <a href={`/board?uuid=${uuid}`}>
           {detailView ? <DetailView {...{ uuid, title }} /> : children}
@@ -49,6 +49,6 @@ export const MarkmapPreview = ({ children }: any) => {
           </div>
         </div>
       </div>
-    </MemoizedComponent>
+    </Memo>
   );
 };

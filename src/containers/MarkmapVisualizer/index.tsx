@@ -11,7 +11,7 @@ import { SocketService, URL_API } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
 import { MarkmapVisualizerEditor } from "../MarkmapVisualizerEditor";
 import { useToggle } from "../../hooks/useToggle";
-import { MemoizedComponent } from "../../components/MemoizedComponent";
+import { Memo } from "../../components/Memo";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
@@ -140,7 +140,7 @@ export const MarkmapVisualizer = ({
   };
 
   return (
-    <MemoizedComponent deps={[text, refMm.current, title, showVisualizer, hideDashboard]}>
+    <Memo deps={[text, refMm.current, title, showVisualizer, hideDashboard]}>
       <div
         ref={refVisualizer}
         className={`${styles.visualizer} ${preview ? styles.preview : ""} ${
@@ -180,6 +180,6 @@ export const MarkmapVisualizer = ({
           <div ref={refToolbar}></div>
         </div>
       </div>
-    </MemoizedComponent>
+    </Memo>
   );
 };

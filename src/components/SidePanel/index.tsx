@@ -5,7 +5,7 @@ import { useToggle } from "../../hooks/useToggle";
 import { injectAttrsToReactElements } from "../../utils";
 import { useStateValue } from "../../context";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { MemoizedComponent } from "../../components/MemoizedComponent";
+import { Memo } from "../../components/Memo";
 
 export const SidePanel = (props: any) => {
   const {
@@ -32,7 +32,7 @@ export const SidePanel = (props: any) => {
   }, [float]);
 
   const main = (
-    <MemoizedComponent
+    <Memo
       deps={[float, activeSidebars, sidebars, settingsDashboard, expand]}
     >
       <div className={styles.container}>
@@ -118,7 +118,7 @@ export const SidePanel = (props: any) => {
           />
         </div>
       </div>
-    </MemoizedComponent>
+    </Memo>
   );
 
   return children ? (

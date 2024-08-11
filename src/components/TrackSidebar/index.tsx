@@ -2,7 +2,7 @@ import { labelCases, mapToList } from "../../utils";
 import { useToggle } from "../../hooks/useToggle";
 import styles from "./styles.module.css";
 import { useMemo } from "react";
-import { MemoizedComponent } from "../MemoizedComponent";
+import { Memo } from "../Memo";
 
 export function TrackSidebar(props: any) {
   const {
@@ -60,7 +60,7 @@ export function TrackSidebar(props: any) {
   );
 
   return (
-    <MemoizedComponent deps={[indexesList]}>
+    <Memo deps={[indexesList]}>
       <section
         {...{
           ...props,
@@ -81,6 +81,6 @@ export function TrackSidebar(props: any) {
         )}
         {indexesList}
       </section>
-    </MemoizedComponent>
+    </Memo>
   );
 }
