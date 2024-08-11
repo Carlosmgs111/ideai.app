@@ -1,11 +1,11 @@
-import { labelCases } from "../../utils";
+import { labelCases, mapToList } from "../../utils";
 import { useToggle } from "../../hooks/useToggle";
 import styles from "./styles.module.css";
+import { useMemo } from "react";
 
 export function TrackSidebar(props: any) {
   const {
-    items = [],
-    refs = [],
+    items = {},
     innerItems = true,
     direction = "column",
     isactive = 1,
@@ -18,38 +18,45 @@ export function TrackSidebar(props: any) {
     showbutton ? expanded : 1,
     !expanded
   );
-  const indexesList: any = [];
-  items.map((item: any, index: number) => {
-    const { title, reference } = item;
-    const href = redirect
-      ? `/${redirect}#${labelCases(reference).LS}`
-      : `#${labelCases(reference).LS}`;
-    indexesList.push(
-      <a
-        className={`
+
+  const indexesList: any = useMemo(
+    () =>
+      mapToList(items).map((item: any, index: number) => {
+        const { title, reference } = item;
+        const href = redirect
+          ? `/${redirect}#${labelCases(reference).LS}`
+          : `#${labelCases(reference).LS}`;
+        return (
+          <a
+            className={`
       ${styles.item} 
-      ${refs[labelCases(reference).LS] ? styles.active : ""}`}
-        key={index}
-        href={href}
-      >
-        <i
-          className={`
+      ${item.isVisible ? styles.active : ""}`}
+            key={index}
+            href={href}
+          >
+            <i
+              className={`
         fa-solid fa-circle-dot 
         ${styles.icon} ${expand && styles.hidden}
-        ${refs[labelCases(reference).LS] ? styles.active : ""}`}
-        ></i>
-        {innerItems && (
-          <i
-            {...{
-              className: styles.inner.concat(" ", expand ? styles.show : ""),
-            }}
-          >
-            {labelCases(title).CS}
-          </i>
-        )}
-      </a>
-    );
-  });
+        ${item.isVisible ? styles.active : ""}`}
+            ></i>
+            {innerItems && (
+              <i
+                {...{
+                  className: styles.inner.concat(
+                    " ",
+                    expand ? styles.show : ""
+                  ),
+                }}
+              >
+                {labelCases(title).CS}
+              </i>
+            )}
+          </a>
+        );
+      }),
+    [mapToList(items)]
+  );
 
   return (
     <section
