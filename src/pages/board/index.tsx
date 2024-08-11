@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { MarkmapVisualizer } from "../../containers/MarkmapVisualizer";
 import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
-import { ComponentReferencer } from "../../components/ComponentReferencer";
+import { Refs } from "../../components/Refs";
 import { useNavScroll } from "../../hooks/useNavScroll";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
@@ -61,7 +61,7 @@ export const Board = ({ quicknav = false }: any) => {
       </button>
       <Memo deps={[markmaps]}>
         <div ref={container} className={styles.content}>
-          <ComponentReferencer $refs={elements}>
+          <Refs $refs={elements}>
             {mapToList(markmaps).map((markmap: any, idx: any) => (
               <MarkmapVisualizer
                 key={idx}
@@ -69,14 +69,14 @@ export const Board = ({ quicknav = false }: any) => {
                 {...markmap}
               ></MarkmapVisualizer>
             ))}
-          </ComponentReferencer>
+          </Refs>
         </div>
       </Memo>
       <button onClick={navNext}>
         <i className={`fa-solid fa-chevron-right`}></i>
       </button>
       <QuicknavDashboard hide={quicknav}>
-        <ComponentReferencer $refs={navIndexes}>
+        <Refs $refs={navIndexes}>
           {mapToList(markmaps).map((markmap: any, idx: any) => {
             return (
               <Anchor key={idx} idx={String(idx)}>
@@ -84,7 +84,7 @@ export const Board = ({ quicknav = false }: any) => {
               </Anchor>
             );
           })}
-        </ComponentReferencer>
+        </Refs>
       </QuicknavDashboard>
     </div>
   );
