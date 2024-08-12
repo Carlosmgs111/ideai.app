@@ -50,7 +50,7 @@ export function TrackSidebar(props: any) {
                   ),
                 }}
               >
-                {labelCases(title).CS}
+                {title}
               </i>
             )}
           </a>

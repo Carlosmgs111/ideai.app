@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ELEMENT_EVENTS } from "../utils";
 
 const deepinInChild = (element: Element, cb: Function) => {
@@ -18,6 +18,7 @@ export const useNavScroll = (
   const container: any = useRef(null);
   const navIndexes: any = useRef([]);
   const elements: any = useRef([]);
+  const [behavior, setBehavior] = useState("smooth");
   const [currentId, setCurrentId] = useState(0);
   const navNext = () => {
     if (!elements.current.length) return;
@@ -29,14 +30,40 @@ export const useNavScroll = (
     if (currentId === 0) return setCurrentId(elements.current.length - 1);
     setCurrentId(currentId - 1);
   };
-  const navTo = (index: number) => setCurrentId(index);
+  const navTo = (index: number) => {
+    setBehavior("auto");
+    setCurrentId(index);
+  };
+
+  const scrollTo = useCallback(() => {
+    container.current.scrollTo({
+      left: elements.current[currentId].current.offsetLeft,
+      behavior,
+    });
+  }, [currentId]);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        navNext();
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        navPrev();
+      }
+    };
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [currentId]);
+
   useEffect(() => {
     if (!container.current || !navIndexes.current[0] || !elements.current[0])
       return;
-    container.current.scrollTo({
-      left: elements.current[currentId].current.offsetLeft,
-      behavior: "smooth",
-    });
+    scrollTo();
+    !behavior.includes("smooth") && setBehavior("smooth");
   }, [container.current, currentId]);
 
   useEffect(() => {
@@ -52,10 +79,8 @@ export const useNavScroll = (
         anchor.current.addEventListener(ELEMENT_EVENTS.CLICK, () => {
           if (!currentElement.current) return;
           setCurrentId(Number(currentElement.current.id));
-          container.current.scrollTo({
-            left: currentElement.current.offsetLeft,
-            behavior: "smooth",
-          });
+          scrollTo();
+          !behavior.includes("smooth") && setBehavior("smooth");
         });
     });
 
@@ -65,5 +90,13 @@ export const useNavScroll = (
     };
   }, [...dependencies, currentId]);
 
-  return { container, navIndexes, elements, navPrev, navNext, navTo };
+  return {
+    container,
+    navIndexes,
+    elements,
+    navPrev,
+    navNext,
+    navTo,
+    current: currentId,
+  };
 };

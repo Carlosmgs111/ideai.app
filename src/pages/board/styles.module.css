@@ -1,20 +1,19 @@
 .page {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100dvw;
   max-width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
 }
 .content {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   gap: 4rem;
   touch-action: all;
   overflow-x: scroll;
-  scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
 }
 .page > button {

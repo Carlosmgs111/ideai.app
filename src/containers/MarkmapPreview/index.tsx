@@ -16,19 +16,19 @@ const DetailView = ({ title, uuid, description }: any) => {
 };
 
 export const MarkmapPreview = ({ children }: any) => {
-  const { uuid, title }: any = children.props;
+  const markmap: any = children.props;
   const [{}, dispatch]: any = useStateValue();
   const [detailView, toggleDetailView] = useToggle(false, true);
   const settingsButtonOnClick = () => {
     dispatch({
-      currentModal: <MarkmapPreviewDashboard {...{ uuid, title }} />,
+      currentModal: <MarkmapPreviewDashboard {...markmap} />,
     });
   };
   return (
     <Memo deps={[children.props, detailView]}>
       <div className={styles.container}>
-        <Link to={`/board?uuid=${uuid}`}>
-          {detailView ? <DetailView {...{ uuid, title }} /> : children}
+        <Link to={`/board?uuid=${markmap.uuid}`}>
+          {detailView ? <DetailView {...markmap} /> : children}
         </Link>
         <div className={styles.panel}>
           <div className={styles.dashboard}>

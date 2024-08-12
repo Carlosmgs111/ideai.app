@@ -29,6 +29,7 @@ const renderToolbar = (markMap: Markmap, wrapper: HTMLElement) => {
       content: "Alert",
       onClick: () => alert("You made it!"),
     });
+    toolbar.setBrand(false);
     // toolbar.setItems([...Toolbar.defaultItems, "alert"]);
     wrapper.append(toolbar.render());
   }
@@ -64,7 +65,7 @@ export const MarkmapVisualizer = ({
   });
   const saveText = (text: any) => {
     fetch(`${URL_API}/markmap/update`, {
-      method: "PUT",
+      method: "PATCH",
       body: JSON.stringify({ text, uuid }),
       headers: {
         "Content-Type": "application/json",
@@ -81,11 +82,28 @@ export const MarkmapVisualizer = ({
     SocketService.receiveMessage({
       core: {
         [`appendToMarkmapText$${uuid}`]: async (updatedMarkmap: any) => {
-          const { text: chunk, title } = updatedMarkmap;
-          dispatch({
-            markmaps: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
-          });
+          const { text: chunk, title: receivedTitle } = updatedMarkmap;
           composedTextDispatch(chunk);
+          if (title) return;
+          dispatch({
+            markmaps: {
+              ...markmaps,
+              [uuid]: { ...markmaps[uuid], title: receivedTitle },
+            },
+          });
+        },
+      },
+    });
+    // ? Useful in collaborative environments
+    SocketService.receiveMessage({
+      core: {
+        [`updateMarkmap$${uuid}`]: async (updatedMarkmap: any) => {
+          dispatch({
+            markmaps: {
+              ...markmaps,
+              [uuid]: { ...markmaps[uuid], ...updatedMarkmap },
+            },
+          });
         },
       },
     });
@@ -111,11 +129,12 @@ export const MarkmapVisualizer = ({
 
   useEffect(() => {
     const markMap = refMm.current;
+    if (!showVisualizer) return;
     if (!markMap) return;
     const { root } = transformer.transform(text);
     markMap.setData(root);
     markMap.fit();
-  }, [refMm.current, text]);
+  }, [refMm.current, text, showVisualizer]);
 
   useEffect(() => {
     if (markmaps[uuid].text === text) return;
@@ -137,7 +156,7 @@ export const MarkmapVisualizer = ({
   };
 
   return (
-    <Memo deps={[text, refMm.current, title, showVisualizer, hideDashboard]}>
+    <Memo deps={[text, title, showVisualizer, hideDashboard]}>
       <div
         ref={refVisualizer}
         className={`${styles.visualizer} ${preview ? styles.preview : ""} ${

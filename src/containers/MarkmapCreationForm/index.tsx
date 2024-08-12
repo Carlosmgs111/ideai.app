@@ -129,9 +129,9 @@ const PromptCreation = ({ usefile: _usefile = false }: any) => {
         body: JSON.stringify(body),
       })
         .then((response) => response.json())
-        .then(({ created }: any) => {
-          if (!created) return;
-        });
+        // .then((data: any) => {
+        //   dispatch({ markmaps: { ...markmaps, [uuid]: data } });
+        // });
       dispatch({ currentModal: null });
       navigate(`/board?uuid=${uuid}`);
     }

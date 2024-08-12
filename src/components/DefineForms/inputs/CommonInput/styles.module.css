@@ -1,5 +1,8 @@
 .container {
   position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
 }
 .common_input {
   height: 2.8rem;

@@ -1,15 +1,23 @@
 import styles from "./styles.module.css";
 import { URL_API } from "../../services";
 import { useStateValue } from "../../context";
-import { CommonInput } from "../../components/DefineForms/inputs";
+import {
+  CommonInput,
+  ParagraphInput,
+} from "../../components/DefineForms/inputs";
 import { useReduceState } from "../../hooks/useReduceState";
 import { useAxiosRequest } from "../../hooks/useAxiosRequest";
 
 export const MarkmapPreviewDashboard = (markmap: any) => {
   const [{ markmaps }, dispatch]: any = useStateValue();
   const [markmapState, setMarkmapState] = useReduceState(markmap);
-  const { uuid, title } = markmapState;
-  const onClickDeleteButton = () => {
+  const { uuid, title, description = "" } = markmapState;
+  const onClickDeleteButton = (e: any) => {
+    e.preventDefault();
+    const result = window.confirm(
+      ` ⚠️ El Mindmap ${title} una vez eliminado no se podra recuperar, ¿Esta seguro de seguir? ⚠️ `
+    );
+    if (!result) return;
     dispatch({ loading: true });
     fetch(`${URL_API}/markmap/delete`, {
       method: "DELETE",
@@ -31,10 +39,22 @@ export const MarkmapPreviewDashboard = (markmap: any) => {
       setData: ({ updated }: any) => {
         if (!updated) return;
         dispatch({
-          markmaps: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
+          markmaps: { ...markmaps, [uuid]: { ...markmap, title } },
         });
       },
-    }).patch("markmap/update/title", { uuid, title });
+    }).patch("markmap/update", { uuid, title });
+  };
+
+  const onClickUpdateDescription = (e: any) => {
+    e.preventDefault();
+    useAxiosRequest({
+      setData: ({ updated }: any) => {
+        if (!updated) return;
+        dispatch({
+          markmaps: { ...markmaps, [uuid]: { ...markmap, description } },
+        });
+      },
+    }).patch("markmap/update", { uuid, description });
   };
   return (
     <div className={styles.dashboard_body}>
@@ -51,6 +71,19 @@ export const MarkmapPreviewDashboard = (markmap: any) => {
           <i className="fa-solid fa-check"></i>&nbsp;&nbsp;Actualizar
         </button>
       </form>
+      <form className={styles.section}>
+        <ParagraphInput
+          label="Descripción"
+          text={description}
+          onChange={(_: any, target: any) => {
+            setMarkmapState({ description: target.value });
+          }}
+        ></ParagraphInput>
+        <button onClick={onClickUpdateDescription}>
+          <i className="fa-solid fa-check"></i>&nbsp;&nbsp;Actualizar
+        </button>
+      </form>
+      <div className={styles.division}></div>
       <section className={styles.section}>
         <div>
           <span></span>

@@ -4,8 +4,8 @@
   height: fit-content;
 }
 .drag_body {
-  min-width: 64rem;
-  max-width: 80rem;
+  min-width:30rem;
+  max-width: 60rem;
   height: 42rem;
   border-radius: 0.8rem;
   display: flex;
@@ -27,7 +27,7 @@
   padding: 3.6rem;
   transition: 0.4s;
   font-size: 2rem;
-  width: 54rem;
+  width: 100%;
   color: var(--main-color-950b);
 }
 .drag_body:hover > label {

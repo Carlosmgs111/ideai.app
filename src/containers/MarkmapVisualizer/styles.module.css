@@ -12,12 +12,10 @@
   border-radius: 0.8rem;
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  transition: 0.4s ease !important;
-  transform: scale(1);
+  transition: 0.8s ease !important;
   opacity: 1;
 }
 .visualizer.hide {
-  transform: scale(0.8) !important;
   opacity: 0;
 }
 .visualizer > h1 {

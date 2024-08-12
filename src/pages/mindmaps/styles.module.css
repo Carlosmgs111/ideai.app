@@ -2,12 +2,14 @@
   padding-top: 6rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
 }
 .content {
   width: 100%;
+  max-width: 100rem;
   min-height: 100vh;
   display: flex;
   flex-direction: row;

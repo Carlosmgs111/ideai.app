@@ -5,7 +5,7 @@ import { mapToList } from "../../utils";
 import { Refs } from "../../hocs/Refs";
 import { useNavScroll } from "../../hooks/useNavScroll";
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Memo } from "../../hocs/Memo";
 
 const Anchor = ({ children }: any) => {
@@ -38,13 +38,16 @@ const QuicknavDashboard = ({ children, hide = false }: any) => {
 export const Board = ({ quicknav = false }: any) => {
   const [{ markmaps }]: any = useStateValue();
   const location = useLocation();
-  const { container, elements, navIndexes, navPrev, navNext, navTo }: any =
-    useNavScroll(
-      {
-        horizontal: true,
-      },
-      [markmaps]
-    );
+  const navigate = useNavigate();
+  const {
+    container,
+    elements,
+    navIndexes,
+    navPrev,
+    navNext,
+    navTo,
+    current,
+  }: any = useNavScroll({ horizontal: true }, [markmaps]);
 
   useEffect(() => {
     const currentUUID = location.search.split("?uuid=")[1];
@@ -52,7 +55,13 @@ export const Board = ({ quicknav = false }: any) => {
       ({ uuid }: any) => uuid === currentUUID
     );
     if (index > -1) navTo(index);
-  }, [location, markmaps]);
+  }, []);
+
+  useEffect(() => {
+    const currentUUID = mapToList(markmaps)[current]?.uuid;
+    if (!currentUUID) return;
+    navigate(`?uuid=${mapToList(markmaps)[current].uuid}`);
+  }, [current]);
 
   return (
     <div className={styles.page}>

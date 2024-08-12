@@ -278,13 +278,7 @@ export function InputForm({
         if (index < nonOptionals.length + 1)
           return <li key={index}> {Form(attribute, onChange)}</li>;
         return (
-          <Memo
-            deps={
-              [
-                /* Mapfy(data).size */
-              ]
-            }
-          >
+          <Memo deps={[Mapfy(data).size]}>
             <li
               style={{ width: "100%" }}
               key={index}
