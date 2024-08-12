@@ -2,7 +2,7 @@ import { InputForm } from "./InputForm";
 import styles from "./styles.module.css";
 import { useHook } from "./useHook";
 import { labelCases, Mapfy } from "../../utils";
-import { Memo } from "../../components/Memo";
+import { Memo } from "../../hocs/Memo";
 
 export enum INPUT_TYPES {
   TEXT = "TEXT", // input text

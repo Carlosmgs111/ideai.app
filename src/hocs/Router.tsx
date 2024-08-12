@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { NotFound } from "../../pages/NotFound";
+import { NotFound } from "../pages/NotFound";
 import { Children } from "react";
 
 export const Router = ({ children }: any): any => {

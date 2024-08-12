@@ -2,11 +2,11 @@ import styles from "./styles.module.css";
 import { MarkmapVisualizer } from "../../containers/MarkmapVisualizer";
 import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
-import { Refs } from "../../components/Refs";
+import { Refs } from "../../hocs/Refs";
 import { useNavScroll } from "../../hooks/useNavScroll";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { Memo } from "../../components/Memo";
+import { Memo } from "../../hocs/Memo";
 
 const Anchor = ({ children }: any) => {
   const ref = useRef(null);

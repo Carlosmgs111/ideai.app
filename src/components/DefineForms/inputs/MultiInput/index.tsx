@@ -12,7 +12,7 @@ import {
   mapToList,
 } from "../../../../utils";
 import { INPUT_TYPES } from "../../../../components/DefineForms";
-import { Memo } from "../../../../components/Memo";
+import { Memo } from "../../../../hocs/Memo";
 import { useReducer, useEffect } from "react";
 
 const ACTIONS = Object.freeze({ ADD: "ADD", REMOVE: "REMOVE" });

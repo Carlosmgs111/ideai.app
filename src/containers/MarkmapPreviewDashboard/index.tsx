@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import { URL_API } from "../../services";
 import { useStateValue } from "../../context";
+import { CommonInput } from "../../components/DefineForms/inputs";
 
 export const MarkmapPreviewDashboard = ({ uuid, title }: any) => {
   const [{ markmaps }, dispatch]: any = useStateValue();
@@ -36,7 +37,7 @@ export const MarkmapPreviewDashboard = ({ uuid, title }: any) => {
 
       <section className={styles.section}>
         <div>
-          <div>🏷️</div>
+          <div><CommonInput label="Título" value={""}></CommonInput></div>
           <div>🎚️</div>
         </div>
       </section>

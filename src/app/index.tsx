@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { Router } from "../components/Router";
+import { Router } from "../hocs/Router";
 import { Navigation } from "../components";
 import { Home, Board, Dashboard, Mindmaps, Learn } from "../pages";
 import { useStateValue } from "../context";

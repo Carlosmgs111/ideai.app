@@ -5,7 +5,7 @@ import { mapToList } from "../../utils";
 import { SidePanel } from "../../components/SidePanel";
 import { useTrackSidebar } from "../../hooks/useTrackSidebar";
 import { MarkmapPreview } from "../../containers/MarkmapPreview";
-import { Memo } from "../../components/Memo";
+import { Memo } from "../../hocs/Memo";
 
 export const Mindmaps = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();

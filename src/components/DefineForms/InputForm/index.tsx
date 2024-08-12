@@ -1,5 +1,5 @@
 import { beutifyLabel, Mapfy } from "../../../utils";
-import { Memo } from "../../../components/Memo";
+import { Memo } from "../../../hocs/Memo";
 import {
   CommonInput,
   SelectionInput,

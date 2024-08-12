@@ -2,7 +2,7 @@ import { labelCases, mapToList } from "../../utils";
 import { useToggle } from "../../hooks/useToggle";
 import styles from "./styles.module.css";
 import { useMemo } from "react";
-import { Memo } from "../Memo";
+import { Memo } from "../../hocs/Memo";
 
 export function TrackSidebar(props: any) {
   const {

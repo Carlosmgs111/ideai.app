@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import { MarkmapPreviewDashboard } from "../MarkmapPreviewDashboard";
-import { Memo } from "../../components/Memo";
+import { Memo } from "../../hocs/Memo";
 import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 
@@ -25,7 +25,7 @@ export const MarkmapPreview = ({ children }: any) => {
     });
   };
   return (
-    <Memo>
+    <Memo deps={[children.props]}>
       <div className={styles.container}>
         <a href={`/board?uuid=${uuid}`}>
           {detailView ? <DetailView {...{ uuid, title }} /> : children}

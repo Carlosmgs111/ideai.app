@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSidebar";
 import { cloneElement, Children } from "react";
-import { Refs } from "../../components/Refs";
-import { Memo } from "../../components/Memo";
+import { Refs } from "../../hocs/Refs";
+import { Memo } from "../../hocs/Memo";
 import { mapToList } from "../../utils";
 
 const ElementWrapped = ({

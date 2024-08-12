@@ -5,7 +5,7 @@ import { useToggle } from "../../hooks/useToggle";
 import { injectAttrsToReactElements } from "../../utils";
 import { useStateValue } from "../../context";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { Memo } from "../../components/Memo";
+import { Memo } from "../../hocs/Memo";
 
 export const SidePanel = (props: any) => {
   const {

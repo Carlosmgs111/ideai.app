@@ -11,7 +11,7 @@ import { SocketService, URL_API } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
 import { MarkmapVisualizerEditor } from "../MarkmapVisualizerEditor";
 import { useToggle } from "../../hooks/useToggle";
-import { Memo } from "../../components/Memo";
+import { Memo } from "../../hocs/Memo";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
