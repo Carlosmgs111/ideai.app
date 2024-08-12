@@ -28,7 +28,7 @@ export const CommonInput = ({
   return (
     <Memo deps={[value]}>
       {required && <InputHelper />}
-      <div>
+      <div className={styles.container}>
         <input
           className={styles.common_input}
           type={typeof value === "string" ? "text" : "number"}

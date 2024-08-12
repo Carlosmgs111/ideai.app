@@ -36,9 +36,9 @@
   white-space: nowrap;
   background-color: var(--main-color-400);
   border-radius: 0.5rem;
+  padding: 0 4px;
   left: 2.6rem;
   top: 0.6rem;
-  padding: 0 4px;
   transition: 0.4s;
   opacity: 0;
   margin: 0;

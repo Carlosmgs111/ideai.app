@@ -25,7 +25,7 @@ export const MarkmapPreview = ({ children }: any) => {
     });
   };
   return (
-    <Memo deps={[children.props]}>
+    <Memo deps={[children.props, detailView]}>
       <div className={styles.container}>
         <a href={`/board?uuid=${uuid}`}>
           {detailView ? <DetailView {...{ uuid, title }} /> : children}
@@ -33,7 +33,7 @@ export const MarkmapPreview = ({ children }: any) => {
         <div className={styles.panel}>
           <div className={styles.dashboard}>
             <button onClick={settingsButtonOnClick}>
-              <i className={`fa-solid fa-screwdriver-wrench`}></i>{" "}
+              <i className={`fa-solid fa-screwdriver-wrench`}></i>&nbsp;
               Configuraciónes
             </button>
             <button onClick={toggleDetailView}>
@@ -43,7 +43,7 @@ export const MarkmapPreview = ({ children }: any) => {
                     ? "fa-solid fa-rotate-left"
                     : "fa-solid fa-circle-info"
                 }`}
-              ></i>{" "}
+              ></i>&nbsp;
               {detailView ? "Volver" : "Ver Detalles"}
             </button>
           </div>
