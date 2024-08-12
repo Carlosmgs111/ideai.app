@@ -27,14 +27,12 @@ export const SidePanel = (props: any) => {
   const [float, switchFloat] = useToggle(sidebarFloat, !sidebarFloat);
 
   useEffect(() => {
-    dispatch({ type: "setSidebarFloat", payload: sidebarFloat });
+    dispatch({ sidebarFloat });
     setSidebarFloat(float);
   }, [float]);
 
   const main = (
-    <Memo
-      deps={[float, activeSidebars, sidebars, settingsDashboard, expand]}
-    >
+    <Memo deps={[float, activeSidebars, sidebars, settingsDashboard, expand]}>
       <div className={styles.container}>
         <div className={styles.access_button}>
           <button

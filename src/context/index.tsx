@@ -1,14 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-  Children,
-  cloneElement,
-} from "react";
+import { createContext, useContext, Children, cloneElement } from "react";
+import { useReduceState } from "../hooks/useReduceState";
 
 export const StateContext: any = createContext(null);
-export const StateProvider = ({ reducer, initialState, children }: any) => (
-  <StateContext.Provider value={useReducer(reducer, initialState)}>
+export const StateProvider = ({ initialState, children }: any) => (
+  <StateContext.Provider value={useReduceState(initialState)}>
     {children
       ? Children.toArray(children).map((child: any) =>
           cloneElement(child, { withcontext: "true" })

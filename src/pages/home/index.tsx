@@ -14,8 +14,7 @@ export const Home = ({}: any) => {
     e.preventDefault();
     const uuid = uuidv4();
     dispatch({
-      type: "setMarkmaps",
-      payload: { [uuid]: { uuid, text: "", title: "" }, ...markmaps },
+      markmaps: { [uuid]: { uuid, text: "", title: "" }, ...markmaps },
     });
 
     if (!files[0]) return;
@@ -51,12 +50,7 @@ export const Home = ({}: any) => {
         </article>
         <div>
           <button
-            onClick={() =>
-              dispatch({
-                type: "setCurrentModal",
-                payload: <MarkmapCreationForm />,
-              })
-            }
+            onClick={() => dispatch({ currentModal: <MarkmapCreationForm /> })}
             className={`${styles.button} `}
           >
             <i className="fa-solid fa-diagram-project"></i> Crea Mindmap desde

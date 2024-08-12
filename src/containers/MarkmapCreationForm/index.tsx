@@ -20,11 +20,8 @@ const ManualCreation = ({}: any) => {
   const [onClickHandler, HOHTrigger]: any = getHOHAndTrigger(
     ({ setError: _, setLoading: __, data, reset: ___ }: any) => {
       const markmap = { ...data[0], uuid };
-      dispatch({
-        type: "setMarkmaps",
-        payload: { [uuid]: markmap, ...markmaps },
-      });
-      dispatch({ type: "setCurrentModal", payload: null });
+      dispatch({ markmaps: { [uuid]: markmap, ...markmaps } });
+      dispatch({ currentModal: null });
       navigate(`/board?uuid=${uuid}`);
       fetch(`${URL_API}/markmap/create`, {
         method: "POST",
@@ -124,8 +121,7 @@ const PromptCreation = ({ usefile: _usefile = false }: any) => {
         body = { ...body, file: file.split(",")[1], format: "base64" };
       }
       dispatch({
-        type: "setMarkmaps",
-        payload: { [uuid]: { uuid, text: "", title: "" }, ...markmaps },
+        markmaps: { [uuid]: { uuid, text: "", title: "" }, ...markmaps },
       });
       fetch(creationEndpoint, {
         method: "POST",
@@ -136,7 +132,7 @@ const PromptCreation = ({ usefile: _usefile = false }: any) => {
         .then(({ created }: any) => {
           if (!created) return;
         });
-      dispatch({ type: "setCurrentModal", payload: null });
+      dispatch({ currentModal: null });
       navigate(`/board?uuid=${uuid}`);
     }
   );

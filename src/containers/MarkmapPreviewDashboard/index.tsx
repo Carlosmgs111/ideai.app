@@ -2,21 +2,15 @@ import styles from "./styles.module.css";
 import { URL_API } from "../../services";
 import { useStateValue } from "../../context";
 import { CommonInput } from "../../components/DefineForms/inputs";
-import { useReducer } from "react";
+import { useReduceState } from "../../hooks/useReduceState";
+import { useAxiosRequest } from "../../hooks/useAxiosRequest";
 
 export const MarkmapPreviewDashboard = (markmap: any) => {
   const [{ markmaps }, dispatch]: any = useStateValue();
-  const [markmapState, setMarkmapState] = useReducer(
-    (markmap: any, payload: any) => {
-      const [key, value]: any = Object.entries(payload)[0];
-      markmap = { ...markmap, [key]: value };
-      return markmap;
-    },
-    markmap
-  );
+  const [markmapState, setMarkmapState] = useReduceState(markmap);
   const { uuid, title } = markmapState;
   const onClickDeleteButton = () => {
-    dispatch({ type: "setLoading", payload: true });
+    dispatch({ loading: true });
     fetch(`${URL_API}/markmap/delete`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -27,9 +21,20 @@ export const MarkmapPreviewDashboard = (markmap: any) => {
         const { deleted } = response;
         if (!deleted) return;
         delete markmaps[uuid];
-        dispatch({ type: "setCurrentModal", payload: null });
-        dispatch({ type: "setMarkmaps", payload: { ...markmaps } });
+        dispatch({ currentModal: null });
+        dispatch({ markmaps: { ...markmaps } });
       });
+  };
+  const onClickUpdateTitle = (e: any) => {
+    e.preventDefault();
+    useAxiosRequest({
+      setData: ({ updated }: any) => {
+        if (!updated) return;
+        dispatch({
+          markmaps: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
+        });
+      },
+    }).patch("markmap/update/title", { uuid, title });
   };
   return (
     <div className={styles.dashboard_body}>
@@ -42,7 +47,7 @@ export const MarkmapPreviewDashboard = (markmap: any) => {
             setMarkmapState({ title: target.value });
           }}
         ></CommonInput>
-        <button>
+        <button onClick={onClickUpdateTitle}>
           <i className="fa-solid fa-check"></i>&nbsp;&nbsp;Actualizar
         </button>
       </form>

@@ -3,6 +3,7 @@ import { MarkmapPreviewDashboard } from "../MarkmapPreviewDashboard";
 import { Memo } from "../../hocs/Memo";
 import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
+import { Link } from "react-router-dom";
 
 const DetailView = ({ title, uuid, description }: any) => {
   return (
@@ -20,16 +21,15 @@ export const MarkmapPreview = ({ children }: any) => {
   const [detailView, toggleDetailView] = useToggle(false, true);
   const settingsButtonOnClick = () => {
     dispatch({
-      type: "setCurrentModal",
-      payload: <MarkmapPreviewDashboard {...{ uuid, title }} />,
+      currentModal: <MarkmapPreviewDashboard {...{ uuid, title }} />,
     });
   };
   return (
     <Memo deps={[children.props, detailView]}>
       <div className={styles.container}>
-        <a href={`/board?uuid=${uuid}`}>
+        <Link to={`/board?uuid=${uuid}`}>
           {detailView ? <DetailView {...{ uuid, title }} /> : children}
-        </a>
+        </Link>
         <div className={styles.panel}>
           <div className={styles.dashboard}>
             <button onClick={settingsButtonOnClick}>
@@ -43,7 +43,8 @@ export const MarkmapPreview = ({ children }: any) => {
                     ? "fa-solid fa-rotate-left"
                     : "fa-solid fa-circle-info"
                 }`}
-              ></i>&nbsp;
+              ></i>
+              &nbsp;
               {detailView ? "Volver" : "Ver Detalles"}
             </button>
           </div>

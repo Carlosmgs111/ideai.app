@@ -83,8 +83,7 @@ export const MarkmapVisualizer = ({
         [`appendToMarkmapText$${uuid}`]: async (updatedMarkmap: any) => {
           const { text: chunk, title } = updatedMarkmap;
           dispatch({
-            type: "setMarkmaps",
-            payload: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
+            markmaps: { ...markmaps, [uuid]: { ...markmaps[uuid], title } },
           });
           composedTextDispatch(chunk);
         },
@@ -96,8 +95,7 @@ export const MarkmapVisualizer = ({
     setText(composedText);
     if (markmaps[uuid].text === composedText) return;
     dispatch({
-      type: "setMarkmaps",
-      payload: {
+      markmaps: {
         ...markmaps,
         [uuid]: { ...markmaps[uuid], text: composedText },
       },
@@ -123,8 +121,7 @@ export const MarkmapVisualizer = ({
     if (markmaps[uuid].text === text) return;
     autosave && saveText(text);
     dispatch({
-      type: "setMarkmaps",
-      payload: {
+      markmaps: {
         ...markmaps,
         [uuid]: { ...markmaps[uuid], text },
       },

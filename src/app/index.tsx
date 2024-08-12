@@ -19,7 +19,7 @@ export default () => {
         data.reverse().forEach((markmap: any) => {
           newMarkmaps[markmap.uuid] = markmap;
         });
-        dispatch({ type: "setMarkmaps", payload: newMarkmaps });
+        dispatch({ markmaps: newMarkmaps });
       });
   }, []);
   return (
@@ -42,9 +42,7 @@ export default () => {
           <Learn path={"learn/markmap"}></Learn>
         </Router>
       </div>
-      <Modal
-        onClick={() => dispatch({ type: "setCurrentModal", payload: null })}
-      >
+      <Modal onClick={() => dispatch({ currentModal: null })}>
         {currentModal}
       </Modal>
       <div className={styles.footer}>

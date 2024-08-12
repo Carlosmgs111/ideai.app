@@ -48,7 +48,7 @@ export const DragNDropZone = ({ uploadFile }: any) => {
     },
     [files]
   );
-  useEffect(() => dispatch({ type: "setFile", payload: files[0] }), [files]);
+  useEffect(() => dispatch({ file: files[0] }), [files]);
 
   const { getRootProps, getInputProps, isDragActive }: any = useDropzone({
     onDrop,
@@ -79,10 +79,7 @@ export const DragNDropZone = ({ uploadFile }: any) => {
         <div className={styles.options}>
           <button
             onClick={() =>
-              dispatch({
-                type: "setCurrentModal",
-                payload: <MarkmapCreationForm usefile={true} />,
-              })
+              dispatch({ currentModal: <MarkmapCreationForm usefile={true} /> })
             }
           >
             <i className="fa-solid fa-robot"></i> Crear con Prompt
