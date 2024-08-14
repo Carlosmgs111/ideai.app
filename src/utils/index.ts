@@ -370,7 +370,6 @@ export const getSizesDisposition = (i: any) => {
 export const injectAttrsToReactElements = (items: any, attrs = {}) =>
   items.map((item: any, index: any) => cloneElement(item, { ...attrs, index }));
 
-
 export const getDispatchSetFunctions = (
   dispatch: Function,
   actionTypes: Array<string>
@@ -384,4 +383,12 @@ export const getDispatchSetFunctions = (
     };
   }
   return functions;
+};
+
+export const shuffleArray = (array: any) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 };

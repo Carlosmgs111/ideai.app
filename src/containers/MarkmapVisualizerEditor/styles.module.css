@@ -11,13 +11,13 @@
   padding: 3.2rem;
   border-radius: 0.8rem;
   transition: 0.4s;
-  background-color: var(--main-color-950);
+  backdrop-filter: blur(4px);
   background-image: radial-gradient(
-    var(--main-color-900b) 0.1rem,
+    var(--main-color-200b) 0.1rem,
     transparent 0
   );
   background-size: 1.4rem 1.4rem;
-  color: var(--main-color-50);
+  color: var(--main-color-950);
 }
 .header {
   padding: 0.8rem;
@@ -25,7 +25,7 @@
   display: flex;
   justify-content: flex-start;
   gap: 0.8rem;
-  color: var(--main-color-50);
+  color: var(--main-color-950);
 }
 .header > span {
   width: 1px;

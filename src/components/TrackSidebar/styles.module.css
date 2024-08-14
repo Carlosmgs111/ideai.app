@@ -110,12 +110,12 @@
   transform: translate(-180px, 0);
   opacity: 0;
   max-width: 0;
-  max-height: 1.4rem;
+  max-height: 1.8rem;
   scale: 0;
 }
 .inner.show {
   transform: translate(0, 0);
   scale: 1;
   opacity: 1;
-  max-width: 20rem;
+  max-width: 18rem;
 }

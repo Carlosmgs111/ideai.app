@@ -14,9 +14,9 @@ const initialState = {
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <StateProvider {...{ initialState }}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StateProvider>
+    <StateProvider {...{ initialState }}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StateProvider>
 );

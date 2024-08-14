@@ -117,7 +117,10 @@ export function Navigation({ className, pages }: any) {
           className={
             currentTheme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun"
           }
-          onClick={toggleCurrentTheme}
+          onClick={() => {
+            document.body.classList.toggle("dark");
+            toggleCurrentTheme();
+          }}
         ></button>
       </div>
     </div>

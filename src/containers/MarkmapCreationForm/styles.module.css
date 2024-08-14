@@ -1,10 +1,5 @@
 .form_body {
   padding: 3.6rem;
-  background-color: var(--main-color-950);
-  background-image: radial-gradient(
-    var(--main-color-700b) 0.1rem,
-    transparent 0
-  );
   background-size: 1.6rem 1.6rem;
   border-radius: 0.8rem;
   display: flex;
@@ -12,13 +7,34 @@
   gap: 1.6rem;
   width: 50rem;
 }
+.form_body.light {
+  background-color: var(--main-color-50);
+  background-image: radial-gradient(
+    var(--main-color-300b) 0.1rem,
+    transparent 0
+  );
+  --high-contrast-color: var(--main-color-950);
+  --low-contrast-color: var(--main-color-50);
+}
+.form_body.dark {
+  background-color: var(--main-color-950);
+  background-image: radial-gradient(
+    var(--main-color-700b) 0.1rem,
+    transparent 0
+  );
+  --high-contrast-color: var(--main-color-50);
+  --low-contrast-color: var(--main-color-950);
+}
 .form_body > button:nth-child(1) {
+  border: solid 1px transparent;
+  background-color: var(--high-contrast-color);
+  color: var(--low-contrast-color);
   cursor: pointer;
 }
 .form_body > button:nth-child(1):hover {
-  background-color: var(--main-color-950);
-  color: var(--main-color-50);
-  border: solid 1px var(--main-color-50);
+  background-color: var(--low-contrast-color);
+  color: var(--high-contrast-color);
+  border: solid 1px var(--high-contrast-color);
 }
 .creation_form {
   display: flex;
@@ -32,13 +48,14 @@
 .creation_form > button {
   width: fit-content;
   border: 1px solid transparent;
-  background-color: var(--main-color-50);
+  color: var(--low-contrast-color);
+  background-color: var(--high-contrast-color);
   padding: 0.8rem 1.6rem;
 }
 .creation_form > button:hover {
-  border: 1px solid var(--main-color-50);
-  background-color: var(--main-color-950);
-  color: var(--main-color-50);
+  border: 1px solid var(--high-contrast-color);
+  background-color: var(--low-contrast-color);
+  color: var(--high-contrast-color);
   padding: 0.8rem 1.6rem;
 }
 .creation_form > span {

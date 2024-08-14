@@ -127,11 +127,10 @@ const PromptCreation = ({ usefile: _usefile = false }: any) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
-      })
-        .then((response) => response.json())
-        // .then((data: any) => {
-        //   dispatch({ markmaps: { ...markmaps, [uuid]: data } });
-        // });
+      }).then((response) => response.json());
+      // .then((data: any) => {
+      //   dispatch({ markmaps: { ...markmaps, [uuid]: data } });
+      // });
       dispatch({ currentModal: null });
       navigate(`/board?uuid=${uuid}`);
     }
@@ -196,8 +195,9 @@ const PromptCreation = ({ usefile: _usefile = false }: any) => {
 
 export const MarkmapCreationForm = ({ usefile = false }: any) => {
   const [manual, toggleManual] = useToggle(false, true);
+  const [{ theme }]: any = useStateValue();
   return (
-    <div className={styles.form_body}>
+    <div className={`${styles.form_body} ${styles[theme]}`}>
       <button onClick={toggleManual}>
         <i className={manual ? "fa-solid fa-robot" : "fa-solid fa-pencil"}></i>
         &nbsp;&nbsp;

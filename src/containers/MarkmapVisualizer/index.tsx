@@ -13,6 +13,7 @@ import { MarkmapVisualizerEditor } from "../MarkmapVisualizerEditor";
 import { useToggle } from "../../hooks/useToggle";
 import { Memo } from "../../hocs/Memo";
 import colors from "../../db/colors.json";
+import { shuffleArray } from "../../utils";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
@@ -43,7 +44,7 @@ export const MarkmapVisualizer = ({
   autosave: _autosave = true,
   title,
 }: any) => {
-  const [{ markmaps }, dispatch]: any = useStateValue();
+  const [{ markmaps, theme }, dispatch]: any = useStateValue();
   const [text, setText]: any = useState(markmapText);
   const [autosave, toggleAutosave] = useToggle(_autosave, !_autosave);
   const debouncedText = useDebounce(text, 500);
@@ -57,13 +58,6 @@ export const MarkmapVisualizer = ({
   );
   const [hideDashboard, toggleHideDashboard] = useToggle(true, false);
   const debouncedComposedText = useDebounce(composedText, 100);
-  const shuffleArray = (array: any) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
   const markmapOptions = deriveOptions({
     maxWidth: preview ? 260 : 800,
     initialExpandLevel: preview ? 2 : 3,
@@ -165,19 +159,24 @@ export const MarkmapVisualizer = ({
     setText(e.target.value);
   };
 
+  const textColor: any = {
+    light: "var(--main-color-950)",
+    dark: "var(--main-color-50)",
+  };
+
   return (
-    <Memo deps={[text, title, showVisualizer, hideDashboard]}>
+    <Memo deps={[text, title, showVisualizer, hideDashboard, theme]}>
       <div
         ref={refVisualizer}
-        className={`${styles.visualizer} ${preview ? styles.preview : ""} ${
-          !showVisualizer && !preview ? styles.hide : ""
-        }`}
+        className={`${styles.visualizer} ${styles[theme]} ${
+          preview ? styles.preview : ""
+        } ${!showVisualizer && !preview ? styles.hide : ""}`}
       >
-        {!preview && <h1>{title}</h1>}
+        {!preview && !title && <h1>{title}</h1>}
         <svg
           className={styles.board}
           style={{
-            color: preview ? "var(--main-color-950)" : "var(--main-color-100)",
+            color: textColor[theme],
           }}
           ref={refSvg}
         />

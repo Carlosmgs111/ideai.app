@@ -1,5 +1,5 @@
 .app {
-  width: available;
+  width: 100%;
   min-height: 100vh;
   transition: color 0.4s;
 }
@@ -11,14 +11,6 @@
   color: var(--main-color-50);
   transition: color 0.4s;
 }
-.app::-webkit-scrollbar {
-  display: block;
-  background-color: transparent;
-}
-.app::-webkit-scrollbar-thumb {
-  width: 20rem;
-  background-color: var(--main-color-950);
-}
 .app::before {
   content: "";
   width: 100%;
@@ -27,64 +19,6 @@
   z-index: -10;
 }
 .app.light::before {
-  background-image: radial-gradient(
-      var(--main-color-300b) 0.1rem,
-      transparent 0
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      transparent,
-      var(--main-color-200) 5%,
-      var(--main-color-300),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 0% 0%,
-      transparent 20%,
-      var(--main-color-200),
-      var(--main-color-100),
-      var(--main-color-200),
-      transparent 21%
-    ),
-    radial-gradient(
-      circle at 0% 20%,
-      transparent 30%,
-      var(--main-color-200),
-      var(--main-color-100),
-      var(--main-color-200),
-      transparent 31%
-    );
-}
-.app.dark::before {
-  background-image: radial-gradient(
-      var(--main-color-700b) 0.1rem,
-      transparent 0
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      transparent,
-      var(--main-color-800) 5%,
-      var(--main-color-700),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 0% 0%,
-      transparent 20%,
-      var(--main-color-800),
-      var(--main-color-900),
-      var(--main-color-800),
-      transparent 21%
-    ),
-    radial-gradient(
-      circle at 0% 20%,
-      transparent 30%,
-      var(--main-color-800),
-      var(--main-color-900),
-      var(--main-color-800),
-      transparent 31%
-    );
-}
-.app.light::after {
   content: "";
   position: fixed;
   top: 0;
@@ -92,14 +26,14 @@
   width: 100%;
   height: 100%;
   background-image: radial-gradient(
-    var(--main-color-100b) 0.1rem,
+    var(--main-color-300b) 0.1rem,
     transparent 0
   );
-  background-size: 0.4rem 0.4rem;
+  background-size: 1.6rem 1.6rem;
   z-index: -100;
   background-color: var(--main-color-50);
 }
-.app.dark::after {
+.app.dark::before {
   content: "";
   position: fixed;
   top: 0;
@@ -107,10 +41,10 @@
   width: 100%;
   height: 100%;
   background-image: radial-gradient(
-    var(--main-color-900b) 0.1rem,
+    var(--main-color-800b) 0.1rem,
     transparent 0
   );
-  background-size: 0.4rem 0.4rem;
+  background-size: 1.6rem 1.6rem;
   z-index: -100;
   background-color: var(--main-color-950);
 }
@@ -136,7 +70,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
-  color: var(--main-color-50);
+  color: var(--main-color-50) !important;
 }
 .footer > span > a {
   text-decoration: none;

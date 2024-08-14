@@ -4,7 +4,8 @@ import { Memo } from "../../hocs/Memo";
 import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 import { Link } from "react-router-dom";
-
+import colors from "../../db/colors.json";
+import { shuffleArray } from "../../utils";
 const DetailView = ({ title, description }: any) => {
   return (
     <div className={styles.detail_view}>
@@ -15,8 +16,11 @@ const DetailView = ({ title, description }: any) => {
 };
 
 export const MarkmapPreview = ({ children }: any) => {
+  const [primary, secondary, terciary] = shuffleArray(
+    colors.neon.map(({ hex }: any) => hex)
+  );
   const markmap: any = children.props;
-  const [{}, dispatch]: any = useStateValue();
+  const [{ theme }, dispatch]: any = useStateValue();
   const [detailView, toggleDetailView] = useToggle(false, true);
   const settingsButtonOnClick = () => {
     dispatch({
@@ -24,8 +28,25 @@ export const MarkmapPreview = ({ children }: any) => {
     });
   };
   return (
-    <Memo deps={[children.props, detailView]}>
-      <div className={styles.container}>
+    <Memo deps={[children.props, detailView, theme]}>
+      <div className={`${styles.container} ${styles[theme]}`}>
+        <div
+          className={styles.background}
+          style={{
+            background: `radial-gradient(
+            circle at 0% 0%,
+            ${primary},
+            ${secondary},
+            ${terciary},
+            ${secondary},
+            ${primary},
+            ${secondary},
+            ${terciary},
+            ${secondary},
+            ${primary}
+          )`,
+          }}
+        ></div>
         <Link to={`/board?uuid=${markmap.uuid}`}>
           {detailView ? <DetailView {...markmap} /> : children}
         </Link>
