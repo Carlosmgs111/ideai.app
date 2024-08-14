@@ -8,7 +8,7 @@ import { URL_API } from "../services";
 import { Modal } from "../components/Modal";
 
 export default () => {
-  const [{ currentModal }, dispatch]: any = useStateValue();
+  const [{ currentModal, theme }, dispatch]: any = useStateValue();
   useEffect(() => {
     fetch(`${URL_API}/markmap/getmanymarkmaps?size=100&page=0`, {
       method: "GET",
@@ -23,7 +23,7 @@ export default () => {
       });
   }, []);
   return (
-    <div className={styles.app}>
+    <div className={`${styles.app} ${styles[theme]}`}>
       <div className={styles.header}>
         <Navigation
           pages={[

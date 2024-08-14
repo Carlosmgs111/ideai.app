@@ -3,6 +3,17 @@
   width: fit-content;
   height: fit-content;
 }
+.dropzone.light{
+  --high-contrast-color: var(--main-color-950);
+  --mid-contrast-color: var(--main-color-950b);
+  --low-contrast-color: var(--main-color-50);
+
+}.dropzone.dark{
+  --high-contrast-color: var(--main-color-50);
+  --mid-contrast-color: var(--main-color-100b);
+  --low-contrast-color: var(--main-color-950);
+  
+}
 .drag_body {
   min-width:30rem;
   max-width: 60rem;
@@ -15,7 +26,7 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   transition: 0.4s;
-  border: 2px dashed var(--main-color-950);
+  border: 2px dashed var(--high-contrast-color);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -28,18 +39,18 @@
   transition: 0.4s;
   font-size: 2rem;
   width: 100%;
-  color: var(--main-color-950b);
+  color: var(--mid-contrast-color);
 }
 .drag_body:hover > label {
-  color: var(--main-color-950);
+  color: var(--high-contrast-color);
 }
 .drag_body > label > i {
   transition: 0.4s;
   font-size: 4rem;
-  color: var(--main-color-950b);
+  color: var(--mid-contrast-color);
 }
 .drag_body:hover > label > i {
-  color: var(--main-color-950);
+  color: var(--high-contrast-color);
 }
 .file_preview {
   border-radius: 0.8rem;
@@ -78,24 +89,24 @@
 }
 .options > button:nth-child(1),
 .options > button:nth-child(2) {
-  background-color: var(--main-color-950);
-  color: var(--main-color-50);
+  background-color: var(--high-contrast-color);
+  color: var(--low-contrast-color);
   text-wrap: nowrap;
   cursor: pointer;
 }
 .options > button:nth-child(1):hover,
 .options > button:nth-child(2):hover {
-  border: var(--main-color-950) solid 1px;
-  color: var(--main-color-950);
-  background-color: var(--main-color-50);
+  border: var(--high-contrast-color) solid 1px;
+  color: var(--high-contrast-color);
+  background-color: var(--low-contrast-color);
 }
 .options > button:nth-child(3) {
-  border: var(--main-color-950) solid 1px;
-  background-color: var(--main-color-50);
-  color: var(--main-color-950);
+  border: var(--high-contrast-color) solid 1px;
+  background-color: var(--low-contrast-color);
+  color: var(--high-contrast-color);
 }
 .options > button:nth-child(3):hover {
-  border: var(--main-color-50) solid 1px;
-  color: var(--main-color-50);
-  background-color: var(--main-color-950);
+  border: var(--low-contrast-color) solid 1px;
+  color: var(--low-contrast-color);
+  background-color: var(--high-contrast-color);
 }

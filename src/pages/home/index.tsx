@@ -8,7 +8,7 @@ import { SocketService } from "../../services";
 import { v4 as uuidv4 } from "uuid";
 
 export const Home = ({}: any) => {
-  const [{ markmaps }, dispatch]: any = useStateValue();
+  const [{ markmaps, theme }, dispatch]: any = useStateValue();
   const navigate = useNavigate();
   const uploadFileCallback = (e: any, { files }: any) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ export const Home = ({}: any) => {
     navigate(`/board?uuid=${uuid}`);
   };
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${styles[theme]}`}>
       <div className={styles.hero}>
         <h1>Organiza y Visualiza tus ideas con Mindmaps </h1>
         <article>

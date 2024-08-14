@@ -11,6 +11,9 @@
   align-items: center;
   justify-content: center;
 }
-.logo {
+.logo.light {
   fill: var(--main-color-950);
+}
+.logo.dark {
+  fill: var(--main-color-50);
 }

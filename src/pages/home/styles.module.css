@@ -8,6 +8,14 @@
   gap: 3.6rem;
   padding-bottom: 3.6rem;
 }
+.page.light {
+  --high-contrast-color: var(--main-color-950);
+  --low-contrast-color: var(--main-color-50);
+}
+.page.dark {
+  --high-contrast-color: var(--main-color-50);
+  --low-contrast-color: var(--main-color-950);
+}
 .hero {
   padding-top: 6rem;
   width: 100%;
@@ -23,14 +31,14 @@
   width: 100%;
   font-size: 4.8rem;
   text-align: center;
-  color: var(--main-color-950);
+  /* color: var(--main-color-950); */
 }
 .hero > article {
   font-size: 2rem;
   min-width: 30rem;
   max-width: 60rem;
   text-align: center;
-  color: var(--main-color-950);
+  /* color: var(--main-color-950); */
 }
 .hero > div {
   display: flex;
@@ -48,23 +56,23 @@
   cursor: pointer;
 }
 .hero > div > button:nth-child(1) {
-  background-color: var(--main-color-950);
-  color: var(--main-color-50);
+  background-color: var(--high-contrast-color);
+  color: var(--low-contrast-color);
 }
 .hero > div > button:nth-child(1):hover {
-  border: 1px solid var(--main-color-950);
-  background-color: var(--main-color-50);
-  color: var(--main-color-950);
+  border: 1px solid var(--high-contrast-color);
+  background-color: var(--low-contrast-color);
+  color: var(--high-contrast-color);
 }
 .hero > div > button:nth-child(2) {
-  border: 1px solid var(--main-color-950);
+  border: 1px solid var(--high-contrast-color);
   background-color: transparent;
-  color: var(--main-color-950);
+  color: var(--high-contrast-color);
 }
 .hero > div > button:nth-child(2):hover {
   border: 1px solid transparent;
-  background-color: var(--main-color-950);
-  color: var(--main-color-50);
+  background-color: var(--high-contrast-color);
+  color: var(--low-contrast-color);
 }
 .about {
   width: 100%;

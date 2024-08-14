@@ -177,7 +177,7 @@ export const MarkmapVisualizer = ({
         <svg
           className={styles.board}
           style={{
-            color: preview ? "var(--main-color-950)" : "var(--main-color-950)",
+            color: preview ? "var(--main-color-950)" : "var(--main-color-100)",
           }}
           ref={refSvg}
         />

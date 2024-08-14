@@ -3,8 +3,10 @@ import { useToggle } from "../../hooks/useToggle";
 import styles from "./styles.module.css";
 import { useMemo } from "react";
 import { Memo } from "../../hocs/Memo";
+import { useStateValue } from "../../context";
 
 export function TrackSidebar(props: any) {
+  const [{ theme }]: any = useStateValue();
   const {
     items = {},
     innerItems = true,
@@ -65,7 +67,9 @@ export function TrackSidebar(props: any) {
         {...{
           ...props,
           style: { flexDirection: direction, width },
-          className: styles.body.concat(" ", isactive && styles.active),
+          className: `${styles.body} ${isactive && styles.active} ${
+            styles[theme]
+          }`,
         }}
       >
         {innerItems && Boolean(showbutton) && (

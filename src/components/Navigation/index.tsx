@@ -2,22 +2,20 @@ import styles from "./styles.module.css";
 import { useToggle } from "../../hooks/useToggle";
 import { useResizeHTMLElement } from "../../hooks/useResize";
 import { LogoSVG } from "./../../icons";
-// import { useStateValue } from "../../contexts/context";
-// import { actionTypes } from "../../";
+import { useStateValue } from "../../context";
 import { Linkdex } from "./Linkdex";
 import { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { ToggleButton } from "../../components/ToggleButton";
 
 export function Navigation({ className, pages }: any) {
-  // const [{ token, avatar }, dispatch] = useStateValue();
+  const [{ theme }, dispatch]: any = useStateValue();
   const { pathname } = useLocation();
   const referencesRefs: any = useRef({});
   const [menu, switchMenu] = useToggle(
     { show: false, name: "fas fa-bars p-2 item" },
     { show: true, name: "fas fa-times p-2 item" }
   );
-  const [_, toggleLanguage] = useToggle("es", "en");
+  const [currentTheme, toggleCurrentTheme] = useToggle("light", "dark");
   const indicatorRef: any = useRef(null);
   const adjustIndicatorSizes = (pathname: any) => {
     if (!referencesRefs.current) return;
@@ -43,15 +41,15 @@ export function Navigation({ className, pages }: any) {
   useEffect(() => {
     adjustIndicatorSizes(pathname);
   }, [pathname]);
-  // useEffect(() => {
-  //   dispatch({
-  //     type: actionTypes.setCurrentLang,
-  //     payload: language,
-  //   });
-  // }, [language]);
+  useEffect(() => {
+    dispatch({ theme: currentTheme });
+  }, [currentTheme]);
 
   return (
-    <div ref={navbarContainerRef} className={styles.navbar_container}>
+    <div
+      ref={navbarContainerRef}
+      className={`${styles.navbar_container} ${styles[theme]}`}
+    >
       <div className={`${className} ${styles.navbar}`}>
         <div className={styles.navbar_header}>
           <Linkdex
@@ -115,19 +113,12 @@ export function Navigation({ className, pages }: any) {
         </nav>
       </div>
       <div className={`${styles.page_settings}  ${menu.show && styles.show}`}>
-        {false && (
-          <div className={styles.languages}>
-            <ToggleButton
-              onChange={toggleLanguage}
-              toggled={
-                "url('https://cdn-icons-png.flaticon.com/256/555/555526.png')"
-              }
-              unToggled={
-                "url('https://w7.pngwing.com/pngs/900/804/png-transparent-flag-of-colombia-national-flag-flag-of-cuba-flag-miscellaneous-angle-flag-thumbnail.png')"
-              }
-            ></ToggleButton>
-          </div>
-        )}
+        <button
+          className={
+            currentTheme === "light" ? "fa-solid fa-moon" : "fa-solid fa-sun"
+          }
+          onClick={toggleCurrentTheme}
+        ></button>
       </div>
     </div>
   );

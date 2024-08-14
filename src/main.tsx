@@ -6,6 +6,7 @@ import "./index.css";
 
 const initialState = {
   token: "",
+  theme: "light",
   markmaps: {},
   sidebarFloat: true,
   currentModal: null,

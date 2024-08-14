@@ -29,7 +29,7 @@ const FilesPreview = ({ children }: any): any => {
 
 export const DragNDropZone = ({ uploadFile }: any) => {
   const [files, setFiles]: any = useState([]);
-  const [{}, dispatch]: any = useStateValue();
+  const [{ theme }, dispatch]: any = useStateValue();
   const onClick = useCallback((e: any) => uploadFile(e, { files }), [files]);
 
   const reader = new FileReader();
@@ -57,7 +57,7 @@ export const DragNDropZone = ({ uploadFile }: any) => {
   });
 
   return (
-    <div className={styles.dropzone}>
+    <div className={`${styles.dropzone} ${styles[theme]}`}>
       <form
         className={`${styles.drag_body} ${files.length && styles.deactivated}`}
         action=""
