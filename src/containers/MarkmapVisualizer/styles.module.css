@@ -1,3 +1,7 @@
+.markmap-node {
+  font-family: "Arial", sans-serif; /* Cambiar la fuente */
+  font-size: 1600px; /* Cambiar el tamaño del texto */
+}
 .visualizer {
   width: 100dvw;
   height: 100dvh;
@@ -8,7 +12,7 @@
     var(--main-color-300b) 0.1rem,
     transparent 0
   );
-  background-size: 1.4rem 1.4rem;
+  background-size: 1rem 1rem;
   border-radius: 0.8rem;
   scroll-snap-align: center;
   scroll-snap-stop: always;

@@ -5,11 +5,10 @@ import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 import { Link } from "react-router-dom";
 
-const DetailView = ({ title, uuid, description }: any) => {
+const DetailView = ({ title, description }: any) => {
   return (
     <div className={styles.detail_view}>
       <h3>{title}</h3>
-      <h5>{uuid}</h5>
       <article>{description}</article>
     </div>
   );

@@ -49,10 +49,17 @@ html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
-
 body {
   margin: 0;
   position: relative;
+}
+body::-webkit-scrollbar {
+  display: block;
+  background-color: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  width: 20rem;
+  background-color: var(--main-color-950);
 }
 body::before {
   content: "";

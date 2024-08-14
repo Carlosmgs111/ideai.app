@@ -20,6 +20,9 @@
   width: 0.4rem;
   display: inside;
   background-color: transparent;
+  /* display: none; */
+}
+.body::-webkit-scrollbar-corner{
   display: none;
 }
 .body::-webkit-scrollbar-thumb {
@@ -78,20 +81,19 @@
   cursor: hand;
   text-decoration: none !important;
   display: flex;
-  padding: 0.6rem;
   align-items: center;
   position: relative;
   direction: ltr;
   transition: max-width 0.4s, max-height 0.4s, opacity 0.2s, transform 0.4s,
     scale 0.4s;
   padding: 0;
-  text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   position: relative;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 400;
-  white-space: nowrap;
   line-height: 1.6rem;
   transform: translate(-180px, 0);
   opacity: 0;

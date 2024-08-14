@@ -1,9 +1,9 @@
 import "markmap-toolbar/dist/style.css";
 import { useRef, useEffect, useReducer, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
-import { Markmap, deriveOptions } from "markmap-view";
+import { Markmap, deriveOptions, loadCSS, loadJS } from "markmap-view";
 import { Toolbar } from "markmap-toolbar";
-import { loadCSS, loadJS } from "markmap-common";
+// import { loadCSS, loadJS } from "markmap-common";
 import { Transformer } from "markmap-lib";
 import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
@@ -12,6 +12,7 @@ import { useNearScreen } from "../../hooks/useNearScreen";
 import { MarkmapVisualizerEditor } from "../MarkmapVisualizerEditor";
 import { useToggle } from "../../hooks/useToggle";
 import { Memo } from "../../hocs/Memo";
+import colors from "../../db/colors.json";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
@@ -56,12 +57,19 @@ export const MarkmapVisualizer = ({
   );
   const [hideDashboard, toggleHideDashboard] = useToggle(true, false);
   const debouncedComposedText = useDebounce(composedText, 100);
+  const shuffleArray = (array: any) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
   const markmapOptions = deriveOptions({
     maxWidth: preview ? 260 : 800,
     initialExpandLevel: preview ? 2 : 3,
     colorFreezeLevel: 3,
     duration: 400,
-    // color: ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#F9F871"],
+    color: shuffleArray(colors.neon.map(({ hex }) => hex)),
   });
   const saveText = (text: any) => {
     fetch(`${URL_API}/markmap/update`, {
@@ -122,6 +130,8 @@ export const MarkmapVisualizer = ({
 
   useEffect(() => {
     if (refMm.current) return;
+    // refSvg.current.style.color = "black";
+    // refSvg.current.style.fontSize
     const markMap = Markmap.create(refSvg.current, markmapOptions);
     refMm.current = markMap;
     renderToolbar(refMm.current, refToolbar.current);
