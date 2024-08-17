@@ -17,7 +17,7 @@ const DetailView = ({ title, description }: any) => {
 
 export const MarkmapPreview = ({ children }: any) => {
   const [primary, secondary, terciary] = shuffleArray(
-    colors.neon.map(({ hex }: any) => hex)
+    colors["neon.v2"].map(({ hex }: any) => hex)
   );
   const markmap: any = children.props;
   const [{ theme }, dispatch]: any = useStateValue();
@@ -47,26 +47,29 @@ export const MarkmapPreview = ({ children }: any) => {
           )`,
           }}
         ></div>
-        <Link to={`/board?uuid=${markmap.uuid}`}>
-          {detailView ? <DetailView {...markmap} /> : children}
-        </Link>
-        <div className={styles.panel}>
-          <div className={styles.dashboard}>
-            <button onClick={settingsButtonOnClick}>
-              <i className={`fa-solid fa-screwdriver-wrench`}></i>&nbsp;
-              Configuraciónes
-            </button>
-            <button onClick={toggleDetailView}>
-              <i
-                className={`${
-                  detailView
-                    ? "fa-solid fa-rotate-left"
-                    : "fa-solid fa-circle-info"
-                }`}
-              ></i>
-              &nbsp;
-              {detailView ? "Volver" : "Ver Detalles"}
-            </button>
+        <div className={styles.pattern}></div>
+        <div className={styles.content}>
+          <Link to={`/board?uuid=${markmap.uuid}`}>
+            {detailView ? <DetailView {...markmap} /> : children}
+          </Link>
+          <div className={styles.panel}>
+            <div className={styles.dashboard}>
+              <button onClick={settingsButtonOnClick}>
+                <i className={`fa-solid fa-screwdriver-wrench`}></i>&nbsp;
+                Configuraciónes
+              </button>
+              <button onClick={toggleDetailView}>
+                <i
+                  className={`${
+                    detailView
+                      ? "fa-solid fa-rotate-left"
+                      : "fa-solid fa-circle-info"
+                  }`}
+                ></i>
+                &nbsp;
+                {detailView ? "Volver" : "Ver Detalles"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

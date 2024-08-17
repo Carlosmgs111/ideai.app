@@ -10,20 +10,10 @@
 .container.light {
   --high-contrast-color: var(--main-color-950);
   --low-contrast-color: var(--main-color-50);
-  background-color: var(--main-color-50);
-  background-image: radial-gradient(
-    var(--main-color-200b) 0.1rem,
-    transparent 0
-  );
 }
 .container.dark {
   --high-contrast-color: var(--main-color-50);
   --low-contrast-color: var(--main-color-950);
-  background-color: var(--main-color-950);
-  background-image: radial-gradient(
-    var(--main-color-800b) 0.1rem,
-    transparent 0
-  );
 }
 .background {
   position: absolute;
@@ -35,10 +25,22 @@
   border-radius: inherit;
   z-index: -1;
   background-size: 800% !important;
+  clip-path: circle-pattern();
   filter: blur(1.6rem);
   animation: glowing 60s linear infinite;
 }
-.container > a:nth-child(n) {
+.pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 8%, var(--low-contrast-color) 8%) 0 0 / 1.4rem
+    1.4rem;
+  border-radius: inherit;
+}
+.content > a:nth-child(n) {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   text-decoration: none;
@@ -54,7 +56,7 @@
     background-position: 0 0;
   }
 }
-.container:hover .panel {
+.content:hover .panel {
   opacity: 1;
 }
 .panel {

@@ -63,7 +63,7 @@ export const MarkmapVisualizer = ({
     initialExpandLevel: preview ? 2 : 3,
     colorFreezeLevel: 3,
     duration: 400,
-    color: shuffleArray(colors.neon.map(({ hex }) => hex)),
+    color: shuffleArray(colors["neon.v1"].map(({ hex }) => hex)),
   });
   const saveText = (text: any) => {
     fetch(`${URL_API}/markmap/update`, {
