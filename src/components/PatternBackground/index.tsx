@@ -11,7 +11,7 @@ export const PatternBackground = ({ children, tiny = false }: any) => {
   return (
     <div className={`${styles.container} ${styles[theme]} `}>
       <div
-        className={styles.background}
+        className={`${styles.background} ${tiny && styles.tiny}`}
         style={{
           background: `radial-gradient(
           circle at 0% 0%,

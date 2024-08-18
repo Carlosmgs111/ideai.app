@@ -392,3 +392,21 @@ export const shuffleArray = (array: any) => {
   }
   return array;
 };
+export const isPrimitiveValue = (value: any): boolean => {
+  if (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "boolean" ||
+    typeof value === "bigint" ||
+    typeof value === "symbol" ||
+    typeof value === "undefined"
+    // || typeof value === "object"
+  ) {
+    return true;
+  }
+  if (value === null) {
+    return true;
+  }
+  if (value?.$$typeof) return false;
+  return false;
+};

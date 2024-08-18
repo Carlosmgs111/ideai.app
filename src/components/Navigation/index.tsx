@@ -15,7 +15,9 @@ export function Navigation({ className, pages }: any) {
     { show: false, name: "fas fa-bars p-2 item" },
     { show: true, name: "fas fa-times p-2 item" }
   );
-  const [currentTheme, toggleCurrentTheme] = useToggle("light", "dark");
+  const themes = ["light", "dark"];
+  if (themes.indexOf(theme)) themes.reverse();
+  const [currentTheme, toggleCurrentTheme] = useToggle(themes[0], themes[1]);
   const indicatorRef: any = useRef(null);
   const adjustIndicatorSizes = (pathname: any) => {
     if (!referencesRefs.current) return;
@@ -42,7 +44,7 @@ export function Navigation({ className, pages }: any) {
     adjustIndicatorSizes(pathname);
   }, [pathname]);
   useEffect(() => {
-    dispatch({ theme: currentTheme });
+    if (currentTheme !== theme) dispatch({ theme: currentTheme });
   }, [currentTheme]);
 
   return (

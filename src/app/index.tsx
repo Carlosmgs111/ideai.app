@@ -6,10 +6,12 @@ import { useStateValue } from "../context";
 import { useEffect } from "react";
 import { URL_API } from "../services";
 import { Modal } from "../components/Modal";
+import { Mapfy } from "../utils";
 
 export default () => {
-  const [{ currentModal, theme }, dispatch]: any = useStateValue();
+  const [{ currentModal, theme, markmaps }, dispatch]: any = useStateValue();
   useEffect(() => {
+    if (Mapfy(markmaps).size) return;
     fetch(`${URL_API}/markmap/getmanymarkmaps?size=100&page=0`, {
       method: "GET",
     })

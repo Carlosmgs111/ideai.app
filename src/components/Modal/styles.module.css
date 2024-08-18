@@ -11,24 +11,26 @@
   left: 0;
   padding: 0;
   margin: 0;
-  transition: 0.4s;
+  transition: .4s;
   overflow: scroll;
-  opacity: 0;
   z-index: -10;
+  opacity: 0;
 }
-
 .modal::-webkit-scrollbar {
   display: none;
 }
-
 .modal.over {
+  transition: .4s;
   z-index: 10;
 }
-
 .modal.active {
+  transition: .4s;
   opacity: 1;
 }
-
+.modal.inactive {
+  transition: .4s;
+  opacity: 0;
+}
 .main_container {
   position: relative;
   min-height: 0;
@@ -36,7 +38,6 @@
   max-width: 90%;
   max-height: 90%;
 }
-
 .button_container {
   position: absolute;
   top: 1rem;
@@ -47,7 +48,6 @@
   width: 2rem;
   height: 2rem;
 }
-
 .close_button {
   font-size: 2.4rem;
   color: #69686875;
@@ -57,7 +57,6 @@
   transition: 0.2s;
   font-weight: 1000;
 }
-
 .close_button:hover {
   font-size: 2.8rem;
   color: #950202;

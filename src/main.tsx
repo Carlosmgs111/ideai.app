@@ -11,6 +11,7 @@ const initialState = {
   sidebarFloat: true,
   currentModal: null,
   file: undefined,
+  lastStore: new Date().getTime()
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
