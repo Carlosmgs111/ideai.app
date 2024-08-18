@@ -9,7 +9,7 @@ import { useReduceState } from "../../hooks/useReduceState";
 import { useAxiosRequest } from "../../hooks/useAxiosRequest";
 
 export const MarkmapPreviewDashboard = (markmap: any) => {
-  const [{ markmaps }, dispatch]: any = useStateValue();
+  const [{ markmaps, theme }, dispatch]: any = useStateValue();
   const [markmapState, setMarkmapState] = useReduceState(markmap);
   const { uuid, title, description = "" } = markmapState;
   const onClickDeleteButton = (e: any) => {
@@ -57,7 +57,7 @@ export const MarkmapPreviewDashboard = (markmap: any) => {
     }).patch("markmap/update", { uuid, description });
   };
   return (
-    <div className={styles.dashboard_body}>
+    <div className={`${styles.dashboard_body} ${styles[theme]}`}>
       <h1>{title}</h1>
       <form className={styles.section}>
         <CommonInput

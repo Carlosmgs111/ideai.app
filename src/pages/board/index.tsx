@@ -7,6 +7,7 @@ import { useNavScroll } from "../../hooks/useNavScroll";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Memo } from "../../hocs/Memo";
+import { PatternBackground } from "../../components/PatternBackground";
 
 const Anchor = ({ children }: any) => {
   const ref = useRef(null);
@@ -72,11 +73,13 @@ export const Board = ({ quicknav = false }: any) => {
         <div ref={container} className={styles.content}>
           <Refs $refs={elements}>
             {mapToList(markmaps).map((markmap: any, idx: any) => (
-              <MarkmapVisualizer
-                key={idx}
-                idx={String(idx)}
-                {...markmap}
-              ></MarkmapVisualizer>
+              <PatternBackground>
+                <MarkmapVisualizer
+                  key={idx}
+                  idx={String(idx)}
+                  {...markmap}
+                ></MarkmapVisualizer>
+              </PatternBackground>
             ))}
           </Refs>
         </div>

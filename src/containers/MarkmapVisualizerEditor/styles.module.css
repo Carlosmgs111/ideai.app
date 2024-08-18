@@ -11,13 +11,26 @@
   padding: 3.2rem;
   border-radius: 0.8rem;
   transition: 0.4s;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+}
+.light {
   background-image: radial-gradient(
     var(--main-color-200b) 0.1rem,
     transparent 0
   );
   background-size: 1.4rem 1.4rem;
   color: var(--main-color-950);
+  --high-contrast-color: var(--main-color-950);
+  --mid-contrast-color: var(--main-color-950b);
+}
+.dark {
+  background-image: radial-gradient(
+    var(--main-color-800b) 0.1rem,
+    transparent 0
+  );
+  background-size: 1.4rem 1.4rem;
+  color: var(--main-color-50);
+  --high-contrast-color: var(--main-color-50);
 }
 .header {
   padding: 0.8rem;
@@ -25,12 +38,12 @@
   display: flex;
   justify-content: flex-start;
   gap: 0.8rem;
-  color: var(--main-color-950);
+  color: var(--high-contrast-color);
 }
 .header > span {
   width: 1px;
   height: available;
-  background-color: var(--main-color-950b);
+  background-color: var(--mid-contrast-color);
 }
 .header > button {
   font-size: 2.4rem;

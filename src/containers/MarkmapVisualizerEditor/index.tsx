@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import { TextEditor } from "../../components/TextEditor";
+import { useStateValue } from "../../context";
 
 export const MarkmapVisualizerEditor = ({
   text,
@@ -9,8 +10,11 @@ export const MarkmapVisualizerEditor = ({
   autosave = true,
   toggleAutosave,
 }: any) => {
+  const [{ theme }]: any = useStateValue();
   return (
-    <div className={`${styles.dashboard} ${hide && styles.hide}`}>
+    <div
+      className={`${styles.dashboard} ${hide && styles.hide} ${styles[theme]}`}
+    >
       <div className={styles.header}>
         <button
           className={`fa-solid fa-caret-left ${styles.button}`}
