@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { TextEditor } from "../../components/TextEditor";
 import { useStateValue } from "../../context";
 
-export const MarkmapVisualizerEditor = ({
+export const MarkmapEditor = ({
   text,
   handleChange,
   autosave = true,

@@ -9,7 +9,8 @@ import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
 import { SocketService, URL_API } from "../../services";
 import { useNearScreen } from "../../hooks/useNearScreen";
-import { MarkmapVisualizerEditor } from "../MarkmapVisualizerEditor";
+import { MarkmapEditor } from "../MarkmapEditor";
+import { MarkmapChat } from "../MarkmapChat";
 import { useToggle } from "../../hooks/useToggle";
 import { Memo } from "../../hocs/Memo";
 import colors from "../../db/colors.json";
@@ -171,7 +172,7 @@ export const MarkmapVisualizer = ({
           preview ? styles.preview : ""
         } ${!showVisualizer && !preview ? styles.hide : ""}`}
       >
-        {!preview && !title && <h1>{title}</h1>}
+        {!preview || (!title && <h1>{title}</h1>)}
         <svg
           className={styles.board}
           style={{
@@ -180,23 +181,39 @@ export const MarkmapVisualizer = ({
           ref={refSvg}
         />
         {!preview && (
-          <button
-            className={`fa-solid fa-pencil ${styles.button}`}
-            onClick={() =>
-              dispatch({
-                currentModal: (
-                  <MarkmapVisualizerEditor
-                    {...{
-                      autosave,
-                      toggleAutosave,
-                      handleChange,
-                      text,
-                    }}
-                  ></MarkmapVisualizerEditor>
-                ),
-              })
-            }
-          ></button>
+          <div className={styles.quickboard}>
+            <div className={styles.option}>
+              <button
+                className={`fa-solid fa-robot ${styles.button}`}
+                onClick={() =>
+                  dispatch({
+                    currentModal: <MarkmapChat />,
+                  })
+                }
+              ></button>
+              <span>Chatear con Mindmap</span>
+            </div>
+            <div className={styles.option}>
+              <button
+                className={`fa-solid fa-pencil ${styles.button}`}
+                onClick={() =>
+                  dispatch({
+                    currentModal: (
+                      <MarkmapEditor
+                        {...{
+                          autosave,
+                          toggleAutosave,
+                          handleChange,
+                          text,
+                        }}
+                      />
+                    ),
+                  })
+                }
+              ></button>
+              <span>Editar Mindmap</span>
+            </div>
+          </div>
         )}
 
         <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>

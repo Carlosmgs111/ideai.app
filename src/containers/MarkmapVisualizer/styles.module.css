@@ -48,30 +48,60 @@
   transition: 0.4s;
   scale: 1;
 }
-.button {
+.quickboard {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  padding: .8rem;
+  border-radius: .8rem;
+  border: 2px solid var(--high-contrast-color);
+  background-color: var(--high-contrast-color);
+  gap: .8rem;
+  display: flex;
+  flex-direction: column;
+}
+.option {
+  position: relative;
+}
+.option > button {
   border: none;
   outline: none;
   padding: 1.6rem;
-  background-color: var(--low-contrast-color);
   font-size: 1.6rem;
   transition: 0.4s;
-  color: var(--low-contrast-color);
-}
-.visualizer > button {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
+  background-color: transparent;
   border: solid 2px var(--high-contrast-color);
-  color: var(--high-contrast-color);
+  color: var(--low-contrast-color);
   border-radius: 0.8rem;
 }
-.visualizer > button.hide {
+.option > button.hide {
   left: -10rem;
   opacity: 0;
 }
-.visualizer > button:hover {
+.option > button:hover {
+  background-color: var(--low-contrast-color);
+  color: var(--high-contrast-color);
+}
+.option > span {
+  white-space: nowrap;
+  position: absolute;
+  font-weight: 700;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: -1;
+  opacity: 0;
+  transition: 0.4s;
+  font-size: 1.6rem;
+  padding: 1.2rem;
   background-color: var(--high-contrast-color);
+  border: solid 2px var(--low-contrast-color);
   color: var(--low-contrast-color);
+  border-radius: 0.8rem;
+}
+.option > button:hover + span {
+  opacity: 1;
+  transform: translate(7.6rem, -50%);
 }
 .board {
   width: 100%;
