@@ -56,7 +56,6 @@ export const MarkmapVisualizer = ({
     (prevText: any, text: any) => (prevText += text),
     markmapText
   );
-  const [hideDashboard, toggleHideDashboard] = useToggle(true, false);
   const debouncedComposedText = useDebounce(composedText, 100);
   const markmapOptions = deriveOptions({
     maxWidth: preview ? 260 : 800,
@@ -165,7 +164,7 @@ export const MarkmapVisualizer = ({
   };
 
   return (
-    <Memo deps={[text, title, showVisualizer, hideDashboard, theme]}>
+    <Memo deps={[text, title, showVisualizer, theme]}>
       <div
         ref={refVisualizer}
         className={`${styles.visualizer} ${styles[theme]} ${
@@ -182,25 +181,24 @@ export const MarkmapVisualizer = ({
         />
         {!preview && (
           <button
-            className={`fa-solid fa-pencil ${styles.button} ${
-              !hideDashboard && styles.hide
-            }`}
-            onClick={toggleHideDashboard}
+            className={`fa-solid fa-pencil ${styles.button}`}
+            onClick={() =>
+              dispatch({
+                currentModal: (
+                  <MarkmapVisualizerEditor
+                    {...{
+                      autosave,
+                      toggleAutosave,
+                      handleChange,
+                      text,
+                    }}
+                  ></MarkmapVisualizerEditor>
+                ),
+              })
+            }
           ></button>
         )}
-        {!preview && (
-          <MarkmapVisualizerEditor
-            {...{
-              autosave,
-              toggleAutosave,
-              preview,
-              handleChange,
-              text,
-              hide: hideDashboard,
-              toggleHide: toggleHideDashboard,
-            }}
-          ></MarkmapVisualizerEditor>
-        )}
+
         <div className={`${styles.toolbar} ${preview ? styles.hidden : ""}`}>
           <div ref={refToolbar}></div>
         </div>

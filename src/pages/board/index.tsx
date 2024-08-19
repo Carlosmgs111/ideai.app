@@ -73,9 +73,8 @@ export const Board = ({ quicknav = false }: any) => {
         <div ref={container} className={styles.content}>
           <Refs $refs={elements}>
             {mapToList(markmaps).map((markmap: any, idx: any) => (
-              <PatternBackground>
+              <PatternBackground key={idx}>
                 <MarkmapVisualizer
-                  key={idx}
                   idx={String(idx)}
                   {...markmap}
                 ></MarkmapVisualizer>

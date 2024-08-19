@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { useRef, useState, useEffect } from "react";
 
-export const TextEditor = ({ value, onChange }: any) => {
+export const TextEditor = ({ value, onChange, theme }: any) => {
   const containerRef: any = useRef(null);
   const textareaRef: any = useRef(null);
   const [top, setTop] = useState(false);
@@ -27,6 +27,9 @@ export const TextEditor = ({ value, onChange }: any) => {
     }
   };
   useEffect(() => {
+    containerRef.current.addEventListener("keydown", (event: any) =>
+      event.stopPropagation()
+    );
     if (containerRef.current) {
       containerRef.current.addEventListener("scroll", checkOverflow);
       window.addEventListener("resize", checkOverflow);
@@ -41,9 +44,10 @@ export const TextEditor = ({ value, onChange }: any) => {
   }, [value]);
 
   return (
-    <div className={styles.form}>
+    <div className={`${styles.form} ${styles[theme]}`}>
       <div
         className={`
+
             ${styles["scroll-shadow"]}
             ${styles["shadow-top"]}
             ${top ? styles.show : ""}`}

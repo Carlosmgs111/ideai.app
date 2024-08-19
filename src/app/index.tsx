@@ -44,7 +44,7 @@ export default () => {
           <Learn path={"learn/markmap"}></Learn>
         </Router>
       </div>
-      <Modal onClick={() => dispatch({ currentModal: null })}>
+      <Modal theme={theme} onClick={() => dispatch({ currentModal: null })}>
         {currentModal}
       </Modal>
       <div className={styles.footer}>

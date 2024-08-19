@@ -1,5 +1,5 @@
 import { Children, cloneElement } from "react";
-import styles from "./styles.module.css";
+import styles from "./styles.module.css"
 
 export const Modal = ({
   children,
@@ -7,10 +7,11 @@ export const Modal = ({
   onClick = null,
   over = true,
   showCloseButton = true,
+  theme
 }: any) => {
   return (
     <div
-      className={`${styles.modal} 
+      className={`${styles.modal} ${styles[theme]}
       ${active || children ? styles.active : styles.inactive} 
       ${active || children && over ? styles.over : ""}`}
       id="modal_body"

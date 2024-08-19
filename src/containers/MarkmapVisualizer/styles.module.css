@@ -52,7 +52,7 @@
   border: none;
   outline: none;
   padding: 1.6rem;
-  background-color: transparent;
+  background-color: var(--low-contrast-color);
   font-size: 1.6rem;
   transition: 0.4s;
   color: var(--low-contrast-color);
@@ -70,8 +70,8 @@
   opacity: 0;
 }
 .visualizer > button:hover {
-  background-color: var(--low-contrast-color);
-  color: var(--high-contrast-color);
+  background-color: var(--high-contrast-color);
+  color: var(--low-contrast-color);
 }
 .board {
   width: 100%;

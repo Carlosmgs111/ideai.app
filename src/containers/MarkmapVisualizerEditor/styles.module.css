@@ -1,19 +1,17 @@
 .dashboard {
-  position: absolute;
-  width: fit-content;
+  min-width: 30rem;
+  max-width: 90rem;
   height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  bottom: 2rem;
-  left: 2rem;
-  padding: 1.2rem;
-  padding: 3.2rem;
   border-radius: 0.8rem;
   transition: 0.4s;
   backdrop-filter: blur(8px);
+  padding: 3.2rem;
 }
 .light {
+  background-color: var(--main-color-50);
   background-image: radial-gradient(
     var(--main-color-200b) 0.1rem,
     transparent 0
@@ -24,6 +22,7 @@
   --mid-contrast-color: var(--main-color-950b);
 }
 .dark {
+  background-color: var(--main-color-950);
   background-image: radial-gradient(
     var(--main-color-800b) 0.1rem,
     transparent 0
@@ -53,9 +52,6 @@
 .header > button:hover {
   transform: translate(-0.6rem);
   scale: 1;
-}
-.dashboard.hide {
-  left: -100rem;
 }
 .editor {
   width: 50rem;

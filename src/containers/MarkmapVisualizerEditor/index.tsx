@@ -5,21 +5,13 @@ import { useStateValue } from "../../context";
 export const MarkmapVisualizerEditor = ({
   text,
   handleChange,
-  hide,
-  toggleHide,
   autosave = true,
   toggleAutosave,
 }: any) => {
   const [{ theme }]: any = useStateValue();
   return (
-    <div
-      className={`${styles.dashboard} ${hide && styles.hide} ${styles[theme]}`}
-    >
+    <div className={`${styles.dashboard} ${styles[theme]}`}>
       <div className={styles.header}>
-        <button
-          className={`fa-solid fa-caret-left ${styles.button}`}
-          onClick={toggleHide}
-        ></button>
         <span></span>
         <label
           style={{
@@ -28,7 +20,7 @@ export const MarkmapVisualizerEditor = ({
             justifyContent: "center",
           }}
         >
-          Autoguardado {/*  */}
+          Autoguardado: &nbsp;
           <input
             type="checkbox"
             value={autosave}
@@ -40,7 +32,9 @@ export const MarkmapVisualizerEditor = ({
 
       <div>
         <div className={`${styles.editor}`}>
-          <TextEditor {...{ value: text, onChange: handleChange }}></TextEditor>
+          <TextEditor
+            {...{ value: text, theme, onChange: handleChange }}
+          ></TextEditor>
         </div>
       </div>
     </div>
