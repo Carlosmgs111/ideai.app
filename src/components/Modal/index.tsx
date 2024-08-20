@@ -1,5 +1,5 @@
 import { Children, cloneElement } from "react";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
 export const Modal = ({
   children,
@@ -7,13 +7,22 @@ export const Modal = ({
   onClick = null,
   over = true,
   showCloseButton = true,
-  theme
+  theme,
+  from = "",
+  props = {},
 }: any) => {
+  const className = [
+    styles.modal,
+    styles[theme],
+    styles[from],
+    active || children ? styles.active : styles.inactive,
+    active || (children && over) ? styles.over : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
   return (
     <div
-      className={`${styles.modal} ${styles[theme]}
-      ${active || children ? styles.active : styles.inactive} 
-      ${active || children && over ? styles.over : ""}`}
+      className={className}
       id="modal_body"
       onClick={(e: any) => {
         if (e.target.id === "modal_body") onClick(null);
@@ -22,7 +31,7 @@ export const Modal = ({
       <div className={styles.main_container}>
         {Children.toArray(children).map((child: any) =>
           cloneElement(child, {
-            ...child.props,
+            ...props,
             disabled: true,
             style: { maxHeight: "90vh" },
           })

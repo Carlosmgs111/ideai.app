@@ -9,7 +9,8 @@ import { Modal } from "../components/Modal";
 import { Mapfy } from "../utils";
 
 export default () => {
-  const [{ currentModal, theme, markmaps }, dispatch]: any = useStateValue();
+  const [{ currentModal, theme, showModalFrom, markmaps }, dispatch]: any =
+    useStateValue();
   useEffect(() => {
     if (Mapfy(markmaps).size) return;
     fetch(`${URL_API}/markmap/getmanymarkmaps?size=100&page=0`, {
@@ -44,7 +45,11 @@ export default () => {
           <Learn path={"learn/markmap"}></Learn>
         </Router>
       </div>
-      <Modal theme={theme} onClick={() => dispatch({ currentModal: null })}>
+      <Modal
+        theme={theme}
+        from={showModalFrom}
+        onClick={() => dispatch({ currentModal: null })}
+      >
         {currentModal}
       </Modal>
       <div className={styles.footer}>

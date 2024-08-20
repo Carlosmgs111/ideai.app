@@ -185,18 +185,19 @@ export const MarkmapVisualizer = ({
             <div className={styles.option}>
               <button
                 className={`fa-solid fa-robot ${styles.button}`}
-                onClick={() =>
+                onClick={() => {
                   dispatch({
                     currentModal: <MarkmapChat />,
-                  })
-                }
+                  });
+                  dispatch({ showModalFrom: "top" });
+                }}
               ></button>
-              <span>Chatear con Mindmap</span>
+              <span>Chatear con AI&bull;sistente</span>
             </div>
             <div className={styles.option}>
               <button
                 className={`fa-solid fa-pencil ${styles.button}`}
-                onClick={() =>
+                onClick={() => {
                   dispatch({
                     currentModal: (
                       <MarkmapEditor
@@ -208,8 +209,9 @@ export const MarkmapVisualizer = ({
                         }}
                       />
                     ),
-                  })
-                }
+                  });
+                  dispatch({ showModalFrom: "top" });
+                }}
               ></button>
               <span>Editar Mindmap</span>
             </div>

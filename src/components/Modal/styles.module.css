@@ -13,7 +13,6 @@
   transition: 0.4s;
   overflow: scroll;
   z-index: -10;
-  opacity: 0;
 }
 .modal.light {
   backdrop-filter: brightness(70%) blur(2px);
@@ -29,12 +28,26 @@
   z-index: 10;
 }
 .modal.active {
-  transition: 0.4s;
+  transition: 0.6s;
   opacity: 1;
+  transform: translate(0, 0);
 }
 .modal.inactive {
-  transition: 0.4s;
+  transition: 0.6s;
   opacity: 0;
+}
+.modal.inactive.top {
+  transition: 0.6s;
+  transform: translate(0, -100vh);
+}
+.modal.inactive.bottom {
+  transform: translate(0, 100vh);
+}
+.modal.inactive.left {
+  transform: translate(-100vw);
+}
+.modal.inactive.right {
+  transform: translate(100vw);
 }
 .main_container {
   position: relative;
