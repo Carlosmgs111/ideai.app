@@ -10,7 +10,7 @@
   left: 0;
   padding: 4rem;
   margin: 0;
-  transition: .4s;
+  transition: 0.4s;
   overflow: scroll;
   z-index: -10;
 }
@@ -27,10 +27,12 @@
   justify-content: left;
 }
 .modal.light {
-  backdrop-filter: brightness(90%) blur(2px);
+  --high-contrast-color: var(--main-color-900b);
+  /* backdrop-filter: brightness(90%) blur(2px); */
 }
 .modal.dark {
-  backdrop-filter: brightness(110%) blur(2px);
+  --high-contrast-color: var(--main-color-100b);
+  /* backdrop-filter: brightness(110%) blur(2px); */
 }
 .modal::-webkit-scrollbar {
   display: none;
@@ -63,6 +65,7 @@
   min-width: 0;
   max-width: 90%;
   max-height: 90%;
+  /* filter: drop-shadow(0 0 .8rem var(--high-contrast-color)); */
 }
 .button_container {
   position: absolute;

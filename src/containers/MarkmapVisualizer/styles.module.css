@@ -8,7 +8,6 @@
   scroll-snap-stop: always;
   transition: 0.8s ease !important;
   opacity: 1;
-  background-size: 1rem 1rem;
 }
 .visualizer.light {
   --high-contrast-color: var(--main-color-950);

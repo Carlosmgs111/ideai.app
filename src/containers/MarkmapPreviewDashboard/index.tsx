@@ -7,6 +7,7 @@ import {
 } from "../../components/DefineForms/inputs";
 import { useReduceState } from "../../hooks/useReduceState";
 import { useAxiosRequest } from "../../hooks/useAxiosRequest";
+import { PatternBackground } from "../../components/PatternBackground";
 
 export const MarkmapPreviewDashboard = (markmap: any) => {
   const [{ markmaps, theme }, dispatch]: any = useStateValue();
@@ -57,41 +58,49 @@ export const MarkmapPreviewDashboard = (markmap: any) => {
     }).patch("markmap/update", { uuid, description });
   };
   return (
-    <div className={`${styles.dashboard_body} ${styles[theme]}`}>
-      <h1>{title}</h1>
-      <form className={styles.section}>
-        <CommonInput
-          label="Título"
-          value={title}
-          onChange={(_: any, target: any) => {
-            setMarkmapState({ title: target.value });
-          }}
-        ></CommonInput>
-        <button onClick={onClickUpdateTitle}>
-          <i className="fa-solid fa-check"></i>&nbsp;&nbsp;Actualizar
-        </button>
-      </form>
-      <form className={styles.section}>
-        <ParagraphInput
-          label="Descripción"
-          text={description}
-          onChange={(_: any, target: any) => {
-            setMarkmapState({ description: target.value });
-          }}
-        ></ParagraphInput>
-        <button onClick={onClickUpdateDescription}>
-          <i className="fa-solid fa-check"></i>&nbsp;&nbsp;Actualizar
-        </button>
-      </form>
-      <div className={styles.division}></div>
-      <section className={styles.section}>
-        <div>
-          <span></span>
-          <button onClick={onClickDeleteButton} className={`${styles.caution}`}>
-            <i className={`fa-solid fa-trash-can`}></i> Eliminar este Mindmap
-          </button>
+    <div style={{borderRadius:"1.6rem"}}>
+      <PatternBackground tiny>
+        <div className={`${styles.dashboard_body} ${styles[theme]}`}>
+          <h1>{title}</h1>
+          <form className={styles.section}>
+            <CommonInput
+              label="Título"
+              value={title}
+              onChange={(_: any, target: any) => {
+                setMarkmapState({ title: target.value });
+              }}
+            ></CommonInput>
+            <button onClick={onClickUpdateTitle}>
+              <i className="fa-solid fa-check"></i>&nbsp;&nbsp;Actualizar
+            </button>
+          </form>
+          <form className={styles.section}>
+            <ParagraphInput
+              label="Descripción"
+              text={description}
+              onChange={(_: any, target: any) => {
+                setMarkmapState({ description: target.value });
+              }}
+            ></ParagraphInput>
+            <button onClick={onClickUpdateDescription}>
+              <i className="fa-solid fa-check"></i>&nbsp;&nbsp;Actualizar
+            </button>
+          </form>
+          <div className={styles.division}></div>
+          <section className={styles.section}>
+            <div>
+              <span></span>
+              <button
+                onClick={onClickDeleteButton}
+                className={`${styles.caution}`}
+              >
+                <i className={`fa-solid fa-trash-can`}></i> Eliminar este
+                Mindmap
+              </button>
+            </div>
+          </section>
         </div>
-      </section>
+      </PatternBackground>
     </div>
   );
 };
