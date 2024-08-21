@@ -5,11 +5,10 @@ import { Home, Board, Dashboard, Mindmaps, Learn } from "../pages";
 import { useStateValue } from "../context";
 import { useEffect } from "react";
 import { URL_API } from "../services";
-import { Modal } from "../components/Modal";
 import { Mapfy } from "../utils";
 
 export default () => {
-  const [{ currentModal, theme, showModalFrom, markmaps }, dispatch]: any =
+  const [{ theme,  markmaps }, dispatch]: any =
     useStateValue();
   useEffect(() => {
     if (Mapfy(markmaps).size) return;
@@ -45,13 +44,6 @@ export default () => {
           <Learn path={"learn/markmap"}></Learn>
         </Router>
       </div>
-      <Modal
-        theme={theme}
-        from={showModalFrom}
-        onClick={() => dispatch({ currentModal: null })}
-      >
-        {currentModal}
-      </Modal>
       <div className={styles.footer}>
         <span>
           Powered by{" "}

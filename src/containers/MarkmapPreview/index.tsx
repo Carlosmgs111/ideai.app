@@ -5,6 +5,7 @@ import { useStateValue } from "../../context";
 import { useToggle } from "../../hooks/useToggle";
 import { Link } from "react-router-dom";
 import { PatternBackground } from "../../components/PatternBackground";
+import { Modal } from "../../components/Modal";
 
 const DetailView = ({ title, description }: any) => {
   return (
@@ -17,15 +18,15 @@ const DetailView = ({ title, description }: any) => {
 
 export const MarkmapPreview = ({ children }: any) => {
   const markmap: any = children.props;
-  const [{ theme }, dispatch]: any = useStateValue();
+  const [{ theme }]: any = useStateValue();
+  const [markmapPreviewDashboard, toggleMarkmapPreviewDashboard] = useToggle(
+    false,
+    true
+  );
   const [detailView, toggleDetailView] = useToggle(false, true);
-  const settingsButtonOnClick = () => {
-    dispatch({
-      currentModal: <MarkmapPreviewDashboard {...markmap} />,
-    });
-  };
+
   return (
-    <Memo deps={[children.props, detailView, theme]}>
+    <Memo deps={[children.props, detailView, theme, markmapPreviewDashboard]}>
       <div className={`${styles.container} ${styles[theme]}`}>
         <PatternBackground tiny={true}>
           <div className={styles.content}>
@@ -34,7 +35,7 @@ export const MarkmapPreview = ({ children }: any) => {
             </Link>
             <div className={styles.panel}>
               <div className={styles.dashboard}>
-                <button onClick={settingsButtonOnClick}>
+                <button onClick={toggleMarkmapPreviewDashboard}>
                   <i className={`fa-solid fa-screwdriver-wrench`}></i>&nbsp;
                   Configuraciónes
                 </button>
@@ -54,6 +55,14 @@ export const MarkmapPreview = ({ children }: any) => {
           </div>
         </PatternBackground>
       </div>
+      <Modal
+        from="top"
+        theme={theme}
+        active={markmapPreviewDashboard}
+        onClick={toggleMarkmapPreviewDashboard}
+      >
+        <MarkmapPreviewDashboard {...markmap} />
+      </Modal>
     </Memo>
   );
 };

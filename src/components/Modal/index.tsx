@@ -15,8 +15,8 @@ export const Modal = ({
     styles.modal,
     styles[theme],
     styles[from],
-    active || children ? styles.active : styles.inactive,
-    active || (children && over) ? styles.over : "",
+    active ? styles.active : styles.inactive,
+    active && over ? styles.over : "",
   ]
     .filter(Boolean)
     .join(" ");

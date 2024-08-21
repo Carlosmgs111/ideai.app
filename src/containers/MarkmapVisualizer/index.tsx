@@ -15,6 +15,7 @@ import { useToggle } from "../../hooks/useToggle";
 import { Memo } from "../../hocs/Memo";
 import colors from "../../db/colors.json";
 import { shuffleArray } from "../../utils";
+import { Modal } from "../../components/Modal";
 
 const transformer = new Transformer();
 const { scripts, styles: TStyles }: any = transformer.getAssets();
@@ -48,6 +49,8 @@ export const MarkmapVisualizer = ({
   const [{ markmaps, theme }, dispatch]: any = useStateValue();
   const [text, setText]: any = useState(markmapText);
   const [autosave, toggleAutosave] = useToggle(_autosave, !_autosave);
+  const [markmapEditor, toggleMarkmapEditor] = useToggle(false, true);
+  const [assistantChat, toggleAssistantChat] = useToggle(false, true);
   const debouncedText = useDebounce(text, 500);
   const [refVisualizer, showVisualizer] = useNearScreen(false);
   const refSvg = useRef<any>();
@@ -165,7 +168,7 @@ export const MarkmapVisualizer = ({
   };
 
   return (
-    <Memo deps={[text, title, showVisualizer, theme]}>
+    <Memo deps={[text, title, showVisualizer, theme, toggleMarkmapEditor]}>
       <div
         ref={refVisualizer}
         className={`${styles.visualizer} ${styles[theme]} ${
@@ -185,33 +188,14 @@ export const MarkmapVisualizer = ({
             <div className={styles.option}>
               <button
                 className={`fa-solid fa-robot ${styles.button}`}
-                onClick={() => {
-                  dispatch({
-                    currentModal: <MarkmapChat />,
-                  });
-                  dispatch({ showModalFrom: "top" });
-                }}
+                onClick={toggleAssistantChat}
               ></button>
               <span>Chatear con AI&bull;sistente</span>
             </div>
             <div className={styles.option}>
               <button
                 className={`fa-solid fa-pencil ${styles.button}`}
-                onClick={() => {
-                  dispatch({
-                    currentModal: (
-                      <MarkmapEditor
-                        {...{
-                          autosave,
-                          toggleAutosave,
-                          handleChange,
-                          text,
-                        }}
-                      />
-                    ),
-                  });
-                  dispatch({ showModalFrom: "top" });
-                }}
+                onClick={toggleMarkmapEditor}
               ></button>
               <span>Editar Mindmap</span>
             </div>
@@ -222,6 +206,29 @@ export const MarkmapVisualizer = ({
           <div ref={refToolbar}></div>
         </div>
       </div>
+      <Modal
+        active={markmapEditor}
+        onClick={toggleMarkmapEditor}
+        theme={theme}
+        from="left"
+      >
+        <MarkmapEditor
+          {...{
+            autosave,
+            toggleAutosave,
+            handleChange,
+            text,
+          }}
+        />
+      </Modal>
+      <Modal
+        active={assistantChat}
+        onClick={toggleAssistantChat}
+        theme={theme}
+        from="left"
+      >
+        <MarkmapChat />
+      </Modal>
     </Memo>
   );
 };

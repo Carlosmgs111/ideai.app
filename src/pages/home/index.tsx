@@ -6,9 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { MarkmapCreationForm } from "../../containers/MarkmapCreationForm";
 import { SocketService } from "../../services";
 import { v4 as uuidv4 } from "uuid";
+import { Modal } from "../../components/Modal";
+import { useToggle } from "../../hooks/useToggle";
 
 export const Home = ({}: any) => {
   const [{ markmaps, theme }, dispatch]: any = useStateValue();
+  const [markmapCreationForm, toggleMarkmapCreationForm] = useToggle(
+    false,
+    true
+  );
   const navigate = useNavigate();
   const uploadFileCallback = (e: any, { files }: any) => {
     e.preventDefault();
@@ -50,7 +56,7 @@ export const Home = ({}: any) => {
         </article>
         <div>
           <button
-            onClick={() => dispatch({ currentModal: <MarkmapCreationForm /> })}
+            onClick={toggleMarkmapCreationForm}
             className={`${styles.button} `}
           >
             <i className="fa-solid fa-diagram-project"></i> Crea Mindmap desde
@@ -127,6 +133,13 @@ export const Home = ({}: any) => {
           </ul>
         </article>
       </section>
+      <Modal
+        theme={theme}
+        active={markmapCreationForm}
+        onClick={toggleMarkmapCreationForm}
+      >
+        <MarkmapCreationForm />
+      </Modal>
     </div>
   );
 };

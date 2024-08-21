@@ -30,6 +30,9 @@
   background-color: var(--high-contrast-color);
   color: var(--low-contrast-color);
   cursor: pointer;
+  transition: 0.4s;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
 }
 .form_body > button:nth-child(1):hover {
   background-color: var(--low-contrast-color);
@@ -46,11 +49,13 @@
   padding: 0;
 }
 .creation_form > button {
-  width: fit-content;
+  transition: 0.4s;
+  width: 100%;
   border: 1px solid transparent;
   color: var(--low-contrast-color);
   background-color: var(--high-contrast-color);
   padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
 }
 .creation_form > button:hover {
   border: 1px solid var(--high-contrast-color);
@@ -61,6 +66,7 @@
 .creation_form > span {
   font-size: 1.2rem;
   font-weight: 100;
+  color: var(--high-contrast-color);
 }
 .creation_form > label:nth-child(2) {
   display: flex;
