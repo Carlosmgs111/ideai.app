@@ -8,11 +8,11 @@
   height: 100%;
   top: 0;
   left: 0;
-  padding: 4rem;
   margin: 0;
   transition: 0.4s;
   overflow: scroll;
   z-index: -10;
+  backdrop-filter: blur(1px);
 }
 .modal.top {
   justify-content: top;
@@ -25,14 +25,13 @@
 }
 .modal.left {
   justify-content: left;
+  padding-left: 4rem;
 }
 .modal.light {
   --high-contrast-color: var(--main-color-900b);
-  /* backdrop-filter: brightness(90%) blur(2px); */
 }
 .modal.dark {
   --high-contrast-color: var(--main-color-100b);
-  /* backdrop-filter: brightness(110%) blur(2px); */
 }
 .modal::-webkit-scrollbar {
   display: none;
@@ -63,9 +62,9 @@
   position: relative;
   min-height: 0;
   min-width: 0;
-  max-width: 90%;
-  max-height: 90%;
-  /* filter: drop-shadow(0 0 .8rem var(--high-contrast-color)); */
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 0 0.8rem var(--high-contrast-color));
 }
 .button_container {
   position: absolute;

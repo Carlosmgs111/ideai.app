@@ -8,8 +8,10 @@ import {
 import { useReduceState } from "../../hooks/useReduceState";
 import { useAxiosRequest } from "../../hooks/useAxiosRequest";
 import { PatternBackground } from "../../components/PatternBackground";
+import { useEffect } from "react";
 
 export const MarkmapPreviewDashboard = (markmap: any) => {
+  // console.log({ markmap });
   const [{ markmaps, theme }, dispatch]: any = useStateValue();
   const [markmapState, setMarkmapState] = useReduceState(markmap);
   const { uuid, title, description = "" } = markmapState;
@@ -57,8 +59,9 @@ export const MarkmapPreviewDashboard = (markmap: any) => {
       },
     }).patch("markmap/update", { uuid, description });
   };
+  useEffect(() => setMarkmapState({ ...markmap }), [markmap]);
   return (
-    <div style={{borderRadius:"1.6rem"}}>
+    <div style={{ borderRadius: "1.6rem" }}>
       <PatternBackground tiny>
         <div className={`${styles.dashboard_body} ${styles[theme]}`}>
           <h1>{title}</h1>

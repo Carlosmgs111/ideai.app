@@ -12,13 +12,13 @@ export default () => {
     useStateValue();
   useEffect(() => {
     if (Mapfy(markmaps).size) return;
-    fetch(`${URL_API}/markmap/getmanymarkmaps?size=100&page=0`, {
+    fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
       method: "GET",
     })
       .then((response: any) => response.json())
       .then((data) => {
         const newMarkmaps: any = {};
-        data.reverse().forEach((markmap: any) => {
+        data./* reverse(). */forEach((markmap: any) => {
           newMarkmaps[markmap.uuid] = markmap;
         });
         dispatch({ markmaps: newMarkmaps });

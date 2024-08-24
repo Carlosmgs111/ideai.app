@@ -288,8 +288,11 @@ export const onErrorMiddleware = async (
 export const mapToList = (data: any): any =>
   Object.entries({ ...data }).map((data) => data[1]);
 
-export const listToMap = (data: any): any =>
-  Object.fromEntries([...data].map((data: any, index: any) => [index, data]));
+export const listToMap = (data: any, index: string = ""): any => {
+  return Object.fromEntries(
+    [...data].map((data: any, _index: any) => [[data[index || _index]], data])
+  );
+};
 
 /**
  * ? Comparison of the Last Two Added Boolean

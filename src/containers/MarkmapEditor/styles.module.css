@@ -1,7 +1,7 @@
 .container {
   min-width: 30rem;
-  max-width: 90rem;
-  height: fit-content;
+  max-width: 120rem;
+  height: available;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -43,7 +43,7 @@
 }
 .editor {
   width: 50rem;
-  max-height: 50rem;
+  max-height: calc(100vh - 6.4rem - 5rem);
   min-height: 10rem;
   height: fit-content;
   padding: 0 1.6rem;

@@ -26,7 +26,7 @@ export const MarkmapPreview = ({ children }: any) => {
   const [detailView, toggleDetailView] = useToggle(false, true);
 
   return (
-    <Memo deps={[children.props, detailView, theme, markmapPreviewDashboard]}>
+    <Memo deps={[markmap, detailView, theme, markmapPreviewDashboard]}>
       <div className={`${styles.container} ${styles[theme]}`}>
         <PatternBackground tiny={true}>
           <div className={styles.content}>
