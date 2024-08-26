@@ -32,8 +32,6 @@ export const Modal = ({
         {Children.toArray(children).map((child: any) =>
           cloneElement(child, {
             ...props,
-            disabled: true,
-            style: { maxHeight: "90vh" },
           })
         )}
         {showCloseButton && (

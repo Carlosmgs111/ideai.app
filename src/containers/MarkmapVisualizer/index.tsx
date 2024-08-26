@@ -48,10 +48,10 @@ export const MarkmapVisualizer = ({
 }: any) => {
   const [{ markmaps, theme }, dispatch]: any = useStateValue();
   const [text, setText]: any = useState(markmapText);
+  const debouncedText = useDebounce(text, 500);
   const [autosave, toggleAutosave] = useToggle(_autosave, !_autosave);
   const [markmapEditor, toggleMarkmapEditor] = useToggle(false, true);
   const [assistantChat, toggleAssistantChat] = useToggle(false, true);
-  const debouncedText = useDebounce(text, 500);
   const [refVisualizer, showVisualizer] = useNearScreen(false);
   const refSvg = useRef<any>();
   const refMm = useRef<any>();
@@ -116,7 +116,7 @@ export const MarkmapVisualizer = ({
 
   useEffect(() => {
     setText(composedText);
-    if (markmaps[uuid].text === composedText) return;
+    if (markmapText === composedText) return;
     dispatch({
       markmaps: {
         ...markmaps,
@@ -144,8 +144,8 @@ export const MarkmapVisualizer = ({
   }, [refMm.current, text, showVisualizer]);
 
   useEffect(() => {
-    if (markmaps[uuid].text === text) return;
-    autosave && saveText(text);
+    if (debouncedText === text) return;
+    !preview && autosave && saveText(text);
     dispatch({
       markmaps: {
         ...markmaps,

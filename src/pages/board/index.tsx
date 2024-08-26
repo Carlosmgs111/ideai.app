@@ -38,6 +38,7 @@ const QuicknavDashboard = ({ children, hide = false }: any) => {
 
 export const Board = ({ quicknav = false }: any) => {
   const [{ markmaps }]: any = useStateValue();
+  // console.log({ markmaps });
   const location = useLocation();
   const navigate = useNavigate();
   const {

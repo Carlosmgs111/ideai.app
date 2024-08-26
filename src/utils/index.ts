@@ -56,6 +56,7 @@ export const filterAttrs = (
  * @US Upper Case Singular (UpperSingle)
  */
 export const labelCases = (label: string, normal: boolean = true) => {
+  if (!label) return "";
   label = normal ? normalize(label) : label;
   return Object.defineProperties(Object(String(label)), {
     LP: { value: plural(label.toLowerCase()), writable: false },
@@ -70,6 +71,7 @@ export const labelCases = (label: string, normal: boolean = true) => {
 };
 
 export const normalize = (str: any) => {
+  if (!str) return "";
   const from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÇç",
     to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuucc",
     mapping: any = {};
@@ -87,6 +89,7 @@ export const normalize = (str: any) => {
 };
 
 export const capitalize = (label: any, pluralize: boolean = false) => {
+  if (!label) return "";
   return (
     label[0].toUpperCase() +
     label.slice(1).toLowerCase() +
@@ -290,7 +293,9 @@ export const mapToList = (data: any): any =>
 
 export const listToMap = (data: any, index: string = ""): any => {
   return Object.fromEntries(
-    [...data].map((data: any, _index: any) => [[data[index || _index]], data])
+    [...data].map((data: any, _index: any) => {
+      return [[data[index || _index]], data];
+    })
   );
 };
 

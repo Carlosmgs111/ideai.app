@@ -8,6 +8,7 @@ const initialState = {
   token: "",
   theme: "light",
   markmaps: {},
+  orderedMarkmaps: [],
   sidebarFloat: true,
   currentModal: null,
   showModalFrom: "top",

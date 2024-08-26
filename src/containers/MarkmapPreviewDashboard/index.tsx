@@ -11,7 +11,6 @@ import { PatternBackground } from "../../components/PatternBackground";
 import { useEffect } from "react";
 
 export const MarkmapPreviewDashboard = (markmap: any) => {
-  // console.log({ markmap });
   const [{ markmaps, theme }, dispatch]: any = useStateValue();
   const [markmapState, setMarkmapState] = useReduceState(markmap);
   const { uuid, title, description = "" } = markmapState;

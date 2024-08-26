@@ -8,8 +8,7 @@ import { URL_API } from "../services";
 import { Mapfy } from "../utils";
 
 export default () => {
-  const [{ theme,  markmaps }, dispatch]: any =
-    useStateValue();
+  const [{ theme, markmaps }, dispatch]: any = useStateValue();
   useEffect(() => {
     if (Mapfy(markmaps).size) return;
     fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
@@ -18,10 +17,12 @@ export default () => {
       .then((response: any) => response.json())
       .then((data) => {
         const newMarkmaps: any = {};
-        data./* reverse(). */forEach((markmap: any) => {
+        data.forEach((markmap: any) => {
           newMarkmaps[markmap.uuid] = markmap;
         });
-        dispatch({ markmaps: newMarkmaps });
+        dispatch({
+          markmaps: newMarkmaps,
+        });
       });
   }, []);
   return (

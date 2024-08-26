@@ -17,14 +17,13 @@ const DetailView = ({ title, description }: any) => {
 };
 
 export const MarkmapPreview = ({ children }: any) => {
-  const markmap: any = children.props;
+  const { preview, ...markmap }: any = children.props;
   const [{ theme }]: any = useStateValue();
   const [markmapPreviewDashboard, toggleMarkmapPreviewDashboard] = useToggle(
     false,
     true
   );
   const [detailView, toggleDetailView] = useToggle(false, true);
-
   return (
     <Memo deps={[markmap, detailView, theme, markmapPreviewDashboard]}>
       <div className={`${styles.container} ${styles[theme]}`}>
