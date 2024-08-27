@@ -25,6 +25,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 3.2rem;
 }
 .pagination.light {
   --high-contrast-color: var(--main-color-950);
@@ -41,8 +42,8 @@
   background-color: var(--high-contrast-color);
   border: 1px solid transparent;
 }
+.pagination button.active,
 .pagination button:hover {
-  cursor: pointer;
   color: var(--high-contrast-color);
   background-color: var(--low-contrast-color);
   border: 1px solid var(--high-contrast-color);

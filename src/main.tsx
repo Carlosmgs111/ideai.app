@@ -7,6 +7,7 @@ import "./index.css";
 const initialState = {
   token: "",
   theme: "light",
+  totalMarkmaps: 0,
   markmaps: {},
   orderedMarkmaps: [],
   sidebarFloat: true,

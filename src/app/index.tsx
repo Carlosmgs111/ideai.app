@@ -11,18 +11,25 @@ export default () => {
   const [{ theme, markmaps }, dispatch]: any = useStateValue();
   useEffect(() => {
     if (Mapfy(markmaps).size) return;
-    fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
+    fetch(`${URL_API}/markmap/countofmarkmaps`, {
       method: "GET",
     })
       .then((response: any) => response.json())
-      .then((data) => {
-        const newMarkmaps: any = {};
-        data.forEach((markmap: any) => {
-          newMarkmaps[markmap.uuid] = markmap;
-        });
-        dispatch({
-          markmaps: newMarkmaps,
-        });
+      .then(({ totalMarkmaps }: any) => {
+        fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
+          method: "GET",
+        })
+          .then((response: any) => response.json())
+          .then((data) => {
+            const newMarkmaps: any = {};
+            data.forEach((markmap: any) => {
+              newMarkmaps[markmap.uuid] = markmap;
+            });
+            dispatch({
+              markmaps: newMarkmaps,
+              totalMarkmaps,
+            });
+          });
       });
   }, []);
   return (

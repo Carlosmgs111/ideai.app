@@ -9,12 +9,35 @@ import { Memo } from "../../hocs/Memo";
 import { useEffect, useState } from "react";
 import { URL_API } from "../../services";
 
+const Pagination = ({ pagesQty, theme, setCurrentPage, currentPage }: any) => {
+  const paginationButtons: any = [];
+  for (let i = 0; i < pagesQty; i++) {
+    paginationButtons.push(
+      <li>
+        <button
+          className={currentPage === i + 1 ? styles.active : ""}
+          onClick={() => setCurrentPage(i + 1)}
+        >
+          {i + 1}
+        </button>
+      </li>
+    );
+  }
+  return (
+    <div className={`${styles.pagination} ${styles[theme]}`}>
+      <ul>{paginationButtons}</ul>
+    </div>
+  );
+};
+
 export const Mindmaps = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();
-  let [{ markmaps, orderedMarkmaps, theme }, dispatch]: any = useStateValue();
+  const [{ markmaps, orderedMarkmaps, totalMarkmaps, theme }, dispatch]: any =
+    useStateValue();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentMarkmaps, setCurrentMarkmaps] = useState([]);
   const qty = 10;
+  const pages = Math.ceil(totalMarkmaps / qty);
   useEffect(() => {
     if (orderedMarkmaps[(currentPage - 1) * qty]) {
       const currentMarkmaps: any = [];
@@ -94,28 +117,9 @@ export const Mindmaps = ({}: any) => {
             </div>
           </Memo>
         </SidePanel>
-        <div className={`${styles.pagination} ${styles[theme]}`}>
-          <ul>
-            <li>
-              <button onClick={() => setCurrentPage(1)}>1</button>
-            </li>
-            <li>
-              <button onClick={() => setCurrentPage(2)}>2</button>
-            </li>
-            <li>
-              <button onClick={() => setCurrentPage(3)}>3</button>
-            </li>
-            <li>
-              <button onClick={() => setCurrentPage(4)}>4</button>
-            </li>
-            <li>
-              <button onClick={() => setCurrentPage(5)}>5</button>
-            </li>
-            <li>
-              <button onClick={() => setCurrentPage(6)}>6</button>
-            </li>
-          </ul>
-        </div>
+        <Pagination
+          {...{ pagesQty: pages, setCurrentPage, currentPage, theme }}
+        />
       </main>
     </div>
   );
