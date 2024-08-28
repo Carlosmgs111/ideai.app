@@ -16,7 +16,7 @@ export default () => {
     })
       .then((response: any) => response.json())
       .then(({ totalMarkmaps }: any) => {
-        fetch(`${URL_API}/markmap/getmanymarkmaps?size=10&page=0`, {
+        fetch(`${URL_API}/markmap/getmanymarkmaps?size=20&page=0`, {
           method: "GET",
         })
           .then((response: any) => response.json())

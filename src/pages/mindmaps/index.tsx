@@ -9,7 +9,7 @@ import { Memo } from "../../hocs/Memo";
 import { useEffect, useState } from "react";
 import { URL_API } from "../../services";
 
-const Pagination = ({ pagesQty, theme, setCurrentPage, currentPage }: any) => {
+const Pagination = ({ pagesQty, setCurrentPage, currentPage }: any) => {
   const paginationButtons: any = [];
   for (let i = 0; i < pagesQty; i++) {
     paginationButtons.push(
@@ -24,7 +24,7 @@ const Pagination = ({ pagesQty, theme, setCurrentPage, currentPage }: any) => {
     );
   }
   return (
-    <div className={`${styles.pagination} ${styles[theme]}`}>
+    <div className={`${styles.pagination}`}>
       <ul>{paginationButtons}</ul>
     </div>
   );
@@ -34,9 +34,10 @@ export const Mindmaps = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();
   const [{ markmaps, orderedMarkmaps, totalMarkmaps, theme }, dispatch]: any =
     useStateValue();
+  const [currentFilter, setCurrentFilter] = useState("public");
   const [currentPage, setCurrentPage] = useState(1);
   const [currentMarkmaps, setCurrentMarkmaps] = useState([]);
-  const qty = 10;
+  const qty = 20;
   const pages = Math.ceil(totalMarkmaps / qty);
   useEffect(() => {
     if (orderedMarkmaps[(currentPage - 1) * qty]) {
@@ -90,8 +91,22 @@ export const Mindmaps = ({}: any) => {
     setCurrentMarkmaps(currentMarkmaps);
   }, [markmaps]);
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${styles[theme]}`}>
       <main className={styles.content}>
+        <div className={styles.filter}>
+          <button
+            className={`${currentFilter === "public" && styles.active}`}
+            onClick={() => setCurrentFilter("public")}
+          >
+            Mindmaps Públicos
+          </button>
+          <button
+            className={`${currentFilter === "owned" && styles.active}`}
+            onClick={() => setCurrentFilter("owned")}
+          >
+            Mis Mindmaps
+          </button>
+        </div>
         <SidePanel
           {...{
             // width: "240px",
@@ -117,10 +132,8 @@ export const Mindmaps = ({}: any) => {
             </div>
           </Memo>
         </SidePanel>
-        <Pagination
-          {...{ pagesQty: pages, setCurrentPage, currentPage, theme }}
-        />
       </main>
+      <Pagination {...{ pagesQty: pages, setCurrentPage, currentPage }} />
     </div>
   );
 };

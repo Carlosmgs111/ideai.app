@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+}
+.hidden_div {
+  visibility: hidden;
+  white-space: pre-wrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.floating_button {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  cursor: pointer;
+  border: 3px solid var(--low-contrast-color);
+  aspect-ratio: 1/1;
+}
+
+.floating_button:hover {
+  background-color: var(--low-contrast-color);
+  color: var(--high-contrast-color);
+  border: 3px solid var(--high-contrast-color);
+}

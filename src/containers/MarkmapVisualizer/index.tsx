@@ -144,7 +144,7 @@ export const MarkmapVisualizer = ({
   }, [refMm.current, text, showVisualizer]);
 
   useEffect(() => {
-    if (debouncedText === text) return;
+    if (markmapText === text) return;
     !preview && autosave && saveText(text);
     dispatch({
       markmaps: {

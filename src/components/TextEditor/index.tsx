@@ -1,19 +1,24 @@
 import styles from "./styles.module.css";
 import { useRef, useState, useEffect } from "react";
+import { TextareaMagicButton } from "../MagicButton";
 
-export const TextEditor = ({ value, onChange, theme }: any) => {
+export const TextEditor = ({
+  value,
+  onChange,
+  theme,
+  $textareaRef = null,
+}: any) => {
+  const nativeTextareaRef = useRef(null);
   const containerRef: any = useRef(null);
-  const textareaRef: any = useRef(null);
+  const textareaRef: any = $textareaRef || nativeTextareaRef;
   const [top, setTop] = useState(false);
   const [bottom, setBottom] = useState(false);
   const [text, setText] = useState(value);
-
   const autoGrow = (preAdjust = false) => {
     if (!textareaRef.current) return;
     if (preAdjust) textareaRef.current.style.height = "auto";
     textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
   };
-
   const checkOverflow = () => {
     if (!containerRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
@@ -38,7 +43,6 @@ export const TextEditor = ({ value, onChange, theme }: any) => {
       textareaRef.current.addEventListener("input", () => autoGrow());
     }
   }, []);
-
   useEffect(() => {
     setText(value);
   }, [value]);
@@ -53,18 +57,20 @@ export const TextEditor = ({ value, onChange, theme }: any) => {
             ${top ? styles.show : ""}`}
       ></div>
       <div ref={containerRef} className={styles.container}>
-        <textarea
-          ref={textareaRef}
-          wrap="hard"
-          id="texteditor"
-          className={styles.textarea}
-          value={text}
-          onChange={(e: any) => {
-            e.preventDefault();
-            setText(e.target.value);
-            onChange(e);
-          }}
-        />
+        <TextareaMagicButton>
+          <textarea
+            ref={textareaRef}
+            wrap="hard"
+            id="texteditor"
+            className={styles.textarea}
+            value={text}
+            onChange={(e: any) => {
+              e.preventDefault();
+              setText(e.target.value);
+              onChange(e);
+            }}
+          />
+        </TextareaMagicButton>
       </div>
       <div
         className={`

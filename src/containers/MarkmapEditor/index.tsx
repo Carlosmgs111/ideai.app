@@ -10,6 +10,7 @@ export const MarkmapEditor = ({
   toggleAutosave,
 }: any) => {
   const [{ theme }]: any = useStateValue();
+
   return (
     <div style={{ borderRadius: ".8rem" }}>
       <PatternBackground tiny>
@@ -36,7 +37,11 @@ export const MarkmapEditor = ({
           <div>
             <div className={`${styles.editor}`}>
               <TextEditor
-                {...{ value: text, theme, onChange: handleChange }}
+                {...{
+                  value: text,
+                  theme,
+                  onChange: handleChange,
+                }}
               ></TextEditor>
             </div>
           </div>
