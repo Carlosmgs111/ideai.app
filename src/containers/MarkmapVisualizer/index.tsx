@@ -3,7 +3,7 @@ import { useRef, useEffect, useReducer, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import { Markmap, deriveOptions, loadCSS, loadJS } from "markmap-view";
 import { Toolbar } from "markmap-toolbar";
-// import { loadCSS, loadJS } from "markmap-common";
+import { injectStyles } from "./injectStyles";
 import { Transformer } from "markmap-lib";
 import styles from "./styles.module.css";
 import { useStateValue } from "../../context";
@@ -127,20 +127,21 @@ export const MarkmapVisualizer = ({
 
   useEffect(() => {
     if (refMm.current) return;
-    // refSvg.current.style.color = "black";
-    // refSvg.current.style.fontSize
-    const markMap = Markmap.create(refSvg.current, markmapOptions);
-    refMm.current = markMap;
+    console.log("Render");
+    const markmap = Markmap.create(refSvg.current, markmapOptions);
+    refMm.current = markmap;
     renderToolbar(refMm.current, refToolbar.current);
   }, [refSvg.current, preview, markmapOptions]);
 
   useEffect(() => {
-    const markMap = refMm.current;
+    const markmap = refMm.current;
     if (!showVisualizer) return;
-    if (!markMap) return;
+    if (!markmap) return;
+    console.log("Render");
+    injectStyles(refSvg.current);
     const { root } = transformer.transform(text);
-    markMap.setData(root);
-    markMap.fit();
+    markmap.setData(root);
+    markmap.fit();
   }, [refMm.current, text, showVisualizer]);
 
   useEffect(() => {
@@ -177,7 +178,7 @@ export const MarkmapVisualizer = ({
       >
         {!preview || (!title && <h1>{title}</h1>)}
         <svg
-          className={styles.board}
+          className={`${styles.board}`}
           style={{
             color: textColor[theme],
           }}

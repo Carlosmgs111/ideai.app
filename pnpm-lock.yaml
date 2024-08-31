@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@types/d3':
+    specifier: ^7.4.3
+    version: 7.4.3
   axios:
     specifier: ^1.7.2
     version: 1.7.5
