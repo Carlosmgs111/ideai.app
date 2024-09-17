@@ -89,7 +89,7 @@ export const Mindmaps = ({}: any) => {
       }
     }
     setCurrentMarkmaps(currentMarkmaps);
-  }, [markmaps]);
+  }, [markmaps, orderedMarkmaps]);
   return (
     <div className={`${styles.page} ${styles[theme]}`}>
       <main className={styles.content}>
@@ -114,20 +114,23 @@ export const Mindmaps = ({}: any) => {
             sidebars: [<TrackSidebar />],
           }}
         >
-          <Memo deps={[currentMarkmaps]}>
+          <Memo deps={[currentMarkmaps, orderedMarkmaps]}>
             <div className={styles.elements}>
               <ContentWrapper>
-                {currentMarkmaps.map((markmap: any, key: any) => (
-                  <MarkmapPreview
-                    title={markmap.title}
-                    id={markmap.uuid}
-                    key={key}
-                  >
-                    <MarkmapVisualizer
-                      {...{ ...markmap, preview: true }}
-                    ></MarkmapVisualizer>
-                  </MarkmapPreview>
-                ))}
+                {currentMarkmaps.map((markmap: any, key: any) => {
+                  if (!markmap) return;
+                  return (
+                    <MarkmapPreview
+                      title={markmap.title}
+                      id={markmap.uuid}
+                      key={key}
+                    >
+                      <MarkmapVisualizer
+                        {...{ ...markmap, preview: true }}
+                      ></MarkmapVisualizer>
+                    </MarkmapPreview>
+                  );
+                })}
               </ContentWrapper>
             </div>
           </Memo>

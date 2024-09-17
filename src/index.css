@@ -59,18 +59,18 @@ body::-webkit-scrollbar {
   width: 1rem;
   display: inside;
   transition: 0.4s;
-  background-color: var(--main-color-50);
+  background-color: var(--main-color-950);
 }
 body::-webkit-scrollbar-corner {
   display: none;
 }
 body::-webkit-scrollbar-thumb {
   border-radius: 1rem;
-  background-color: var(--main-color-950);
+  background-color: var(--main-color-50);
 }
 body.dark::-webkit-scrollbar {
-  background-color: var(--main-color-950);
+  background-color: var(--main-color-50);
 }
 body.dark::-webkit-scrollbar-thumb {
-  background-color: var(--main-color-50);
+  background-color: var(--main-color-950);
 }

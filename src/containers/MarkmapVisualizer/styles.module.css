@@ -121,7 +121,7 @@
   scale: 0;
 }
 svg[data-type="markmap"] {
-  --stroke-width: 0.3rem;
+  --stroke-width: 0.25rem;
 }
 svg[data-type="markmap"] path {
   stroke-width: var(--stroke-width);
@@ -137,5 +137,5 @@ svg[data-type="markmap"] a {
   transition: 0.2s;
 }
 svg[data-type="markmap"] a:hover {
-  color: #00fff2;
+  color: #2fdfd6;
 }

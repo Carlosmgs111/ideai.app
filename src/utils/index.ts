@@ -212,10 +212,10 @@ export const runButtonBehavior = (e: any, behaviors: any) => {
 };
 
 export const beutifyLabel = (label: any) => {
+  if (!label) return "";
   label = label.replace(/\w\S*/g, (w: any) =>
     w.replace(/^\w/, (c: any) => c.toUpperCase())
   );
-  if (!label) return;
   for (var i in label) {
     if (Number(i) !== label.length - 1) {
       if (

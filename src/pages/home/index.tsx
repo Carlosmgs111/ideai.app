@@ -10,7 +10,7 @@ import { Modal } from "../../components/Modal";
 import { useToggle } from "../../hooks/useToggle";
 
 export const Home = ({}: any) => {
-  const [{ markmaps, theme }, dispatch]: any = useStateValue();
+  const [{ markmaps, orderedMarkmaps, theme }, dispatch]: any = useStateValue();
   const [markmapCreationForm, toggleMarkmapCreationForm] = useToggle(
     false,
     true
@@ -19,8 +19,10 @@ export const Home = ({}: any) => {
   const uploadFileCallback = (e: any, { files }: any) => {
     e.preventDefault();
     const uuid = uuidv4();
+    orderedMarkmaps.unshift(uuid);
     dispatch({
       markmaps: { [uuid]: { uuid, text: "", title: "" }, ...markmaps },
+      orderedMarkmaps: [...orderedMarkmaps],
     });
 
     if (!files[0]) return;
