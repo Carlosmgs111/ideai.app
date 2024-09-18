@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSidebar";
 import { cloneElement, Children } from "react";
 import { Refs } from "../../hocs/Refs";
@@ -34,7 +34,6 @@ const ElementWrapped = ({
 
 export const useTrackSidebar = () => {
   const [indexes, setIndexes]: any = useState({});
-  const elementsIndexes = useRef([]);
   const TrackSidebar = useCallback((props: any) => {
     return (
       <WrappedTrackSidebar
@@ -53,7 +52,7 @@ export const useTrackSidebar = () => {
       });
     }, [children.length]);
     return (
-      <Refs $refs={elementsIndexes}>
+      <Refs>
         {Children.toArray(children).map((child: any, index) => (
           <ElementWrapped
             key={index}
@@ -61,7 +60,7 @@ export const useTrackSidebar = () => {
               indexes,
               setIndexes,
               index,
-              use: (current: any) => {
+              $useCurrent: (current: any) => {
                 if (!current) return;
                 const observer: any = new window.IntersectionObserver(
                   (entries) => {

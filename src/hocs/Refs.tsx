@@ -1,24 +1,41 @@
-import { Children, cloneElement, useEffect } from "react";
+import { Children, cloneElement, useEffect, useRef } from "react";
 
 const Ref = ({ children: child, $ref }: any) => {
+  const { $useCurrent, ...props } = child.props;
   useEffect(() => {
-    let whenGone: Function | null = null;
-    if (child.props.use) whenGone = child.props.use($ref.current);
-    return () => whenGone && whenGone();
-  }, [$ref.current, child.props.id]);
+    let cleanup: Function | null = null;
+    if ($useCurrent) cleanup = $useCurrent($ref.current);
+    return () => {
+      if (cleanup) cleanup();
+    };
+  }, [$ref.current, props.id]);
   return (
-    <div id={child.props.id} ref={$ref} autoFocus={true}>
+    <div id={props.id} ref={$ref} autoFocus={true}>
       {cloneElement(child, {
-        ...child.props,
+        ...props,
       })}
     </div>
   );
 };
 
-export const Refs = ({ children, $refs }: any): any => {
+/**
+ * ? Each element passed as `children` may or may not recieve an argument named `$useCurrent`,
+ * ? this is a function that in turn receives a reference of the current element,
+ * ? useful for access and modify its behaviors and appearances.
+ * */
+
+export const Refs = ({
+  children,
+  $refs = undefined,
+}: {
+  children: any;
+  $refs?: undefined | { current: any };
+}): any => {
+  const nativeRefs = useRef([]);
+  const refs = $refs || nativeRefs;
   return Children.toArray(children).map((child: any, index: any) => {
     const $ref = { current: null };
-    $refs.current[index] = $ref;
+    refs.current[index] = $ref;
     return (
       <Ref key={index} {...{ $ref }}>
         {child}

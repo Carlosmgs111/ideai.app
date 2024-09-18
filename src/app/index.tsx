@@ -1,7 +1,6 @@
 import styles from "./styles.module.css";
 import { Router } from "../hocs/Router";
 import { Navigation } from "../components";
-//  import { Home, Board, Dashboard, Mindmaps, Learn } from "../pages";
 import { useStateValue } from "../context";
 import { useEffect } from "react";
 import { URL_API } from "../services";

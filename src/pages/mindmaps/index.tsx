@@ -1,4 +1,4 @@
-import styles from "./styles.module.css";
+import styles from "./styles.module.css"
 import { MarkmapVisualizer } from "../../containers/MarkmapVisualizer";
 import { useStateValue } from "../../context";
 import { listToMap } from "../../utils";
@@ -9,7 +9,7 @@ import { Memo } from "../../hocs/Memo";
 import { useEffect, useState } from "react";
 import { URL_API } from "../../services";
 
-const Pagination = ({ pagesQty, setCurrentPage, currentPage }: any) => {
+const Pagination = ({ pagesQty, setCurrentPage, currentPage, qty }: any) => {
   const paginationButtons: any = [];
   for (let i = 0; i < pagesQty; i++) {
     paginationButtons.push(
@@ -18,7 +18,7 @@ const Pagination = ({ pagesQty, setCurrentPage, currentPage }: any) => {
           className={currentPage === i + 1 ? styles.active : ""}
           onClick={() => setCurrentPage(i + 1)}
         >
-          {i + 1}
+          {i * qty + 1} - {(i + 1) * qty}
         </button>
       </li>
     );
@@ -136,7 +136,14 @@ export const Mindmaps = ({}: any) => {
           </Memo>
         </SidePanel>
       </main>
-      <Pagination {...{ pagesQty: pages, setCurrentPage, currentPage }} />
+      <Pagination
+        {...{
+          pagesQty: pages,
+          setCurrentPage,
+          currentPage,
+          qty,
+        }}
+      />
     </div>
   );
 };
