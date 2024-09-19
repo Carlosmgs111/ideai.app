@@ -4,10 +4,16 @@
   justify-content: center;
   min-height: 100vh;
 }
+.page.light {
+  --high-contrast-color: var(--main-color-950);
+}
+.page.dark {
+  --high-contrast-color: var(--main-color-50);
+}
 .content {
   text-align: center;
   justify-content: center;
-  color: var(--main-color-950);
+  color: var(--high-contrast-color);
 }
 .content > h2 {
   font-size: 10rem;

@@ -7,8 +7,9 @@ import { URL_API } from "../services";
 import { Mapfy } from "../utils";
 import { LazyComponent, lazyLoad } from "../components/LazyComponent";
 import { Memo } from "../hocs/Memo";
+import { CubeGridLoader } from "../components/CubeGridLoader";
 
-export default () => {
+export const App = () => {
   const [{ theme, token, markmaps }, dispatch]: any = useStateValue();
   useEffect(() => {
     if (Mapfy(markmaps).size) return;
@@ -38,7 +39,7 @@ export default () => {
       <div className={styles.header}>
         <Navigation
           pages={[
-            { label: "Mindmaps", to: "mindmaps" },
+            { label: "Mindmaps", to: "mindmaps/indexes" },
             { label: "Board", to: "board" },
             {
               label: token ? "Dasboard" : "Login",
@@ -52,10 +53,16 @@ export default () => {
           <Router>
             <LazyComponent
               Component={lazyLoad(() => import("../pages/Home"), "Home")}
+              fallback={
+                <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
+              }
               path={"/"}
             ></LazyComponent>
             <LazyComponent
               Component={lazyLoad(() => import("../pages/Board"), "Board")}
+              fallback={
+                <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
+              }
               path={"board"}
             ></LazyComponent>
             <LazyComponent
@@ -63,17 +70,26 @@ export default () => {
                 () => import("../pages/Dashboard"),
                 "Dashboard"
               )}
+              fallback={
+                <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
+              }
               path={"dashboard"}
             ></LazyComponent>
             <LazyComponent
               Component={lazyLoad(
-                () => import("../pages/Mindmaps"),
-                "Mindmaps"
+                () => import("../pages/MindmapsIndexes"),
+                "MindmapsIndexes"
               )}
-              path={"mindmaps"}
+              fallback={
+                <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
+              }
+              path={"mindmaps/indexes"}
             ></LazyComponent>
             <LazyComponent
               Component={lazyLoad(() => import("../pages/Learn"), "Learn")}
+              fallback={
+                <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
+              }
               path={"learn/markmap"}
             ></LazyComponent>
           </Router>

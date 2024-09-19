@@ -30,7 +30,7 @@ const Pagination = ({ pagesQty, setCurrentPage, currentPage, qty }: any) => {
   );
 };
 
-export const Mindmaps = ({}: any) => {
+export const MindmapsIndexes = ({}: any) => {
   const { TrackSidebar, ContentWrapper }: any = useTrackSidebar();
   const [{ markmaps, orderedMarkmaps, totalMarkmaps, theme }, dispatch]: any =
     useStateValue();
