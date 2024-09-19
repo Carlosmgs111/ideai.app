@@ -1,7 +1,9 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./app";
 import { StateProvider } from "./context";
+import { lazyLoad, LazyComponent } from "./hocs/LazyComponent";
+const App = lazyLoad(() => import("./app"), "App");
+import { CubeGridLoader } from "./components/CubeGridLoader";
 import "./index.css";
 
 const initialState = {
@@ -16,11 +18,20 @@ const initialState = {
   file: undefined,
   lastStore: new Date().getTime(),
 };
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const rootElement: any = document.getElementById("root");
+ReactDOM.createRoot(rootElement).render(
   <StateProvider {...{ initialState }}>
     <BrowserRouter>
-      <App />
+      <LazyComponent
+        Component={App}
+        fallback={
+          <CubeGridLoader
+            style={{
+              height: "100vh",
+            }}
+          />
+        }
+      />
     </BrowserRouter>
   </StateProvider>
 );

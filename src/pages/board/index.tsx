@@ -2,12 +2,13 @@ import styles from "./styles.module.css";
 import { MarkmapVisualizer } from "../../containers/MarkmapVisualizer";
 import { useStateValue } from "../../context";
 import { mapToList } from "../../utils";
-import { Refs } from "../../hocs/Refs";
 import { useNavScroll } from "../../hooks/useNavScroll";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Memo } from "../../hocs/Memo";
 import { PatternBackground } from "../../components/PatternBackground";
+import { lazyLoad, LazyComponent } from "../../hocs/LazyComponent";
+const Refs = lazyLoad(() => import("../../hocs/Refs"), "Refs");
 
 const Anchor = ({ children }: any) => {
   const ref = useRef(null);
@@ -72,7 +73,7 @@ export const Board = ({ quicknav = false }: any) => {
       </button>
       <Memo deps={[markmaps]}>
         <div ref={container} className={styles.content}>
-          <Refs $refs={elements}>
+          <LazyComponent Component={Refs} $refs={elements}>
             {mapToList(markmaps).map((markmap: any, idx: any) => (
               <PatternBackground key={idx}>
                 <MarkmapVisualizer
@@ -81,14 +82,14 @@ export const Board = ({ quicknav = false }: any) => {
                 ></MarkmapVisualizer>
               </PatternBackground>
             ))}
-          </Refs>
+          </LazyComponent>
         </div>
       </Memo>
       <button onClick={navNext}>
         <i className={`fa-solid fa-chevron-right`}></i>
       </button>
       <QuicknavDashboard hide={quicknav}>
-        <Refs $refs={navIndexes}>
+        <LazyComponent Component={Refs} $refs={navIndexes}>
           {mapToList(markmaps).map((markmap: any, idx: any) => {
             return (
               <Anchor key={idx} idx={String(idx)}>
@@ -96,7 +97,7 @@ export const Board = ({ quicknav = false }: any) => {
               </Anchor>
             );
           })}
-        </Refs>
+        </LazyComponent>
       </QuicknavDashboard>
     </div>
   );

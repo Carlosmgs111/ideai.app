@@ -4,7 +4,10 @@ const Ref = ({ children: child, $ref }: any) => {
   const { $useCurrent, ...props } = child.props;
   useEffect(() => {
     let cleanup: Function | null = null;
-    if ($useCurrent) cleanup = $useCurrent($ref.current);
+    if ($useCurrent) {
+      if (!$ref.current) return;
+      cleanup = $useCurrent($ref.current);
+    }
     return () => {
       if (cleanup) cleanup();
     };
@@ -19,7 +22,7 @@ const Ref = ({ children: child, $ref }: any) => {
 };
 
 /**
- * ? Each element passed as `children` may or may not recieve an argument named `$useCurrent`,
+ * ? Each element passed as `children` may recieve an argument named `$useCurrent`,
  * ? this is a function that in turn receives a reference of the current element,
  * ? useful for access and modify its behaviors and appearances.
  * */

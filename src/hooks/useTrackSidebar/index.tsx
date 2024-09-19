@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from "react";
 import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSidebar";
 import { cloneElement, Children } from "react";
-import { Refs } from "../../hocs/Refs";
 import { Memo } from "../../hocs/Memo";
 import { mapToList } from "../../utils";
+import { lazyLoad, LazyComponent } from "../../hocs/LazyComponent";
+const Refs = lazyLoad(() => import("../../hocs/Refs"), "Refs");
 
 const ElementWrapped = ({
   children: child,
@@ -52,7 +53,7 @@ export const useTrackSidebar = () => {
       });
     }, [children.length]);
     return (
-      <Refs>
+      <LazyComponent Component={Refs}>
         {Children.toArray(children).map((child: any, index) => (
           <ElementWrapped
             key={index}
@@ -61,7 +62,6 @@ export const useTrackSidebar = () => {
               setIndexes,
               index,
               $useCurrent: (current: any) => {
-                if (!current) return;
                 const observer: any = new window.IntersectionObserver(
                   (entries) => {
                     const { isIntersecting }: any = entries[0];
@@ -82,7 +82,7 @@ export const useTrackSidebar = () => {
             {child}
           </ElementWrapped>
         ))}
-      </Refs>
+      </LazyComponent>
     );
   }, []);
   return { TrackSidebar, ContentWrapper };
