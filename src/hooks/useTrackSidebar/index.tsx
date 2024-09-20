@@ -3,11 +3,7 @@ import { TrackSidebar as WrappedTrackSidebar } from "../../components/TrackSideb
 import { cloneElement, Children } from "react";
 import { Memo } from "../../hocs/Memo";
 import { mapToList } from "../../utils";
-<<<<<<< HEAD
 import { lazyLoad, LazyComponent } from "../../hocs/LazyComponent";
-=======
-import { lazyLoad, LazyComponent } from "../../components/LazyComponent";
->>>>>>> 817f7bd6536d6d68e602d9b8c7597882d2b18e5f
 const Refs = lazyLoad(() => import("../../hocs/Refs"), "Refs");
 
 const ElementWrapped = ({
