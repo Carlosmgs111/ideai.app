@@ -52,14 +52,14 @@ export const App = () => {
         <Memo>
           <Router>
             <LazyComponent
-              Component={lazyLoad(() => import("../pages/Home"), "Home")}
+              Component={lazyLoad(() => import("../pages/Home0"), "Home")}
               fallback={
                 <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
               }
               path={"/"}
             ></LazyComponent>
             <LazyComponent
-              Component={lazyLoad(() => import("../pages/Board"), "Board")}
+              Component={lazyLoad(() => import("../pages/Board0"), "Board")}
               fallback={
                 <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
               }
@@ -67,7 +67,7 @@ export const App = () => {
             ></LazyComponent>
             <LazyComponent
               Component={lazyLoad(
-                () => import("../pages/Dashboard"),
+                () => import("../pages/Dashboard0"),
                 "Dashboard"
               )}
               fallback={
@@ -86,7 +86,7 @@ export const App = () => {
               path={"mindmaps/indexes"}
             ></LazyComponent>
             <LazyComponent
-              Component={lazyLoad(() => import("../pages/Learn"), "Learn")}
+              Component={lazyLoad(() => import("../pages/Learn0"), "Learn")}
               fallback={
                 <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
               }
