@@ -39,7 +39,7 @@ export const App = () => {
       <div className={styles.header}>
         <Navigation
           pages={[
-            { label: "Mindmaps", to: "mindmaps/indexes" },
+            { label: "Mindmaps", to: "mindmaps-indexes" },
             { label: "Board", to: "board" },
             {
               label: token ? "Dasboard" : "Login",
@@ -83,7 +83,7 @@ export const App = () => {
               fallback={
                 <CubeGridLoader style={{ height: "100vh" }} theme={theme} />
               }
-              path={"mindmaps/indexes"}
+              path={"mindmaps-indexes"}
             ></LazyComponent>
             <LazyComponent
               Component={lazyLoad(() => import("../pages/Learn"), "Learn")}

@@ -3,11 +3,10 @@
   gap: 0.8rem;
   font-size: 1.6rem;
   overflow: scroll;
-  min-height: fit-content;
   direction: rtl;
   transition: max-height 0.4s, max-width 0.4s, width 0.4s, scale 0.4s,
     opacity 0.2s transfrom 0.4s;
-  max-height: 0;
+  max-height: 100%;
   max-width: 0;
   scale: 0;
   opacity: 0;
@@ -32,7 +31,6 @@
   display: inside;
   background-color: transparent;
   transition: 0.4s;
-  /* display: none; */
 }
 .body::-webkit-scrollbar-corner {
   display: none;
@@ -42,8 +40,8 @@
   background-color: var(--high-contrast-color);
 }
 .body.active {
-  max-height: calc(100vh - 14rem);
-  max-width: 25rem;
+  /* max-height: calc(100vh - 14rem); */
+  max-width: 24rem;
   width: 100%;
   scale: 1;
   opacity: 1;
